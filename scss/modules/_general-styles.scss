@@ -42,5 +42,9 @@ a {
 
   a {
     color: inherit;
+
+    &:hover {
+      color: $white;
+    }
   }
 }

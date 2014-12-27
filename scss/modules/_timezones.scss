@@ -37,7 +37,9 @@
 
       span {
         font-size: 10px;
-        vertical-align: text-top;
+        vertical-align: super;
+        position: relative;
+        top: 1px;
       }
     }
   }
@@ -52,6 +54,71 @@
 
     &.loading {
       @include background-image("loader");
+    }
+  }
+
+  .clock {
+    position: relative;
+    margin: 0 auto 10px;
+    width: 120px;
+    height: 120px;
+    border: 3px solid $white;
+    border-radius: 50%;
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      margin: -3px 0 0 -3px;
+      background: $white;
+      border-radius: 50%;
+    }
+
+    .hours,
+    .minutes,
+    .seconds {
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      width: 4px;
+      margin: 0 0 0 -2px;
+      background: $white;
+      border-radius: 2px;
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+
+    .hours {
+      height: 30px;
+      margin-top: -30px;
+    }
+
+    .minutes {
+      height: 50px;
+      margin-top: -50px;
+    }
+
+    .seconds {
+      background: $red;
+      z-index: 3;
+      width: 2px;
+      height: 48px;
+      margin: -48px 0 0 -1px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        background: $red;
+        height: 10px;
+        left: 0;
+        right: 0;
+        top: 100%;
+      }
     }
   }
 }
