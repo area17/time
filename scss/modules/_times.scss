@@ -1,0 +1,30 @@
+.times {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: $dark-grey;
+  padding: 100px 20px 20px;
+  display: none;
+
+  .show-times & {
+    display: block;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    margin: 0 0 50px;
+    border: 0 none;
+    background: transparent;
+    color: $white;
+    font: 48px/1 $font-stack-helvetica;
+  }
+
+  li {
+    font-size: 48px;
+    line-height: 48px;
+    margin-bottom: 10px;
+  }
+}

@@ -17,6 +17,8 @@ a {
 .logo {
   @extend %hide_text;
   display: block;
+  position: relative;
+  z-index: 9;
   width: 119px;
   height: 76px;
   @include background-image("a17");
