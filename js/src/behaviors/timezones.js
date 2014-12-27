@@ -26,30 +26,34 @@ timezones.Behaviors.timezones = function(container) {
   container.innerHTML = lis;
 
   timezones.locations.forEach(function(location,index){
+    /*
     var forecast = new ForecastIO();
     var condition = forecast.getCurrentConditions(location.lat, location.long);
-    location.temperature = Math.round( convert_f_to_c( condition.getTemperature() ) );
+    location.temperature = Math.round( timezones.Helpers.convert_f_to_c( condition.getTemperature() ) );
     location.time = condition.getTime("HH:mm");
     location.icon = condition.getIcon();
     //
     $("#location-"+index+" .time",container).textContent = location.time;
     $("#location-"+index+" i",container).innerHTML = location.temperature + "<span>&deg;"+location.unit+"</span>";
     //
+    */
     skycons.add("icon-"+index, location.icon);
   });
 
   $(".icon.loading",container).removeClass("loading");
   skycons.play();
 
-  setInterval(function(){
-    now = moment.utc();
-    timezones.locations.forEach(function(location,index){
-      location.time = now.tz(location.timezone).format("HH:mm");
-      $("#location-"+index+" .time",container).textContent = location.time;
-    });
-  },1000);
+  requestAnimationFrame(update_time);
 
-  function convert_f_to_c(f){
-    return (f - 32)*(5/9);
+  function update_time() {
+    var right_now = moment.utc();
+    if (now != right_now) {
+      now = right_now;
+      timezones.locations.forEach(function(location,index){
+        location.time = now.tz(location.timezone).format("HH:mm");
+        $("#location-"+index+" .time",container).textContent = location.time;
+      });
+    }
+    requestAnimationFrame(update_time);
   }
 };
