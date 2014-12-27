@@ -1,0 +1,57 @@
+.timezones {
+  @extend %float_clear;
+
+  li {
+    display: inline;
+    float: left;
+    width: calc(100%/6);
+    text-align: center;
+    margin: 0 0 50px;
+
+    @include breakpoint(medium) {
+      width: calc(100%/3);
+    }
+    @include breakpoint(small) {
+      display: block;
+      float: none;
+      width: auto;
+    }
+  }
+
+  b {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .time {
+    font-size: 48px;
+    line-height: 48px;
+    margin-bottom: 10px;
+  }
+
+  .weather {
+
+    i {
+      display: block;
+      font-style: normal;
+
+      span {
+        font-size: 10px;
+        vertical-align: text-top;
+      }
+    }
+  }
+
+  .icon {
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 10px;
+    background: no-repeat 50% 50%;
+    background-size: 24px 24px;
+
+    &.loading {
+      @include background-image("loader");
+    }
+  }
+}

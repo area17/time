@@ -1,0 +1,21 @@
+@mixin background-image($file_name) {
+  @if map-has-key($images, $file_name) {
+    background-repeat: no-repeat;
+    background-image: url(map-get($images, $file_name));
+    .no-svg & {
+      background-image: url('/img/#{$file_name}.png');
+    }
+  } @else {
+    @warn "Unknown `#{$file_name}` in $images.";
+  }
+}
+
+@mixin breakpoint($point) {
+  @if map-has-key($breakpoints, $point) {
+    @media #{map-get($breakpoints, $point)} {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint `#{$point}` in $breakpoints.";
+  }
+}

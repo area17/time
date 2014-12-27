@@ -1,0 +1,44 @@
+h1, h2, h3, h4, h5, h6, p, ul, ol, dl, small, table, label {
+  margin: 0 0 20px;
+}
+  h1, h2, h3, h4, h5, h6 {
+    font: 22px/28px $font-stack-helvetica;
+  }
+  ul li {
+    list-style-type: none;
+  }
+  ol li {
+  }
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  @extend %hide_text;
+  display: block;
+  width: 119px;
+  height: 76px;
+  @include background-image("a17");
+  background-size: 50%;
+  margin: 20px;
+}
+
+.powered_by {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  margin: 0;
+  color: $light-grey;
+  font-size: 10px;
+  line-height: 10px;
+
+  @include breakpoint(small) {
+    position: static;
+    margin: 20px;
+  }
+
+  a {
+    color: inherit;
+  }
+}

@@ -1,0 +1,54 @@
+body {
+  background: #fff;
+  font: $default-text;
+  color: $white;
+  background: $dark-grey;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: none;
+
+  &:after {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    width: 1px;
+    height: 1px;
+    margin: -1px 0 0 -1px;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+  }
+}
+  @include breakpoint(small) {
+    head {
+      font-family: 'small';
+    }
+    body:after {
+      content: 'small';
+    }
+  }
+  @include breakpoint(medium) {
+    head {
+      font-family: 'medium';
+    }
+    body:after {
+      content: 'medium';
+    }
+  }
+  @include breakpoint(large) {
+    head {
+      font-family: 'large';
+    }
+    body:after {
+      content: 'large';
+    }
+  }
+  @include breakpoint(xlarge) {
+    head {
+      font-family: 'xlarge';
+    }
+    body:after {
+      content: 'xlarge';
+    }
+  }
+
+

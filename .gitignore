@@ -1,0 +1,10 @@
+.sass-cache/
+.DS_Store
+css/
+node_modules/
+js/timezones.js
+*.gz
+img/*.svg
+img/_images.scss
+img/orig/
+todo.md
