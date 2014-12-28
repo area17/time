@@ -4,6 +4,7 @@ timezones.Behaviors.timezones = function(container) {
   var lis = "";
   var skycons = new Skycons({"color": "white"});
   var now = moment.utc();
+  var innitted = false;
 
   var init = function() {
     timezones.locations.forEach(function(location,index){
@@ -29,24 +30,35 @@ timezones.Behaviors.timezones = function(container) {
     update_time();
 
     setTimeout(function(){
-      timezones.locations.forEach(function(location,index){
-        var forecast = new ForecastIO();
-        var condition = forecast.getCurrentConditions(location.lat, location.long);
-        location.temperature = Math.round( timezones.Helpers.convert_f_to_c( condition.getTemperature() ) );
-        location.time = condition.getTime("HH:mm");
-        location.icon = condition.getIcon();
-        //
-        $("#location-"+index+" .time",container).textContent = location.time;
-        $("#location-"+index+" i",container).innerHTML = location.temperature + "<span>&deg;"+location.unit+"</span>";
-        //
-        skycons.add("icon-"+index, location.icon);
-      });
-
+      update_weather();
       $(".icon.loading",container).removeClass("loading");
       skycons.play();
+      innitted = true;
     },50);
 
   }();
+
+  function update_weather() {
+    timezones.locations.forEach(function(location,index){
+      var forecast = new ForecastIO();
+      var condition = forecast.getCurrentConditions(location.lat, location.long);
+      location.temperature = Math.round( timezones.Helpers.convert_f_to_c( condition.getTemperature() ) );
+      location.time = condition.getTime("HH:mm");
+      location.icon = condition.getIcon();
+      //
+      $("#location-"+index+" .time",container).textContent = location.time;
+      $("#location-"+index+" i",container).innerHTML = location.temperature + "<span>&deg;"+location.unit+"</span>";
+      //
+      if (innitted) {
+        skycons.set("icon-"+index, location.icon);
+      } else {
+        skycons.add("icon-"+index, location.icon);
+      }
+    });
+    setTimeout(function(){
+      update_weather();
+    },(30*60*1000));
+  }
 
   function update_time() {
     var right_now = moment.utc();
