@@ -522,6 +522,16 @@
     }
   }
 
+  function getPixelRatio(context){
+    var backingStore = context.backingStorePixelRatio ||
+                      context.webkitBackingStorePixelRatio ||
+                      context.mozBackingStorePixelRatio ||
+                      context.msBackingStorePixelRatio ||
+                      context.oBackingStorePixelRatio ||
+                      context.backingStorePixelRatio || 1;
+    return (window.devicePixelRatio || 1) / backingStore;
+  }
+
   var Skycons = function(opts) {
         this.list        = [];
         this.interval    = null;
@@ -643,6 +653,8 @@
     },
     add: function(el, draw) {
       var obj;
+      var context;
+      var ratio;
 
       if(typeof el === "string")
         el = document.getElementById(el);
@@ -657,9 +669,21 @@
       if(typeof draw !== "function")
         return;
 
+      context = el.getContext("2d");
+      ratio = getPixelRatio(context);
+
+      if (ratio > 1) {
+        var orig_width = context.canvas.width;
+        var orig_height = context.canvas.height;
+        context.canvas.width = orig_width * ratio;
+        context.canvas.height = orig_height * ratio;
+        context.canvas.style.width = orig_width + 'px';
+        context.canvas.style.height = orig_height + 'px';
+      }
+
       obj = {
         element: el,
-        context: el.getContext("2d"),
+        context: context,
         drawing: draw
       };
 
