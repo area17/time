@@ -96,11 +96,15 @@
     .hours {
       height: 30px;
       margin-top: -30px;
+      -webkit-animation: time_hours 43200s infinite linear;
+      animation: time_hours 43200s infinite linear;
     }
 
     .minutes {
       height: 50px;
       margin-top: -50px;
+      -webkit-animation: time_minutes 3600s infinite linear;
+      animation: time_minutes 3600s infinite linear;
     }
 
     .seconds {
@@ -109,6 +113,8 @@
       width: 2px;
       height: 48px;
       margin: -48px 0 0 -1px;
+      -webkit-animation: time_seconds 60s steps(60 ,end) infinite;
+      animation: time_seconds 60s steps(60 ,end) infinite;
 
       &:after {
         content: "";

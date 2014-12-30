@@ -5,8 +5,13 @@ timezones.Behaviors.timezones = function(container) {
   var skycons = new Skycons({"color": "white"});
   var now = moment.utc();
   var innitted = false;
+  var timezones_style_block_id = "timezones_clock_anim";
 
   var init = function() {
+    var timezones_style_block = document.createElement("style");
+    timezones_style_block.id = timezones_style_block_id;
+    $("head").appendChild(timezones_style_block);
+
     timezones.locations.forEach(function(location,index){
       location.id = "location-"+index;
       location.time = now.tz(location.timezone).format("HH:mm");
@@ -27,7 +32,16 @@ timezones.Behaviors.timezones = function(container) {
 
     container.innerHTML = lis;
 
-    update_time();
+    update_digital_time();
+    update_analogue_time();
+
+    setInterval(function(){
+      update_digital_time();
+    },1000);
+
+    setInterval(function(){
+      update_analogue_time();
+    },(30*60*1000));
 
     setTimeout(function(){
       update_weather();
@@ -40,6 +54,7 @@ timezones.Behaviors.timezones = function(container) {
 
   function update_weather() {
     timezones.locations.forEach(function(location,index){
+      /*
       var forecast = new ForecastIO();
       var condition = forecast.getCurrentConditions(location.lat, location.long);
       location.temperature = Math.round( timezones.Helpers.convert_f_to_c( condition.getTemperature() ) );
@@ -49,6 +64,7 @@ timezones.Behaviors.timezones = function(container) {
       $("#location-"+index+" .time",container).textContent = location.time;
       $("#location-"+index+" i",container).innerHTML = location.temperature + "<span>&deg;"+location.unit+"</span>";
       //
+      */
       if (innitted) {
         skycons.set("icon-"+index, location.icon);
       } else {
@@ -60,25 +76,30 @@ timezones.Behaviors.timezones = function(container) {
     },(30*60*1000));
   }
 
-  function update_time() {
-    var right_now = moment.utc();
-    if (now != right_now) {
-      now = right_now;
-      timezones.locations.forEach(function(location,index){
-        location.time = now.tz(location.timezone).format("HH:mm");
-        $("#location-"+index+" .time",container).textContent = location.time;
-        //
-        var second = now.seconds() * 6;
-        var minute = now.minutes() * 6 + second / 60;
-        var hour = now.hours();
-        hour = (hour > 12) ? hour - 12 : hour;
-        hour = (hour * 30) + (minute / 12);
-        //
-        $("#location-"+index+" .hours",container).css("transform", "rotate(" + hour + "deg)");
-        $("#location-"+index+" .minutes",container).css("transform", "rotate(" + minute + "deg)");
-        $("#location-"+index+" .seconds",container).css("transform", "rotate(" + second + "deg)");
-      });
-    }
-    requestAnimationFrame(update_time);
+  function update_digital_time() {
+    timezones.locations.forEach(function(location,index){
+      location.time = now.tz(location.timezone).format("HH:mm");
+      $("#location-"+index+" .time",container).textContent = location.time;
+    });
+  }
+
+  function update_analogue_time(){
+    timezones.locations.forEach(function(location,index){
+      var this_timezone = now.tz(location.timezone);
+      var second = now.seconds() * 6;
+      var minute = this_timezone.minutes() * 6 + second / 60;
+      var hour = this_timezone.hours();
+      hour = (hour > 12) ? hour - 12 : hour;
+      hour = (hour * 30) + (minute / 12);
+      //
+      $("#location-"+index+" .hours",container).css("transform", "rotate(" + hour + "deg)");
+      $("#location-"+index+" .minutes",container).css("transform", "rotate(" + minute + "deg)");
+      $("#location-"+index+" .seconds",container).css("transform", "rotate(" + second + "deg)");
+      //
+      var css_anims = "@-webkit-keyframes time_hours { to { transform: rotate(" + (hour+360) + "deg); } }\n@keyframes time_hours { transform: rotate(" + (hour+360) + "deg); }\n";
+      css_anims += "@-webkit-keyframes time_minutes { to { transform: rotate(" + (minute+360) + "deg); } }\n@keyframes time_minutes { transform: rotate(" + (minute+360) + "deg); }\n";
+      css_anims += "@-webkit-keyframes time_seconds { to { transform: rotate(" + (second+360) + "deg); } }\n@keyframes time_seconds { transform: rotate(" + (second+360) + "deg); }\n";
+       $("#"+timezones_style_block_id).textContent = css_anims;
+    });
   }
 };
