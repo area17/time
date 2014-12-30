@@ -17,7 +17,7 @@ timezones.Behaviors.timezones = function(container) {
       location.time = now.tz(location.timezone).format("HH:mm");
       location.temperature = "-";
       location.icon = Skycons.CLOUDY;
-      location.unit = timezones.units_current.unit;
+      location.unit = localStorage.getItem("temperature_unit") || "C";
 
       var this_location_html = location_html;
       this_location_html = this_location_html.replace("{{time}}",location.time);
@@ -44,7 +44,7 @@ timezones.Behaviors.timezones = function(container) {
     },(30*60*1000));
 
     setTimeout(function(){
-      update_weather();
+      //update_weather();
       $(".icon.loading",container).removeClass("loading");
       skycons.play();
       innitted = true;
@@ -54,7 +54,6 @@ timezones.Behaviors.timezones = function(container) {
 
   function update_weather() {
     timezones.locations.forEach(function(location,index){
-      /*
       var forecast = new ForecastIO();
       var condition = forecast.getCurrentConditions(location.lat, location.long);
       location.temperature = Math.round( timezones.Helpers.convert_f_to_c( condition.getTemperature() ) );
@@ -64,7 +63,6 @@ timezones.Behaviors.timezones = function(container) {
       $("#location-"+index+" .time",container).textContent = location.time;
       $("#location-"+index+" i",container).innerHTML = location.temperature + "<span>&deg;"+location.unit+"</span>";
       //
-      */
       if (innitted) {
         skycons.set("icon-"+index, location.icon);
       } else {

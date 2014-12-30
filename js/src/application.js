@@ -17,11 +17,6 @@ timezones.Helpers = {
 timezones.Functions = {
 }
 timezones.media_query_in_use = "large";
-timezones.units = {
-  celcius : { unit: "C" },
-  farenheight : { unit: "F" }
-};
-timezones.units_current = timezones.units.celcius;
 timezones.locations = [
   { name: "San Francisco", lat: 37.775, long: -122.4183333, timezone: "America/Los_Angeles" },
   { name: "Tennessee", lat: 35.7449, long: -86.7489, timezone: "America/Chicago" },
