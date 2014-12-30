@@ -14,15 +14,15 @@
   <div id="settings">
     <p>Time</p>
     <ul>
-      <li><label><input type="checkbox" value="analog" checked> Analogue</label></li>
-      <li><label><input type="checkbox" value="digital" checked> Digital</label></li>
+      <li><label><input type="checkbox" value="show_analog" checked> Analogue</label></li>
+      <li><label><input type="checkbox" value="show_digital" checked> Digital</label></li>
       <li><label><input type="radio" name="digital_format" value="12"> 12 hour</label></li>
       <li><label><input type="radio" name="digital_format" value="24" checked> 24 hour</label></li>
     </ul>
     <p>Weather</p>
     <ul>
-      <li><label><input type="checkbox" value="current_weather" checked> Current weather</label></li>
-      <li><label><input type="checkbox" value="temperature" checked> Temperature</label></li>
+      <li><label><input type="checkbox" value="show_current_weather" checked> Current weather</label></li>
+      <li><label><input type="checkbox" value="show_temperature" checked> Temperature</label></li>
       <li><label><input type="radio" name="temperature_unit" value="c" checked> &deg;C</label></li>
       <li><label><input type="radio" name="temperature_unit" value="f"> &deg;F</label></li>
     </ul>

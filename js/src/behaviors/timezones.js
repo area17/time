@@ -1,6 +1,6 @@
 timezones.Behaviors.timezones = function(container) {
 
-  var location_html = '<li id="{{locationID}}">\n<b>{{name}}</b>\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<div class="time">{{time}}</div>\n<div class="weather"><canvas class="icon loading" id="{{iconID}}" width="64" height="64"></canvas>\n<i>{{temp}} <span>&deg;{{unit}}</span></i>\n</div>\n</li>\n';
+  var location_html = '<li id="{{locationID}}">\n<b>{{name}}</b>\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<div class="time">{{time}}</div>\n<div class="weather"><canvas class="icon loading" id="{{iconID}}" width="64" height="64"></canvas>\n<i>{{temp}}</i>\n</div>\n</li>\n';
   var lis = "";
   var skycons = new Skycons({"color": "white"});
   var now = moment.utc();
@@ -12,18 +12,21 @@ timezones.Behaviors.timezones = function(container) {
     timezones_style_block.id = timezones_style_block_id;
     $("head").appendChild(timezones_style_block);
 
+    hideShow_analog();
+    hideShow_digital();
+    hideShow_weather();
+    hideShow_temperature();
+
     timezones.locations.forEach(function(location,index){
       location.id = "location-"+index;
-      location.time = now.tz(location.timezone).format("HH:mm");
-      location.temperature = "-";
+      location.time = "";
+      location.temperature = "";
       location.icon = Skycons.CLOUDY;
-      location.unit = localStorage.getItem("temperature_unit") || "C";
 
       var this_location_html = location_html;
       this_location_html = this_location_html.replace("{{time}}",location.time);
       this_location_html = this_location_html.replace("{{name}}",location.name);
       this_location_html = this_location_html.replace("{{temp}}",location.temperature);
-      this_location_html = this_location_html.replace("{{unit}}",location.unit);
       this_location_html = this_location_html.replace("{{iconID}}","icon-"+index);
       this_location_html = this_location_html.replace("{{locationID}}",location.id);
       //
@@ -44,7 +47,7 @@ timezones.Behaviors.timezones = function(container) {
     },(30*60*1000));
 
     setTimeout(function(){
-      //update_weather();
+      update_weather();
       $(".icon.loading",container).removeClass("loading");
       skycons.play();
       innitted = true;
@@ -56,12 +59,13 @@ timezones.Behaviors.timezones = function(container) {
     timezones.locations.forEach(function(location,index){
       var forecast = new ForecastIO();
       var condition = forecast.getCurrentConditions(location.lat, location.long);
-      location.temperature = Math.round( timezones.Helpers.convert_f_to_c( condition.getTemperature() ) );
-      location.time = condition.getTime("HH:mm");
+      location.temperature = condition.getTemperature();
       location.icon = condition.getIcon();
       //
-      $("#location-"+index+" .time",container).textContent = location.time;
-      $("#location-"+index+" i",container).innerHTML = location.temperature + "<span>&deg;"+location.unit+"</span>";
+      var temp_unit = localStorage["temperature_unit"] || "c";
+      var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
+      //
+      $("#location-"+index+" i",container).innerHTML = temp + "<span>&deg;"+temp_unit+"</span>";
       //
       if (innitted) {
         skycons.set("icon-"+index, location.icon);
@@ -76,8 +80,10 @@ timezones.Behaviors.timezones = function(container) {
 
   function update_digital_time() {
     timezones.locations.forEach(function(location,index){
-      location.time = now.tz(location.timezone).format("HH:mm");
-      $("#location-"+index+" .time",container).textContent = location.time;
+      location.time = now.tz(location.timezone);
+      var format = localStorage["digital_format"] || "24";
+      var time_str = (format === "24") ? location.time.format("HH:mm") : location.time.format("h:mm") + "<span>" + location.time.format("a") + "<span>"
+      $("#location-"+index+" .time",container).innerHTML = time_str;
     });
   }
 
@@ -100,4 +106,55 @@ timezones.Behaviors.timezones = function(container) {
        $("#"+timezones_style_block_id).textContent = css_anims;
     });
   }
+
+  //
+  function hideShow_analog() {
+    var show_analog = localStorage["show_analog"] || "true";
+    if (show_analog === "false") {
+      container.addClass("hide_analog");
+    } else {
+      container.removeClass("hide_analog");
+    }
+  }
+  function hideShow_digital() {
+    var show_digital = localStorage["show_digital"] || "true";
+    if (show_digital === "false") {
+      container.addClass("hide_digital");
+    } else {
+      container.removeClass("hide_digital");
+    }
+  }
+  function update_digital_format() {
+    update_digital_time();
+  }
+  function hideShow_weather() {
+    var show_weather = localStorage["show_current_weather"] || "true";
+    if (show_weather === "false") {
+      container.addClass("hide_weather");
+    } else {
+      container.removeClass("hide_weather");
+    }
+  }
+  function hideShow_temperature() {
+    var show_temperature = localStorage["show_temperature"] || "true";
+    if (show_temperature === "false") {
+      container.addClass("hide_temperature");
+    } else {
+      container.removeClass("hide_temperature");
+    }
+  }
+  function update_temperature_unit() {
+    timezones.locations.forEach(function(location,index){
+      var temp_unit = localStorage["temperature_unit"] || "c";
+      var temp = Math.round( (temp_unit=== "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
+      $("#location-"+index+" i",container).innerHTML = temp + "<span>&deg;"+temp_unit+"</span>";
+    });
+  }
+
+  document.on("update_show_analog",hideShow_analog);
+  document.on("update_show_digital",hideShow_digital);
+  document.on("update_digital_format",update_digital_format);
+  document.on("update_show_current_weather",hideShow_weather);
+  document.on("update_show_temperature",hideShow_temperature);
+  document.on("update_temperature_unit",update_temperature_unit);
 };

@@ -16,9 +16,8 @@ timezones.Behaviors.settings = function(container){
   });
 
   $checkboxes.on("click",function(event){
-    console.log("click checkbox");
     localStorage[this.value] = this.checked;
-    console.log(localStorage);
+    document.trigger("update_"+this.value);
   });
 
   radios_arr.forEach(function(radio_name,index){
@@ -27,14 +26,12 @@ timezones.Behaviors.settings = function(container){
     if (localStorage[input.name] === undefined) {
       localStorage[input.name] = input.value;
     } else {
-      //input.checked = (localStorage[input.name] == input.value) ? true : false;
       $("input[type=radio][name="+radio_name+"][value=\""+localStorage[input.name]+"\"]",$settings).checked = true;
     }
     //
     inputs.on("click",function(event){
-      console.log("click radio");
       localStorage[this.name] = this.value;
-      console.log(localStorage);
+      document.trigger("update_"+this.name);
     });
   });
 

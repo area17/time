@@ -26,10 +26,27 @@
   .time {
     font-size: 48px;
     line-height: 48px;
+    height: 48px;
     margin-bottom: 10px;
+    vertical-align: middle;
+
+    span {
+      font-size: 12px;
+      line-height: 12px;
+      vertical-align: top;
+      position: relative;
+      top: 2px;
+    }
   }
+    &.hide_digital .time {
+      display: none;
+    }
 
   .weather {
+
+    canvas {
+      display: block;
+    }
 
     i {
       display: block;
@@ -43,6 +60,12 @@
       }
     }
   }
+    &.hide_weather .weather canvas {
+      display: none;
+    }
+    &.hide_temperature .weather i {
+      display: none;
+    }
 
   .icon {
     display: block;
@@ -127,4 +150,7 @@
       }
     }
   }
+    &.hide_analog .clock {
+      display: none;
+    }
 }
