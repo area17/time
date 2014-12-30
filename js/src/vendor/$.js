@@ -124,7 +124,7 @@ $ = (function (document, window, $) {
       });
       return this;
     };
-  window.hasClass = node.hasClass = function (selector) {
+  window.hasClass = node.hasClass = function (className) {
    if (this.classList) {
      return this.classList.contains(className);
    } else {

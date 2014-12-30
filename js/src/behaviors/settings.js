@@ -14,13 +14,15 @@ timezones.Behaviors.settings = function(container){
       input.checked = (localStorage[input.value] == "true") ? true : false;
     }
   });
-
+  // do some clicks
   $checkboxes.on("click",function(event){
     localStorage[this.value] = this.checked;
     document.trigger("update_"+this.value);
   });
 
+
   radios_arr.forEach(function(radio_name,index){
+    // check for locally stored
     var inputs = $("input[type=radio][name="+radio_name+"]",$settings);
     var input = (inputs[0].checked) ? inputs[0] : inputs[1];
     if (localStorage[input.name] === undefined) {
@@ -28,11 +30,27 @@ timezones.Behaviors.settings = function(container){
     } else {
       $("input[type=radio][name="+radio_name+"][value=\""+localStorage[input.name]+"\"]",$settings).checked = true;
     }
-    //
+    // do some clicks
     inputs.on("click",function(event){
       localStorage[this.name] = this.value;
       document.trigger("update_"+this.name);
     });
+  });
+
+  // hide show settings
+  container.on("click",function(event){
+    event.preventDefault();
+    if ($settings.hasClass("active")) {
+      $settings.removeClass("active");
+    } else {
+      $settings.addClass("active");
+    }
+  });
+
+  document.on("keyup",function(event) {
+    if ($settings.hasClass("active") && event.keyCode == 27) {
+      $settings.removeClass("active");
+    }
   });
 
 };

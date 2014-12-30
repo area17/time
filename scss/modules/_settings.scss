@@ -1,0 +1,63 @@
+.settings {
+  @extend %hide_text;
+  position: absolute;
+  z-index: 5;
+  right: 20px;
+  top: 29px;
+  width: 23px;
+  height: 23px;
+  opacity: .5;
+  @include background-image("settings");
+
+  &:hover {
+    opacity: 1;
+    -webkit-animation: settings 12s infinite linear;
+    animation: settings 12s infinite linear;
+  }
+}
+  @-webkit-keyframes settings { to { transform: rotate(360deg); } }
+  @keyframes settings { transform: rotate(360deg); }
+
+#settings {
+  position: absolute;
+  z-index: 4;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #000;
+  width: 300px;
+  padding: 15px 0 10px;
+  transform: translateX(300px);
+  transition: transform .2s ease-in-out;
+  color: $light-grey;
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  p {
+    font-weight: bold;
+    margin: 0;
+    padding: 15px 20px 0;
+
+    & ~ p {
+      border-top: 1px solid $dark-grey;
+    }
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+  }
+  label {
+    display: block;
+    padding: 5px 20px;
+    margin: 0;
+
+    &:hover {
+      color: $white;
+    }
+  }
+  input {
+    margin-right: 10px;
+  }
+}

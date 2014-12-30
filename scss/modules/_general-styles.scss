@@ -26,25 +26,6 @@ a {
   margin: 20px;
 }
 
-.settings {
-  @extend %hide_text;
-  position: absolute;
-  right: 20px;
-  top: 29px;
-  width: 23px;
-  height: 23px;
-  opacity: .5;
-  @include background-image("settings");
-
-  &:hover {
-    opacity: 1;
-    -webkit-animation: settings 12s infinite linear;
-    animation: settings 12s infinite linear;
-  }
-}
-  @-webkit-keyframes settings { to { transform: rotate(360deg); } }
-  @keyframes settings { transform: rotate(360deg); }
-
 .powered_by {
   position: absolute;
   left: 20px;
