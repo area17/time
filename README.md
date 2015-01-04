@@ -19,10 +19,6 @@ Scans the images directory, minifies SVGs and produces an images SASS file with 
 
 Just cloned the GIT repo and want to get set up? Run this - does all of the above.
 
-    $ grunt dist
-
-For release: concats and minifys CSS/JS and includes last commit info and places the output into the /dist/ folder. These files ARE committed to the GIT repo.
-
 
 ### When starting development:
 
