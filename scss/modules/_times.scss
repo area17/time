@@ -19,7 +19,7 @@
     margin: 0 0 50px;
     border: 0 none;
     background: transparent;
-    color: $white;
+    color: $light-grey;
     font: 48px/1 $font-stack-helvetica;
   }
 
@@ -27,5 +27,27 @@
     font-size: 48px;
     line-height: 48px;
     margin-bottom: 10px;
+
+    &.current {
+      color: $yellow;
+      margin-bottom: 38px;
+    }
+  }
+
+  .close {
+    @extend %hide_text;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 76px;
+    width: 60px;
+    opacity: .7;
+    background: no-repeat 50%;
+    background-size: 18px;
+    @include background-image("close");
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }

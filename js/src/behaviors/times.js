@@ -63,6 +63,13 @@ timezones.Behaviors.times = function(container) {
 
   function doSearch(value){
     var value = value;
+    var regex = /^(\d{1,2}$)|^(\d{1,2}(am|pm|\sam|\spm)$)|^(\d{1,2}(:|\.|,)\d{1,2}$)|^(\d{1,2}(:|\.|,)\d{1,2}(am|pm|\sam|\spm)$)/igm;
+    var test = regex.test(value);
+
+    if (!test) {
+      return false;
+    }
+
     value = value.replace(".",":");
     value = value.replace(",",":");
 
@@ -72,8 +79,12 @@ timezones.Behaviors.times = function(container) {
 
     mins = mins.replace("pm","");
     mins = mins.replace("p","");
+    mins = mins.replace("am","");
+    mins = mins.replace("a","");
     hours = hours.replace("pm","");
     hours = hours.replace("p","");
+    hours = hours.replace("am","");
+    hours = hours.replace("a","");
 
     if (is_pm) {
       hours = (hours*1) + 12;
@@ -85,14 +96,26 @@ timezones.Behaviors.times = function(container) {
 
     var now = moment().set('hour',hours).set('minute',mins);
     var lis = "";
+    var format = localStorage["digital_format"] || "24";
 
     timezones.locations.forEach(function(location,index){
-      var this_result_html = result_html;
-      var time = now.tz(location.timezone).format("HH:mm");
-      //
-      this_result_html = this_result_html.replace("{{time}}",time);
-      this_result_html = this_result_html.replace("{{name}}",location.name);
-      lis += this_result_html;
+      if (location.isCurrent) {
+        var time = now.tz(location.timezone);
+        var time_str = (format === "24") ? time.format("HH:mm") : time.format("h:mm") + " <span>" + time.format("a") + "<span>";
+        lis += '<li class="current">'+time_str+' in '+location.name+' is:</li>';
+      }
+    });
+
+    timezones.locations.forEach(function(location,index){
+      if (!location.isCurrent) {
+        var this_result_html = result_html;
+        var time = now.tz(location.timezone);
+        var time_str = (format === "24") ? time.format("HH:mm") : time.format("h:mm") + " <span>" + time.format("a") + "<span>";
+        //
+        this_result_html = this_result_html.replace("{{time}}",time_str);
+        this_result_html = this_result_html.replace("{{name}}",location.name);
+        lis += this_result_html;
+      }
     });
 
     $search_results.innerHTML = lis;
