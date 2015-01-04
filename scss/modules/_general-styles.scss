@@ -26,6 +26,15 @@ a {
   margin: 20px;
 }
 
+.instruction {
+  position: absolute;
+  right: 55px;
+  top: 29px;
+  color: $light-grey;
+  font-size: 12px;
+  line-height: 23px;
+}
+
 .powered_by {
   position: absolute;
   left: 20px;

@@ -1,15 +1,17 @@
 <?php include "includes/_html_header.php"; ?>
 <header id="header">
   <span class="logo">A17</span>
+  <span class="instruction">Type a time, eg: 15:00, 3pm</span>
   <a href="#settings" class="settings" data-behavior="settings">Settings</a>
 </header>
 <section class="container">
   <ul class="timezones" data-behavior="timezones">
   </ul>
   <div class="times" data-behavior="times">
-    <input type="text" placeholder="Type a time, eg: 15:00, 3pm">
+    <input type="text">
     <ul>
     </ul>
+    <a href="#" class="close">Close</a>
   </div>
   <div id="settings">
     <p>Time</p>

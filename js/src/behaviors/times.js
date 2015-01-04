@@ -3,6 +3,7 @@ timezones.Behaviors.times = function(container) {
   var $body = $("body");
   var $search_field = $("input[type=text]",container);
   var $search_results = $("ul",container);
+  var $close = $(".close",container);
   var result_html = '<li>{{time}} in {{name}}</li>';
   var active_class = "show-times";
   var debouncer;
@@ -23,6 +24,11 @@ timezones.Behaviors.times = function(container) {
         doSearch($search_field.value);
       },250);
     }
+  });
+
+  $close.on("click",function(event){
+    event.preventDefault();
+    hide_times();
   });
 
   document.on("keydown",function(event) {
