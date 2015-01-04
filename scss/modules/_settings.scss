@@ -6,17 +6,13 @@
   top: 29px;
   width: 23px;
   height: 23px;
-  opacity: .5;
+  opacity: .7;
   @include background-image("settings");
 
   &:hover {
     opacity: 1;
-    -webkit-animation: settings 12s infinite linear;
-    animation: settings 12s infinite linear;
   }
 }
-  @-webkit-keyframes settings { to { transform: rotate(360deg); } }
-  @keyframes settings { transform: rotate(360deg); }
 
 #settings {
   position: absolute;
@@ -27,12 +23,11 @@
   background: #000;
   width: 300px;
   padding: 15px 0 10px;
-  transform: translateX(300px);
-  transition: transform .2s ease-in-out;
   color: $light-grey;
+  display: none;
 
   &.active {
-    transform: translateX(0);
+    display: block;
   }
 
   p {
@@ -46,7 +41,7 @@
   }
   ul {
     list-style-type: none;
-    margin: 0;
+    margin: 0 0 25px;
   }
   label {
     display: block;
