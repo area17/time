@@ -22,6 +22,14 @@
     display: block;
     margin-bottom: 10px;
   }
+    .current b:before {
+      content: "";
+      display: block;
+      width: 17px;
+      height: 15px;
+      margin: -20px auto 5px;
+      @include background-image("home");
+    }
 
   .time {
     font-size: 48px;

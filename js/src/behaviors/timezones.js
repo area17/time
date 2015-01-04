@@ -1,6 +1,6 @@
 timezones.Behaviors.timezones = function(container) {
 
-  var location_html = '<li id="{{locationID}}">\n<b>{{name}}</b>\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<div class="time">{{time}}</div>\n<div class="weather"><canvas class="icon loading" id="{{iconID}}" width="64" height="64"></canvas>\n<i>{{temp}}</i>\n</div>\n</li>\n';
+  var location_html = '<li id="{{locationID}}" class={{current}}>\n<b>{{name}}</b>\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<div class="time">{{time}}</div>\n<div class="weather"><canvas class="icon loading" id="{{iconID}}" width="64" height="64"></canvas>\n<i></i>\n</div>\n</li>\n';
   var lis = "";
   var skycons = new Skycons({"color": "white"});
   var now = moment.utc();
@@ -11,22 +11,21 @@ timezones.Behaviors.timezones = function(container) {
     var timezones_style_block = document.createElement("style");
     timezones_style_block.id = timezones_style_block_id;
     $("head").appendChild(timezones_style_block);
-
-    hideShow_analog();
-    hideShow_digital();
-    hideShow_weather();
-    hideShow_temperature();
-
+    //
+    var tempTimeHours = new Date();
+    tempTimeHours = tempTimeHours.getHours();
+    //
     timezones.locations.forEach(function(location,index){
       location.id = "location-"+index;
       location.time = "";
       location.temperature = "";
       location.icon = Skycons.CLOUDY;
-
+      location.isCurrent = (now.tz(location.timezone).hours() === tempTimeHours) ? true : false;
+      //
       var this_location_html = location_html;
       this_location_html = this_location_html.replace("{{time}}",location.time);
       this_location_html = this_location_html.replace("{{name}}",location.name);
-      this_location_html = this_location_html.replace("{{temp}}",location.temperature);
+      this_location_html = this_location_html.replace("{{current}}",(location.isCurrent) ? "current" : "");
       this_location_html = this_location_html.replace("{{iconID}}","icon-"+index);
       this_location_html = this_location_html.replace("{{locationID}}",location.id);
       //
@@ -34,6 +33,11 @@ timezones.Behaviors.timezones = function(container) {
     });
 
     container.innerHTML = lis;
+
+    hideShow_analog();
+    hideShow_digital();
+    hideShow_weather();
+    hideShow_temperature();
 
     update_digital_time();
     update_analogue_time();
@@ -79,6 +83,7 @@ timezones.Behaviors.timezones = function(container) {
   }
 
   function update_digital_time() {
+    now = moment.utc();
     timezones.locations.forEach(function(location,index){
       location.time = now.tz(location.timezone);
       var format = localStorage["digital_format"] || "24";
@@ -114,6 +119,7 @@ timezones.Behaviors.timezones = function(container) {
       container.addClass("hide_analog");
     } else {
       container.removeClass("hide_analog");
+      update_analogue_time();
     }
   }
   function hideShow_digital() {
