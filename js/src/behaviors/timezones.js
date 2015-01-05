@@ -101,13 +101,13 @@ timezones.Behaviors.timezones = function(container) {
       hour = (hour > 12) ? hour - 12 : hour;
       hour = (hour * 30) + (minute / 12);
       //
-      $("#location-"+index+" .hours",container).css("transform", "rotate(" + hour + "deg)");
-      $("#location-"+index+" .minutes",container).css("transform", "rotate(" + minute + "deg)");
-      $("#location-"+index+" .seconds",container).css("transform", "rotate(" + second + "deg)");
+      $("#location-"+index+" .hours",container).css("-webkit-transform", "rotate(" + hour + "deg)").css("transform", "rotate(" + hour + "deg)");
+      $("#location-"+index+" .minutes",container).css("-webkit-transform", "rotate(" + minute + "deg)").css("transform", "rotate(" + minute + "deg)");
+      $("#location-"+index+" .seconds",container).css("-webkit-transform", "rotate(" + second + "deg)").css("transform", "rotate(" + second + "deg)");
       //
-      var css_anims = "@-webkit-keyframes time_hours { to { transform: rotate(" + (hour+360) + "deg); } }\n@keyframes time_hours { transform: rotate(" + (hour+360) + "deg); }\n";
-      css_anims += "@-webkit-keyframes time_minutes { to { transform: rotate(" + (minute+360) + "deg); } }\n@keyframes time_minutes { transform: rotate(" + (minute+360) + "deg); }\n";
-      css_anims += "@-webkit-keyframes time_seconds { to { transform: rotate(" + (second+360) + "deg); } }\n@keyframes time_seconds { transform: rotate(" + (second+360) + "deg); }\n";
+      var css_anims = "@-webkit-keyframes time_hours { to { -webkit-transform: rotate(" + (hour+360) + "deg); } }\n@keyframes time_hours { to { transform: rotate(" + (hour+360) + "deg); } }\n";
+      css_anims += "@-webkit-keyframes time_minutes { to { -webkit-transform: rotate(" + (minute+360) + "deg); } }\n@keyframes time_minutes { to { transform: rotate(" + (minute+360) + "deg); } }\n";
+      css_anims += "@-webkit-keyframes time_seconds { to { -webkit-transform: rotate(" + (second+360) + "deg); } }\n@keyframes time_seconds { to { transform: rotate(" + (second+360) + "deg); } }\n";
        $("#"+timezones_style_block_id).textContent = css_anims;
     });
   }

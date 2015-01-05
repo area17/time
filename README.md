@@ -2,6 +2,9 @@
 
 AREA 17 covers multiple timezones around the world. This project displays each timezone, shows the current weather and temperature in the city using Forecast.io and allows you to type a time to see what that time is in the other A17 timezones.
 
+Tested in Chrome 39, Safari 8, Firefox 34 IE11 and Safari iOS8.
+
+
 ## Developing
 
 ### Grunt Tasks:

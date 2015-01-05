@@ -4,12 +4,12 @@
   li {
     display: inline;
     float: left;
-    width: calc(100%/6);
+    width: calc(100%/6.01);
     text-align: center;
     margin: 0 0 50px;
 
     @include breakpoint(medium) {
-      width: calc(100%/3);
+      width: calc(100%/3.01);
     }
     @include breakpoint(small) {
       display: block;
