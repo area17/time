@@ -30,5 +30,6 @@
     </ul>
   </div>
   <p class="powered_by"><a href="http://forecast.io/">Powered by Forecast.io</a></p>
+  <small class="legal">Copyright &copy; 2015 AREA 17</small>
 </section>
 <?php include "includes/_html_footer.php"; ?>

@@ -33,9 +33,14 @@ a {
   color: $light-grey;
   font-size: 12px;
   line-height: 23px;
+
+  @include breakpoint(small) {
+    display: none;
+  }
 }
 
-.powered_by {
+.powered_by,
+.legal {
   position: absolute;
   left: 20px;
   bottom: 20px;
@@ -47,6 +52,8 @@ a {
   @include breakpoint(small) {
     position: static;
     margin: 20px;
+    display: block;
+    text-align: center;
   }
 
   a {
@@ -57,3 +64,11 @@ a {
     }
   }
 }
+  .legal {
+    left: auto;
+    right: 20px;
+
+    @include breakpoint(small) {
+      margin-top: -15px;
+    }
+  }
