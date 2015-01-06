@@ -19,7 +19,7 @@ timezones.Functions = {
 timezones.media_query_in_use = "large";
 timezones.locations = [
   { name: "San Francisco", lat: 37.775, long: -122.4183333, timezone: "America/Los_Angeles" },
-  { name: "Tennessee", lat: 35.7449, long: -86.7489, timezone: "America/Chicago" },
+  { name: "Memphis", lat: 35.6331, long: -88.8208, timezone: "America/Chicago" },
   { name: "New York", lat: 40.7141667, long:  -74.0063889, timezone: "America/New_York" },
   { name: "Tucumán", lat: -26.8166667, long: -65.2166667, timezone: "America/Argentina/Tucuman" },
   { name: "London", lat: 51.5, long:  -0.116667, timezone: "Europe/London" },
