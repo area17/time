@@ -1,4 +1,3 @@
-// grunt compass https://github.com/gruntjs/grunt-contrib-compass
 // grunt timer https://github.com/leecrossley/grunt-timer
 // load grunt tasks https://www.npmjs.org/package/load-grunt-tasks
 // grunt git info https://github.com/damkraw/grunt-gitinfo
@@ -32,6 +31,17 @@ module.exports = function(grunt) {
         files: {
           'js/timezones.js': ['js/src/*.js','js/src/**/*.js']
         }
+      },
+      dist: {
+        options: {
+          mangle: false,
+          beautify: false,
+          compress: true,
+          preserveComments: false
+        },
+        files: {
+          'js/timezones.js': ['js/src/*.js','js/src/**/*.js']
+        }
       }
     },
     sass: {
@@ -39,6 +49,15 @@ module.exports = function(grunt) {
         options: {
           sourceMap: false,
           outputStyle: "nested"
+        },
+        files: {
+          'css/timezones.css': 'scss/timezones.scss'
+        }
+      },
+      dist: {
+        options: {
+          sourceMap: false,
+          outputStyle: "compressed"
         },
         files: {
           'css/timezones.css': 'scss/timezones.scss'
@@ -121,7 +140,7 @@ module.exports = function(grunt) {
 
 
   // Default task
-  grunt.registerTask('default', ['gitinfo','sass:dev','uglify:dev']);
+  grunt.registerTask('default', ['gitinfo','sass:dist','uglify:dist']);
 
   // Image task
   grunt.registerTask('images', ['svgmin:dist','datauri','rename:datauri','clean:datauri','usebanner:images']);

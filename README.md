@@ -10,6 +10,9 @@ Tested in Chrome 39, Safari 8, Firefox 34 IE11 and Safari iOS8.
 ### Grunt Tasks:
 
     $ grunt
+
+Concats and minifies CSS/JS and places the compiled files in /css/ and /js/. These files are not committed to the GIT repo.
+
     $ grunt watch
 
 For dev purposes: concats but doesn't minify CSS/JS and places the compiled files in /css/ and /js/. These files are not committed to the GIT repo.
