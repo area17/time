@@ -8,3 +8,4 @@ img/*.svg
 img/_images.scss
 img/orig/
 todo.md
+proxy.php
