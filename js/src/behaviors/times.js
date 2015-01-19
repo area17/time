@@ -34,7 +34,7 @@ timezones.Behaviors.times = function(container) {
   document.on("keydown",function(event) {
     keysDown[event.keyCode] = true;
     if (event.target.tagName.toLowerCase() !== 'input' && !keysDown["91"] && !keysDown["17"]) {
-      if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode >= 48 && event.keyCode <= 57) {
+      if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode >= 48 && event.keyCode <= 57 || event.keyCode >= 96 && event.keyCode <= 105) {
         show_times();
       }
     }
