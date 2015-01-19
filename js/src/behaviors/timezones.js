@@ -6,6 +6,7 @@ timezones.Behaviors.timezones = function(container) {
   var now = moment.utc();
   var innitted = false;
   var timezones_style_block_id = "timezones_clock_anim";
+  var minutes_temp = 99; // initial value out of range
 
   var init = function() {
     var timezones_style_block = document.createElement("style");
@@ -84,12 +85,15 @@ timezones.Behaviors.timezones = function(container) {
 
   function update_digital_time() {
     now = moment.utc();
-    timezones.locations.forEach(function(location,index){
-      location.time = now.tz(location.timezone);
-      var format = localStorage["digital_format"] || "24";
-      var time_str = (format === "24") ? location.time.format("HH:mm") : location.time.format("h:mm") + "<span>" + location.time.format("a") + "<span>"
-      $("#location-"+index+" .time",container).innerHTML = time_str;
-    });
+    if (now.minutes() != minutes_temp) {
+      minutes_temp = now.minutes();
+      timezones.locations.forEach(function(location,index){
+        location.time = now.tz(location.timezone);
+        var format = localStorage["digital_format"] || "24";
+        var time_str = (format === "24") ? location.time.format("HH:mm") : location.time.format("h:mm") + "<span>" + location.time.format("a") + "<span>"
+        $("#location-"+index+" .time",container).innerHTML = time_str;
+      });
+    }
   }
 
   function update_analogue_time(){
