@@ -127,8 +127,6 @@
     .hours {
       height: 30px;
       margin-top: -30px;
-      -webkit-animation: time_hours 43200s infinite linear;
-      animation: time_hours 43200s infinite linear;
     }
 
     .minutes {
@@ -158,6 +156,12 @@
       }
     }
   }
+    @for $i from 1 through 6 {
+      li:nth-child(#{$i}) .clock .hours {
+        -webkit-animation: time_hours_#{$i} 43200s infinite linear;
+        animation: time_hours_#{$i} 43200s infinite linear;
+      }
+    }
     &.hide_analog .clock {
       display: none;
     }
