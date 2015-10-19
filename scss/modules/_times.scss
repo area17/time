@@ -7,6 +7,8 @@
   bottom: 0;
   background: $dark-grey;
   padding: 100px 20px 20px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   display: none;
 
   .show-times & {
