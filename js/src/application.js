@@ -23,9 +23,7 @@ timezones.locations = [
   { name: "New York", lat: 40.7141667, long:  -74.0063889, timezone: "America/New_York" },
   { name: "Tucumán", lat: -26.8166667, long: -65.2166667, timezone: "America/Argentina/Tucuman" },
   { name: "London", lat: 51.5, long:  -0.116667, timezone: "Europe/London" },
-  { name: "Paris", lat: 48.866667, long: 2.333333, timezone: "Europe/Paris" },
-  { name: "Mumbai", lat: 18.975, long: 72.8258, timezone: "Asia/Calcutta" },
-  { name: "Hyderabad", lat: 17.37, long: 78.48, timezone: "Asia/Calcutta" }
+  { name: "Paris", lat: 48.866667, long: 2.333333, timezone: "Europe/Paris" }
 ];
 
 // look through the document (or ajax'd in content if "context" is defined) to look for "data-behavior" attributes.
