@@ -10,7 +10,7 @@
   array_push($locations, array("name" => "Paris", "timezone" => "Europe/Paris", "emoji" => "🇫🇷"));
   array_push($locations, array("name" => "London", "timezone" => "Europe/London", "emoji" => "🇬🇧"));
   array_push($locations, array("name" => "Tucumán", "timezone" => "America/Argentina/Tucuman", "emoji" => "🇦🇷"));
-  array_push($locations, array("name" => "New_York", "timezone" => "America/New_York", "emoji" => "🇺🇸"));
+  array_push($locations, array("name" => "New York", "timezone" => "America/New_York", "emoji" => "🇺🇸"));
   array_push($locations, array("name" => "Memphis", "timezone" => "America/Chicago", "emoji" => "🇺🇸"));
   array_push($locations, array("name" => "San Francisco", "timezone" => "America/Los_Angeles", "emoji" => "🇺🇸"));
 
