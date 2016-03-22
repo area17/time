@@ -1,0 +1,32 @@
+{
+    "key": "A17.times",
+    "name": "A17 times",
+    "description": "Quickly see all the timezones A17 operates in by typing /time",
+    "vendor": {
+        "name": "AREA 17",
+        "url": "http://www.area17.com/"
+    },
+    "links": {
+        "self": "http://time.area17.com/hipchat.json",
+        "homepage": "http://time.area17.com/hipchat.json"
+    },
+    "capabilities": {
+        "hipchatApiConsumer": {
+            "scopes": [
+                "send_notification"
+            ]
+        },
+        "installable": {
+            "callbackUrl": "http://time.area17.com/hipchat_install.php"
+        },
+        "webhook": [
+            {
+                "url": "http://time.area17.com/hipchat.php",
+                "pattern": "^/time",
+                "event": "room_message",
+                "authentication": "none",
+                "name": "Time"
+            }
+        ]
+    }
+}
