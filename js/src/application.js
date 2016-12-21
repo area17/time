@@ -11,18 +11,18 @@ var timezones = window.timezones || {};
 
 // set up some objects within the master one, to hold my Helpers and behaviors
 timezones.Behaviors = {
-}
+};
 timezones.Helpers = {
-}
+};
 timezones.Functions = {
-}
+};
 timezones.media_query_in_use = "large";
 timezones.locations = [
   { name: "San Francisco", lat: 37.775, long: -122.4183333, timezone: "America/Los_Angeles" },
   { name: "Memphis", lat: 35.6331, long: -88.8208, timezone: "America/Chicago" },
   { name: "New York", lat: 40.7141667, long:  -74.0063889, timezone: "America/New_York" },
   { name: "Tucumán", lat: -26.8166667, long: -65.2166667, timezone: "America/Argentina/Tucuman" },
-  { name: "London", lat: 51.5, long:  -0.116667, timezone: "Europe/London" },
+  { name: "Manchester", lat: 53.4808, long: 2.2426, timezone: "Europe/London" },
   { name: "Paris", lat: 48.866667, long: 2.333333, timezone: "Europe/Paris" }
 ];
 
