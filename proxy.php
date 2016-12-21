@@ -1,9 +1,9 @@
 <?php
 // File Name: proxy.php
-// get a Forecast.io key here: https://developer.forecast.io/
-$api_key = 'forecast api key';
+// get a Forecast.io key here: https://darksky.net/dev/
+$api_key = '7eb59add2436baa58f08399b9fc177e7';
 
-$API_ENDPOINT = 'https://api.forecast.io/forecast/';
+$API_ENDPOINT = 'https://api.darksky.net/forecast/';
 $url = $API_ENDPOINT . $api_key . '/';
 
 if(!isset($_GET['url'])) die();
