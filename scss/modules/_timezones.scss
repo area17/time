@@ -1,38 +1,64 @@
 .timezones {
-  @extend %float_clear;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 80px;
+  bottom: 80px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+
+  @include breakpoint(medium) {
+    align-content: space-around;
+  }
+
+  @include breakpoint(small) {
+    justify-content: space-around;
+    align-content: flex-start;
+    bottom: 0;
+    padding-bottom: 10px;
+  }
 
   li {
-    display: inline;
-    float: left;
-    width: calc(100%/6.01);
-    text-align: center;
-    margin: 0 0 50px;
+    flex: 0 0 auto;
+    width: 16.666666667%;
+    margin-bottom: 20px;
 
     @include breakpoint(large) {
-      width: calc(100%/3.01);
     }
     @include breakpoint(medium) {
-      width: calc(100%/3.01);
+      width: 33.33%;
     }
     @include breakpoint(small) {
-      display: block;
-      float: none;
       width: auto;
+      min-width: 120px;
+      margin-bottom: 40px;
     }
   }
 
   b {
-    display: block;
+    position: relative;
+    display: inline-block;
     margin-bottom: 10px;
-  }
-    .current b:before {
-      content: "";
-      display: block;
-      width: 17px;
-      height: 15px;
-      margin: -20px auto 5px;
-      @include background-image("home");
+    font-weight: normal;
+
+    @include breakpoint(small) {
+      font-size: 15px;
     }
+  }
+
+  .current b {
+    font-weight: bold;
+  }
+
+  .current b::before {
+    //content: "⌂ ";
+  }
 
   .time {
     font-size: 48px;
@@ -40,6 +66,12 @@
     height: 48px;
     margin-bottom: 10px;
     vertical-align: middle;
+
+    @include breakpoint(small) {
+      font-size: 32px;
+      line-height: 32px;
+      height: 32px;
+    }
 
     span {
       font-size: 12px;
@@ -54,13 +86,37 @@
     }
 
   .weather {
+    position: relative;
+    display: flex;
+    flex-flow: row no-wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 
-    canvas {
+    &.js-loading::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      margin: -8px 0 0 -8px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: $white;
+      animation: spin 1.5s linear infinite;
+    }
+
+    canvas,
+    .icon,
+    i {
       display: block;
+      flex: 0 0 auto;
+      margin-right: 5px;
+      margin-left: 5px;
     }
 
     i {
-      display: block;
       font-style: normal;
 
       span {
@@ -80,16 +136,25 @@
 
   .icon {
     display: block;
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 10px;
-    background: no-repeat 50% 50%;
-    background-size: 24px 24px;
-
-    &.loading {
-      @include background-image("loader");
-    }
+    width: 32px;
+    height: 32px;
   }
+
+  .current .clock {
+    //background-color: #e0e0e0;
+  }
+
+  /*
+  .current .clock:before {
+    content: "⌂";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    right: 0;
+    font-weight: bold;
+    text-align: center;
+  }
+  */
 
   .clock {
     position: relative;
@@ -98,6 +163,12 @@
     height: 120px;
     border: 3px solid $white;
     border-radius: 50%;
+
+    @include breakpoint(small) {
+      width: 80px;
+      height: 80px;
+      border-width: 2px;
+    }
 
     &:after {
       content: "";
@@ -125,11 +196,21 @@
       border-radius: 2px;
       -webkit-transform-origin: 50% 100%;
       transform-origin: 50% 100%;
+
+      @include breakpoint(small) {
+        width: 2px;
+        margin-left: -1px;
+      }
     }
 
     .hours {
       height: 30px;
       margin-top: -30px;
+
+      @include breakpoint(small) {
+        height: 18px;
+        margin-top: -18px;
+      }
     }
 
     .minutes {
@@ -137,6 +218,11 @@
       margin-top: -50px;
       -webkit-animation: time_minutes 3600s infinite linear;
       animation: time_minutes 3600s infinite linear;
+
+      @include breakpoint(small) {
+        height: 30px;
+        margin-top: -30px;
+      }
     }
 
     .seconds {
@@ -148,7 +234,7 @@
       -webkit-animation: time_seconds 60s steps(60 ,end) infinite;
       animation: time_seconds 60s steps(60 ,end) infinite;
 
-      &:after {
+      &::after {
         content: "";
         position: absolute;
         background: $red;
@@ -157,6 +243,16 @@
         right: 0;
         top: 100%;
       }
+
+      @include breakpoint(small) {
+        height: 29px;
+        margin-top: -29px;
+
+        &::after {
+          height: 5px;
+        }
+      }
+
     }
   }
     @for $i from 1 through 6 {
@@ -168,4 +264,10 @@
     &.hide_analog .clock {
       display: none;
     }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }

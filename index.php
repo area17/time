@@ -2,7 +2,7 @@
 <header id="header">
   <span class="logo">A17</span>
   <span class="instruction">Type a time, eg: 15:00, 3pm</span>
-  <a href="#settings" class="settings" data-behavior="settings">Settings</a>
+  <a href="#settings" class="settings" data-behavior="settings">⚙</a>
 </header>
 <section class="container">
   <ul class="timezones" data-behavior="timezones">

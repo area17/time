@@ -1,17 +1,10 @@
 .settings {
-  @extend %hide_text;
   position: absolute;
   z-index: 5;
   right: 20px;
   top: 29px;
   width: 23px;
   height: 23px;
-  opacity: .7;
-  @include background-image("settings");
-
-  &:hover {
-    opacity: 1;
-  }
 }
 
 #settings {

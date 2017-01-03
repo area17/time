@@ -1,8 +1,8 @@
 timezones.Behaviors.timezones = function(container) {
 
-  var location_html = '<li id="{{locationID}}" class={{current}}>\n<b>{{name}}</b>\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<div class="time">{{time}}</div>\n<div class="weather"><canvas class="icon loading" id="{{iconID}}" width="64" height="64"></canvas>\n<i></i>\n</div>\n</li>\n';
+  var location_html = '<li id="{{locationID}}" class={{current}}>\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<b>{{name}}</b>\n<div class="time">{{time}}</div>\n<div class="weather js-loading"><canvas class="icon" id="{{iconID}}" width="32" height="32"></canvas>\n<i></i>\n</div>\n</li>\n';
   var lis = "";
-  var skycons = new Skycons({"color": "white"});
+  var skycons = new Skycons({"color": "#111111"});
   var now = moment.utc();
   var innitted = false;
   var timezones_style_block_id = "timezones_clock_anim";
@@ -53,7 +53,7 @@ timezones.Behaviors.timezones = function(container) {
 
     setTimeout(function(){
       update_weather();
-      $(".icon.loading",container).removeClass("loading");
+      $(".weather.js-loading",container.parentNode).removeClass("js-loading");
       skycons.play();
       innitted = true;
     },50);

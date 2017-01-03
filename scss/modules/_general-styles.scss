@@ -17,13 +17,14 @@ a {
 .logo {
   @extend %hide_text;
   display: block;
-  position: relative;
+  position: absolute;
   z-index: 9;
+  left: 20px;
+  top: 20px;
   width: 119px;
-  height: 76px;
+  height: 36px;
   @include background-image("a17");
   background-size: 50%;
-  margin: 20px;
 }
 
 .instruction {
@@ -50,10 +51,12 @@ a {
   line-height: 10px;
 
   @include breakpoint(small) {
-    position: static;
-    margin: 20px;
     display: block;
     text-align: center;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    text-shadow: -3px 0 3px $dark-grey, 3px 0 3px $dark-grey, 0 -3px 3px $dark-grey, 0 3px 3px $dark-grey;
   }
 
   a {
@@ -69,6 +72,8 @@ a {
     right: 20px;
 
     @include breakpoint(small) {
-      margin-top: -15px;
+      left: 0;
+      right: 0;
+      bottom: 10px;
     }
   }
