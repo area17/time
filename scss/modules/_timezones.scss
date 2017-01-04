@@ -45,7 +45,6 @@
 .timezones b {
   position: relative;
   display: inline-block;
-  margin-bottom: 10px;
   font-weight: normal;
 
   @include breakpoint(small) {
@@ -80,7 +79,7 @@
   line-height: 12px;
   vertical-align: top;
   position: relative;
-  top: 2px;
+  top: 5px;
 }
 
 .timezones .weather {
@@ -208,8 +207,6 @@
 .timezones .minutes {
   height: 50px;
   margin-top: -50px;
-  -webkit-animation: time_minutes 3600s infinite linear;
-  animation: time_minutes 3600s infinite linear;
 
   @include breakpoint(small) {
     height: 30px;
@@ -250,6 +247,10 @@
   .timezones li:nth-child(#{$i}) .clock .hours {
     -webkit-animation: time_hours_#{$i} 43200s infinite linear;
     animation: time_hours_#{$i} 43200s infinite linear;
+  }
+  .timezones li:nth-child(#{$i}) .clock .minutes {
+    -webkit-animation: time_minutes_#{$i} 3600s infinite linear;
+    animation: time_minutes_#{$i} 3600s infinite linear;
   }
 }
 

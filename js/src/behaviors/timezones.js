@@ -3,9 +3,7 @@ timezones.Behaviors.timezones = function(container) {
   var location_html = '<li id="{{locationID}}" class={{current}}>\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<b>{{name}}</b>\n<div class="time">{{time}}</div>\n<div class="weather js-loading"><canvas class="icon" id="{{iconID}}" width="32" height="32"></canvas>\n<i></i>\n</div>\n</li>\n';
   var lis = "";
   var skycons = new Skycons({"color": "#111111"});
-  var now = moment.utc();
-  console.log(now);
-  console.log(new Date().getTime());
+  var now = new Date().getTime()/1000;
   var innitted = false;
   var timezones_style_block_id = "timezones_clock_anim";
   var minutes_temp = 99; // initial value out of range
@@ -23,7 +21,6 @@ timezones.Behaviors.timezones = function(container) {
       location.time = "";
       location.temperature = "";
       location.icon = Skycons.CLOUDY;
-      //location.isCurrent = (now.tz(location.timezone).hours() === tempTimeHours) ? true : false;
       location.isCurrent = (location.offset === 0);
       //
       var this_location_html = location_html;
@@ -38,12 +35,12 @@ timezones.Behaviors.timezones = function(container) {
 
     container.innerHTML = lis;
 
+    update_digital_time();
+
     hideShow_analog();
     hideShow_digital();
     hideShow_weather();
     hideShow_temperature();
-
-    update_digital_time();
 
     setInterval(function(){
       update_digital_time();
@@ -86,39 +83,54 @@ timezones.Behaviors.timezones = function(container) {
     },(30*60*1000));
   }
 
-  function update_digital_time() {
-    now = moment.utc();
-    //if (now.minutes() != minutes_temp) {
-      minutes_temp = now.minutes();
+  function update_digital_time(override) {
+    now = new Date();
+    var minutes_now = now.getMinutes();
+    now = now.getTime()/1000;
+    if (minutes_now !== minutes_temp || override) {
+      minutes_temp = minutes_now;
       timezones.locations.forEach(function(location,index){
-        location.time = now.tz(location.timezone);
         var format = localStorage["digital_format"] || "24";
-        var time_str = (format === "24") ? location.time.format("HH:mm") : location.time.format("h:mm") + "<span>" + location.time.format("a") + "<span>"
+        var this_time = new Date((now+location.offset) * 1000);
+        var this_hour = this_time.getHours();
+        location.hour = this_hour;
+        var this_pm = (this_hour > 12);
+        this_hour = (format !== "24" && this_hour > 12) ? this_hour - 12 : this_hour;
+        var this_minute = this_time.getMinutes();
+        location.minute = this_minute;
+        if (this_minute < 10) {
+          this_minute = "0" + this_minute;
+        }
+        var time_str = this_hour + ":" + this_minute;
+        if (format !== "24") {
+          time_str = time_str + "<span>" + (this_pm ? "pm" : "am") + "<span>";
+        }
         $("#location-"+index+" .time",container).innerHTML = time_str;
       });
-    //}
+    }
   }
 
   function update_analogue_time(){
-    now = moment.utc();
-    var second = now.seconds() * 6;
-    var minute = now.minutes() * 6 + second / 60;
+    now = new Date();
+    var seconds_now = new Date().getSeconds() * 6;
+    now = now.getTime()/1000;
     //
-    var css_anims = "@-webkit-keyframes time_minutes { to { -webkit-transform: rotate(" + (minute+360) + "deg); } }\n@keyframes time_minutes { to { transform: rotate(" + (minute+360) + "deg); } }\n";
-    css_anims += "@-webkit-keyframes time_seconds { to { -webkit-transform: rotate(" + (second+360) + "deg); } }\n@keyframes time_seconds { to { transform: rotate(" + (second+360) + "deg); } }\n";
+    var css_anims = "@-webkit-keyframes time_seconds { to { -webkit-transform: rotate(" + (seconds_now+360) + "deg); } }\n@keyframes time_seconds { to { transform: rotate(" + (seconds_now+360) + "deg); } }\n";
     //
     timezones.locations.forEach(function(location,index){
-      var this_timezone = now.tz(location.timezone);
-      var hour = this_timezone.hours();
+      var hour = location.hour;
+      var minute = location.minute * 6 + seconds_now / 60;
+      //
       hour = (hour > 12) ? hour - 12 : hour;
       hour = (hour * 30) + (minute / 12);
       hour = (hour >= 360) ? hour - 360 : hour;
       //
       $("#location-"+index+" .hours",container).css("-webkit-transform", "rotate(" + hour + "deg)").css("transform", "rotate(" + hour + "deg)");
       $("#location-"+index+" .minutes",container).css("-webkit-transform", "rotate(" + minute + "deg)").css("transform", "rotate(" + minute + "deg)");
-      $("#location-"+index+" .seconds",container).css("-webkit-transform", "rotate(" + second + "deg)").css("transform", "rotate(" + second + "deg)");
+      $("#location-"+index+" .seconds",container).css("-webkit-transform", "rotate(" + seconds_now + "deg)").css("transform", "rotate(" + seconds_now + "deg)");
       //
       css_anims += "@-webkit-keyframes time_hours_"+(index+1)+" { to { -webkit-transform: rotate(" + (hour+360) + "deg); } }\n@keyframes time_hours_"+(index+1)+" { to { transform: rotate(" + (hour+360) + "deg); } }\n";
+      css_anims += "@-webkit-keyframes time_minutes_"+(index+1)+" { to { -webkit-transform: rotate(" + (minute+360) + "deg); } }\n@keyframes time_minutes_"+(index+1)+" { to { transform: rotate(" + (minute+360) + "deg); } }\n";
     });
 
     $("#"+timezones_style_block_id).textContent = css_anims;
@@ -143,7 +155,7 @@ timezones.Behaviors.timezones = function(container) {
     }
   }
   function update_digital_format() {
-    update_digital_time();
+    update_digital_time(true);
   }
   function hideShow_weather() {
     var show_weather = localStorage["show_current_weather"] || "true";
