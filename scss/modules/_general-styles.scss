@@ -56,14 +56,14 @@ a {
     left: 0;
     right: 0;
     bottom: 25px;
-    text-shadow: -3px 0 3px $dark-grey, 3px 0 3px $dark-grey, 0 -3px 3px $dark-grey, 0 3px 3px $dark-grey;
+    text-shadow: -3px 0 3px $white, 3px 0 3px $white, 0 -3px 3px $white, 0 3px 3px $white;
   }
 
   a {
     color: inherit;
 
     &:hover {
-      color: $white;
+      color: $dark-grey;
     }
   }
 }

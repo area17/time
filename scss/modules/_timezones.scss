@@ -23,247 +23,234 @@
     bottom: 0;
     padding-bottom: 10px;
   }
+}
 
-  li {
-    flex: 0 0 auto;
-    width: 16.666666667%;
-    margin-bottom: 20px;
+.timezones li {
+  flex: 0 0 auto;
+  width: 16.666666667%;
+  margin-bottom: 20px;
 
-    @include breakpoint(large) {
-    }
-    @include breakpoint(medium) {
-      width: 33.33%;
-    }
-    @include breakpoint(small) {
-      width: auto;
-      min-width: 120px;
-      margin-bottom: 40px;
-    }
+  @include breakpoint(large) {
   }
-
-  b {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 10px;
-    font-weight: normal;
-
-    @include breakpoint(small) {
-      font-size: 15px;
-    }
+  @include breakpoint(medium) {
+    width: 33.33%;
   }
-
-  .current b {
-    font-weight: bold;
+  @include breakpoint(small) {
+    width: auto;
+    min-width: 120px;
+    margin-bottom: 40px;
   }
+}
 
-  .current b::before {
-    //content: "⌂ ";
+.timezones b {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-weight: normal;
+
+  @include breakpoint(small) {
+    font-size: 15px;
   }
+}
 
-  .time {
-    font-size: 48px;
-    line-height: 48px;
-    height: 48px;
-    margin-bottom: 10px;
-    vertical-align: middle;
+.timezones .current b {
+  font-weight: bold;
+}
 
-    @include breakpoint(small) {
-      font-size: 32px;
-      line-height: 32px;
-      height: 32px;
-    }
+.timezones .time {
+  font-size: 48px;
+  line-height: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+  vertical-align: middle;
 
-    span {
-      font-size: 12px;
-      line-height: 12px;
-      vertical-align: top;
-      position: relative;
-      top: 2px;
-    }
-  }
-    &.hide_digital .time {
-      display: none;
-    }
-
-  .weather {
-    position: relative;
-    display: flex;
-    flex-flow: row no-wrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-
-    &.js-loading::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 16px;
-      height: 16px;
-      margin: -8px 0 0 -8px;
-      border-radius: 50%;
-      border: 3px solid transparent;
-      border-top-color: $white;
-      animation: spin 1.5s linear infinite;
-    }
-
-    canvas,
-    .icon,
-    i {
-      display: block;
-      flex: 0 0 auto;
-      margin-right: 5px;
-      margin-left: 5px;
-    }
-
-    i {
-      font-style: normal;
-
-      span {
-        font-size: 10px;
-        vertical-align: super;
-        position: relative;
-        top: 1px;
-      }
-    }
-  }
-    &.hide_weather .weather canvas {
-      display: none;
-    }
-    &.hide_temperature .weather i {
-      display: none;
-    }
-
-  .icon {
-    display: block;
-    width: 32px;
+  @include breakpoint(small) {
+    font-size: 32px;
+    line-height: 32px;
     height: 32px;
   }
+}
 
-  .current .clock {
-    //background-color: #e0e0e0;
+.timezones.hide_digital .time {
+  display: none;
+}
+
+.timezones .time span {
+  font-size: 12px;
+  line-height: 12px;
+  vertical-align: top;
+  position: relative;
+  top: 2px;
+}
+
+.timezones .weather {
+  position: relative;
+  display: flex;
+  flex-flow: row no-wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  &.js-loading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border-radius: 50%;
+    border: 0 solid transparent;
+    border-top-color: $dark-grey;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    animation: spin 1.5s linear infinite;
+  }
+}
+
+.timezones.hide_weather .weather canvas {
+  display: none;
+}
+
+.timezones.hide_temperature .weather i {
+  display: none;
+}
+
+
+.timezones .weather canvas,
+.timezones .weather .icon,
+.timezones .weather i {
+  display: block;
+  flex: 0 0 auto;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.timezones .weather i {
+  font-style: normal;
+
+  span {
+    font-size: 10px;
+    vertical-align: super;
+    position: relative;
+    top: 1px;
+  }
+}
+
+.timezones .weather .icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.timezones .clock {
+  position: relative;
+  margin: 0 auto 10px;
+  width: 120px;
+  height: 120px;
+  border: 3px solid $dark-grey;
+  border-radius: 50%;
+
+  @include breakpoint(small) {
+    width: 80px;
+    height: 80px;
+    border-width: 2px;
   }
 
-  /*
-  .current .clock:before {
-    content: "⌂";
+  &:after {
+    content: "";
     position: absolute;
-    top: -25px;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: $dark-grey;
+    border-radius: 50%;
+  }
+}
+
+.timezones.hide_analog .clock {
+  display: none;
+}
+
+.timezones .hours,
+.timezones .minutes,
+.timezones .seconds {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  margin: 0 0 0 -2px;
+  background: $dark-grey;
+  border-radius: 2px;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+
+  @include breakpoint(small) {
+    width: 2px;
+    margin-left: -1px;
+  }
+}
+
+.timezones .hours {
+  height: 30px;
+  margin-top: -30px;
+
+  @include breakpoint(small) {
+    height: 18px;
+    margin-top: -18px;
+  }
+}
+
+.timezones .minutes {
+  height: 50px;
+  margin-top: -50px;
+  -webkit-animation: time_minutes 3600s infinite linear;
+  animation: time_minutes 3600s infinite linear;
+
+  @include breakpoint(small) {
+    height: 30px;
+    margin-top: -30px;
+  }
+}
+
+.timezones .seconds {
+  background: $red;
+  z-index: 3;
+  width: 2px;
+  height: 48px;
+  margin: -48px 0 0 -1px;
+  -webkit-animation: time_seconds 60s steps(60 ,end) infinite;
+  animation: time_seconds 60s steps(60 ,end) infinite;
+
+  &::after {
+    content: "";
+    position: absolute;
+    background: $red;
+    height: 10px;
     left: 0;
     right: 0;
-    font-weight: bold;
-    text-align: center;
+    top: 100%;
   }
-  */
 
-  .clock {
-    position: relative;
-    margin: 0 auto 10px;
-    width: 120px;
-    height: 120px;
-    border: 3px solid $white;
-    border-radius: 50%;
+  @include breakpoint(small) {
+    height: 29px;
+    margin-top: -29px;
 
-    @include breakpoint(small) {
-      width: 80px;
-      height: 80px;
-      border-width: 2px;
-    }
-
-    &:after {
-      content: "";
-      position: absolute;
-      z-index: 2;
-      top: 50%;
-      left: 50%;
-      width: 6px;
-      height: 6px;
-      margin: -3px 0 0 -3px;
-      background: $white;
-      border-radius: 50%;
-    }
-
-    .hours,
-    .minutes,
-    .seconds {
-      position: absolute;
-      z-index: 1;
-      left: 50%;
-      top: 50%;
-      width: 4px;
-      margin: 0 0 0 -2px;
-      background: $white;
-      border-radius: 2px;
-      -webkit-transform-origin: 50% 100%;
-      transform-origin: 50% 100%;
-
-      @include breakpoint(small) {
-        width: 2px;
-        margin-left: -1px;
-      }
-    }
-
-    .hours {
-      height: 30px;
-      margin-top: -30px;
-
-      @include breakpoint(small) {
-        height: 18px;
-        margin-top: -18px;
-      }
-    }
-
-    .minutes {
-      height: 50px;
-      margin-top: -50px;
-      -webkit-animation: time_minutes 3600s infinite linear;
-      animation: time_minutes 3600s infinite linear;
-
-      @include breakpoint(small) {
-        height: 30px;
-        margin-top: -30px;
-      }
-    }
-
-    .seconds {
-      background: $red;
-      z-index: 3;
-      width: 2px;
-      height: 48px;
-      margin: -48px 0 0 -1px;
-      -webkit-animation: time_seconds 60s steps(60 ,end) infinite;
-      animation: time_seconds 60s steps(60 ,end) infinite;
-
-      &::after {
-        content: "";
-        position: absolute;
-        background: $red;
-        height: 10px;
-        left: 0;
-        right: 0;
-        top: 100%;
-      }
-
-      @include breakpoint(small) {
-        height: 29px;
-        margin-top: -29px;
-
-        &::after {
-          height: 5px;
-        }
-      }
-
+    &::after {
+      height: 5px;
     }
   }
-    @for $i from 1 through 6 {
-      li:nth-child(#{$i}) .clock .hours {
-        -webkit-animation: time_hours_#{$i} 43200s infinite linear;
-        animation: time_hours_#{$i} 43200s infinite linear;
-      }
-    }
-    &.hide_analog .clock {
-      display: none;
-    }
+}
+
+@for $i from 1 through 10 {
+  .timezones li:nth-child(#{$i}) .clock .hours {
+    -webkit-animation: time_hours_#{$i} 43200s infinite linear;
+    animation: time_hours_#{$i} 43200s infinite linear;
+  }
 }
 
 @keyframes spin {
