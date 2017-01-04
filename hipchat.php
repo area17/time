@@ -1,5 +1,5 @@
 <?php
-  date_default_timezone_set("UTC");
+  include 'includes/_timezones_setup.php';
 
   /*
   test with curl:
@@ -9,21 +9,7 @@
   // set up
   $time_str = "";
   $format = 'h:i a';
-  $datetime = new DateTime(date("Y-m-d H:i:s"), new DateTimeZone('UTC'));
-  $locations = array();
   $hours = array("0" => "🕛", "1" => "🕐", "2" => "🕑", "3" => "🕒", "4" => "🕓", "5" => "🕔", "6" => "🕕", "7" => "🕖", "8" => "🕗", "9" => "🕘", "10" => "🕙", "11" => "🕚", "12" => "🕛");
-
-  // our locations
-  array_push($locations, array("name" => "Paris", "timezone" => "Europe/Paris", "emoji" => "🇫🇷"));
-  array_push($locations, array("name" => "Manchester", "timezone" => "Europe/London", "emoji" => "🇬🇧"));
-  array_push($locations, array("name" => "Tucumán", "timezone" => "America/Argentina/Tucuman", "emoji" => "🇦🇷"));
-  array_push($locations, array("name" => "New York", "timezone" => "America/New_York", "emoji" => "🇺🇸"));
-  array_push($locations, array("name" => "Memphis", "timezone" => "America/Chicago", "emoji" => "🇺🇸"));
-  array_push($locations, array("name" => "San Francisco", "timezone" => "America/Los_Angeles", "emoji" => "🇺🇸"));
-  // testing timezones that aren't whole integer hours different to UTC
-  //array_push($locations, array("name" => "Sri Lanka", "timezone" => "Asia/Colombo", "emoji" => "🇱🇰"));
-  //array_push($locations, array("name" => "Kathmandu", "timezone" => "Asia/Kathmandu", "emoji" => "🇳🇵"));
-
 
   // determining if there is useful POST info
   $post = file_get_contents('php://input');

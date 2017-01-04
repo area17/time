@@ -4,6 +4,8 @@ timezones.Behaviors.timezones = function(container) {
   var lis = "";
   var skycons = new Skycons({"color": "#111111"});
   var now = moment.utc();
+  console.log(now);
+  console.log(new Date().getTime());
   var innitted = false;
   var timezones_style_block_id = "timezones_clock_anim";
   var minutes_temp = 99; // initial value out of range
@@ -21,7 +23,8 @@ timezones.Behaviors.timezones = function(container) {
       location.time = "";
       location.temperature = "";
       location.icon = Skycons.CLOUDY;
-      location.isCurrent = (now.tz(location.timezone).hours() === tempTimeHours) ? true : false;
+      //location.isCurrent = (now.tz(location.timezone).hours() === tempTimeHours) ? true : false;
+      location.isCurrent = (location.offset === 0);
       //
       var this_location_html = location_html;
       this_location_html = this_location_html.replace("{{time}}",location.time);
@@ -60,6 +63,7 @@ timezones.Behaviors.timezones = function(container) {
   }();
 
   function update_weather() {
+    return false;
     timezones.locations.forEach(function(location,index){
       var forecast = new ForecastIO();
       var condition = forecast.getCurrentConditions(location.lat, location.long);
@@ -84,7 +88,7 @@ timezones.Behaviors.timezones = function(container) {
 
   function update_digital_time() {
     now = moment.utc();
-    if (now.minutes() != minutes_temp) {
+    //if (now.minutes() != minutes_temp) {
       minutes_temp = now.minutes();
       timezones.locations.forEach(function(location,index){
         location.time = now.tz(location.timezone);
@@ -92,7 +96,7 @@ timezones.Behaviors.timezones = function(container) {
         var time_str = (format === "24") ? location.time.format("HH:mm") : location.time.format("h:mm") + "<span>" + location.time.format("a") + "<span>"
         $("#location-"+index+" .time",container).innerHTML = time_str;
       });
-    }
+    //}
   }
 
   function update_analogue_time(){
