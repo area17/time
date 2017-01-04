@@ -9,7 +9,7 @@
   // set up
   $time_str = "";
   $format = 'h:i a';
-  $datetime = new DateTime(date("Y-m-d H:i:s"),new DateTimeZone('UTC'));
+  $datetime = new DateTime(date("Y-m-d H:i:s"), new DateTimeZone('UTC'));
   $locations = array();
   $hours = array("0" => "🕛", "1" => "🕐", "2" => "🕑", "3" => "🕒", "4" => "🕓", "5" => "🕔", "6" => "🕕", "7" => "🕖", "8" => "🕗", "9" => "🕘", "10" => "🕙", "11" => "🕚", "12" => "🕛");
 
@@ -20,6 +20,10 @@
   array_push($locations, array("name" => "New York", "timezone" => "America/New_York", "emoji" => "🇺🇸"));
   array_push($locations, array("name" => "Memphis", "timezone" => "America/Chicago", "emoji" => "🇺🇸"));
   array_push($locations, array("name" => "San Francisco", "timezone" => "America/Los_Angeles", "emoji" => "🇺🇸"));
+  // testing timezones that aren't whole integer hours different to UTC
+  //array_push($locations, array("name" => "Sri Lanka", "timezone" => "Asia/Colombo", "emoji" => "🇱🇰"));
+  //array_push($locations, array("name" => "Kathmandu", "timezone" => "Asia/Kathmandu", "emoji" => "🇳🇵"));
+
 
   // determining if there is useful POST info
   $post = file_get_contents('php://input');
@@ -29,11 +33,17 @@
   if(isset($post_msg)) {
     // replace out the "/time" bit
     $post_msg = preg_replace('/\/time/i', '', $post_msg);
+    $post_msg = preg_replace('/\./i', ':', $post_msg);
     // guess if its am or pm
     $am = preg_match('/\Sam/i', $post_msg) ? true : false;
     $pm = preg_match('/\Spm/i', $post_msg) ? true : false;
     // really crudely get the hour by parsing the string for an integer
     $hour = preg_match('/^\s\d/i', $post_msg) ? intval($post_msg) : -1;
+    // and now crudely get the minute by looking for a colon and a number
+    $minutes = array();
+    preg_match('/:(\d*)/i', $post_msg, $minutes);
+    $minutes = isset($minutes[1]) ? intval($minutes[1]) : 0;
+
     if ($hour > -1) {
       // fix for 12/24 conversion
       $hour = ($hour < 12 && $pm && !$am) ? $hour + 12 : $hour;
@@ -71,7 +81,7 @@
     $datetime->setTimezone(new DateTimeZone($timezone));
     // do we have an hour?
     if ($hour > -1) {
-      $datetime->setTime($hour, '00');
+      $datetime->setTime($hour, $minutes);
       foreach ($locations as $location) {
         if ($timezone === $location["timezone"]) {
           $time_str = $time_str."\n".$location["emoji"]." ".$hours[$datetime->format('g')]." ".$datetime->format($format)." in ".$location["name"]." is:\n\n";
