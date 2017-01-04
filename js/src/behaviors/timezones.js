@@ -41,7 +41,6 @@ timezones.Behaviors.timezones = function(container) {
     hideShow_temperature();
 
     update_digital_time();
-    update_analogue_time();
 
     setInterval(function(){
       update_digital_time();
@@ -117,6 +116,7 @@ timezones.Behaviors.timezones = function(container) {
       //
       css_anims += "@-webkit-keyframes time_hours_"+(index+1)+" { to { -webkit-transform: rotate(" + (hour+360) + "deg); } }\n@keyframes time_hours_"+(index+1)+" { to { transform: rotate(" + (hour+360) + "deg); } }\n";
     });
+
     $("#"+timezones_style_block_id).textContent = css_anims;
   }
 
