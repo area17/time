@@ -107,7 +107,11 @@
   }
 }
 
-.timezones.hide_weather .weather canvas {
+.timezones.hide_weather.hide_temperature .weather.js-loading::after {
+  display: none;
+}
+
+.timezones.hide_weather .weather .icon {
   display: none;
 }
 

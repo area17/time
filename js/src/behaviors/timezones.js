@@ -7,6 +7,20 @@ timezones.Behaviors.timezones = function(container) {
   var innitted = false;
   var timezones_style_block_id = "timezones_clock_anim";
   var minutes_temp = 99; // initial value out of range
+  var updating_weather = false;
+  var lastWeatherCheck = 0;
+  var hidden, visibilityChange, secondInterval, hourInterval, weatherTimeout;
+
+  if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+    hidden = "hidden";
+    visibilityChange = "visibilitychange";
+  } else if (typeof document.msHidden !== "undefined") {
+    hidden = "msHidden";
+    visibilityChange = "msvisibilitychange";
+  } else if (typeof document.webkitHidden !== "undefined") {
+    hidden = "webkitHidden";
+    visibilityChange = "webkitvisibilitychange";
+  }
 
   var init = function() {
     var timezones_style_block = document.createElement("style");
@@ -19,7 +33,7 @@ timezones.Behaviors.timezones = function(container) {
     timezones.locations.forEach(function(location,index){
       location.id = "location-"+index;
       location.time = "";
-      location.temperature = "";
+      location.temperature = "65";
       location.icon = Skycons.CLOUDY;
       location.isCurrent = (location.offset === 0);
       //
@@ -36,51 +50,48 @@ timezones.Behaviors.timezones = function(container) {
     container.innerHTML = lis;
 
     update_digital_time();
+    update_analogue_time();
 
     hideShow_analog();
     hideShow_digital();
-    hideShow_weather();
-    hideShow_temperature();
 
-    setInterval(function(){
-      update_digital_time();
-    },1000);
+    setIntervals();
 
-    setInterval(function(){
-      update_analogue_time();
-    },(30*60*1000));
-
-    setTimeout(function(){
-      update_weather();
-      $(".weather.js-loading",container.parentNode).removeClass("js-loading");
-      skycons.play();
-      innitted = true;
-    },50);
+    window.on("load",function(){
+      hideShow_weather();
+      hideShow_temperature();
+    });
 
   }();
 
   function update_weather() {
-    return false;
-    timezones.locations.forEach(function(location,index){
-      var forecast = new ForecastIO();
-      var condition = forecast.getCurrentConditions(location.lat, location.long);
-      location.temperature = condition.getTemperature();
-      location.icon = condition.getIcon();
-      //
-      var temp_unit = localStorage["temperature_unit"] || "c";
-      var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
-      //
-      $("#location-"+index+" i",container).innerHTML = temp + "<span>&deg;"+temp_unit+"</span>";
-      //
-      if (innitted) {
-        skycons.set("icon-"+index, location.icon);
-      } else {
-        skycons.add("icon-"+index, location.icon);
-      }
-    });
-    setTimeout(function(){
-      update_weather();
-    },(30*60*1000));
+    if ((localStorage["show_current_weather"] === "true" || localStorage["show_temperature"] === "true") && !updating_weather && new Date().getTime() > lastWeatherCheck + 1800000) {
+      updating_weather = true;
+      timezones.locations.forEach(function(location,index){
+        var forecast = new ForecastIO();
+        var condition = forecast.getCurrentConditions(location.lat, location.long);
+        location.temperature = condition.getTemperature();
+        location.icon = condition.getIcon();
+        //
+        var temp_unit = localStorage["temperature_unit"] || "c";
+        var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
+        //
+        $("#location-"+index+" i",container).innerHTML = temp + "<span>&deg;"+temp_unit+"</span>";
+        //
+        if (innitted) {
+          skycons.set("icon-"+index, location.icon);
+        } else {
+          skycons.add("icon-"+index, location.icon);
+          innitted = true;
+        }
+      });
+
+      $(".weather.js-loading").removeClass("js-loading");
+      skycons.play();
+
+      updating_weather = false;
+      lastWeatherCheck = new Date().getTime();
+    }
   }
 
   function update_digital_time(override) {
@@ -143,7 +154,6 @@ timezones.Behaviors.timezones = function(container) {
       container.addClass("hide_analog");
     } else {
       container.removeClass("hide_analog");
-      update_analogue_time();
     }
   }
   function hideShow_digital() {
@@ -163,6 +173,7 @@ timezones.Behaviors.timezones = function(container) {
       container.addClass("hide_weather");
     } else {
       container.removeClass("hide_weather");
+      update_weather();
     }
   }
   function hideShow_temperature() {
@@ -171,6 +182,7 @@ timezones.Behaviors.timezones = function(container) {
       container.addClass("hide_temperature");
     } else {
       container.removeClass("hide_temperature");
+      update_weather();
     }
   }
   function update_temperature_unit() {
@@ -180,6 +192,24 @@ timezones.Behaviors.timezones = function(container) {
       $("#location-"+index+" i",container).innerHTML = temp + "<span>&deg;"+temp_unit+"</span>";
     });
   }
+  function setIntervals() {
+    secondInterval = setInterval(update_digital_time,1000);
+    hourInterval = setInterval(update_analogue_time,3600000);
+    weatherInterval = setInterval(update_weather,1800000);
+  }
+  function handle_visibility_change() {
+    if (document[hidden]) {
+      skycons.pause();
+      //clearInterval(secondInterval);
+      //clearInterval(hourInterval);
+      //clearInterval(weatherTimeout);
+    } else {
+      //update_digital_time(true);
+      //update_analogue_time();
+      //setIntervals();
+      skycons.play();
+    }
+  }
 
   document.on("update_show_analog",hideShow_analog);
   document.on("update_show_digital",hideShow_digital);
@@ -187,4 +217,8 @@ timezones.Behaviors.timezones = function(container) {
   document.on("update_show_current_weather",hideShow_weather);
   document.on("update_show_temperature",hideShow_temperature);
   document.on("update_temperature_unit",update_temperature_unit);
+
+  if (typeof document[hidden]) {
+    document.on(visibilityChange, handle_visibility_change);
+  }
 };

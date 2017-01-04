@@ -5,7 +5,7 @@
   <a href="#settings" class="settings" data-behavior="settings">⚙</a>
 </header>
 <section class="container">
-  <ul class="timezones" data-behavior="timezones">
+  <ul class="timezones js-invisible" data-behavior="timezones">
   </ul>
   <div class="times" data-behavior="times">
     <input type="text">
