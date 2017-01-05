@@ -66,7 +66,12 @@ timezones.Behaviors.timezones = function(container) {
 
   function updateTemperatures(location,index) {
     var rainChanceClass = (location.rainChance > 49) ? " raining" : "";
-    var umbrellaEmoji = (location.rainChance > 49) ? "☔" : "☂️";
+    //
+    umbrellaEmoji = (location.rainChance < 20) ? "🌂" : "☂️";
+    umbrellaEmoji = (location.rainChance > 80) ? "☔" : umbrellaEmoji;
+    var umbrellaClass = ((/wind/i.test(location.icon) || /wind/i.test(location.summary)) && location.rainChance > 80) ? " windy" : "";
+    umbrellaEmoji = (/rain|sleet|snow/i.test(location.icon)) ? "☔" : umbrellaEmoji;
+    //
     var temperatureClass = (location.feelsLike < 33) ? " cold" : "";
     temperatureClass = (location.feelsLike > 86) ? " hot" : temperatureClass;
     temperatureClass = (location.feelsLike > 100) ? " really-hot" : temperatureClass;
@@ -75,7 +80,7 @@ timezones.Behaviors.timezones = function(container) {
     var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
     var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
     //
-    $("#location-"+index+" i",container).innerHTML = "<span class=\"temperature"+temperatureClass+"\">"+ temp + "<sup>&deg;"+temp_unit+"</sup></span> &bull; <span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\">"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span><span class=\"rainchance"+rainChanceClass+"\"><br><span class=\"umbrella\">"+umbrellaEmoji+"</span> "+location.rainChance+"%</span>";
+    $("#location-"+index+" i",container).innerHTML = "<span class=\"temperature"+temperatureClass+"\">"+ temp + "<sup>&deg;"+temp_unit+"</sup></span> &bull; <span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\">"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span><span class=\"rainchance"+rainChanceClass+"\"><br><span class=\"umbrella"+umbrellaClass+"\">"+umbrellaEmoji+"</span> "+location.rainChance+"%</span>";
     $("#location-"+index+" .weather.js-loading").removeClass("js-loading");
   }
 
@@ -94,6 +99,7 @@ timezones.Behaviors.timezones = function(container) {
         location.icon = data.currently.icon;
         location.feelsLike = Math.round(data.currently.apparentTemperature);
         location.rainChance = Math.round(data.currently.precipProbability*100);
+        location.summary = data.currently.summary;
         //
         updateTemperatures(location,index);
         //

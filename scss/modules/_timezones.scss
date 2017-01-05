@@ -136,6 +136,7 @@
 .timezones .weather i {
   text-align: left;
   font-style: normal;
+  line-height: 18px;
 }
 
 .timezones.hide_weather .weather i {
@@ -154,14 +155,18 @@
   color: #f00;
 }
 
-.timezones .weather i .feelsLike.cold,
-.timezones .weather i .raining {
+.timezones .weather i .feelsLike.cold {
   color: $blue;
 }
 
 .timezones .umbrella {
+  display: inline-block;
   font-size: 15px;
   filter: grayscale(1);
+}
+
+.timezones .umbrella.windy {
+  transform: rotate(-40deg);
 }
 
 .timezones .weather i sup {
