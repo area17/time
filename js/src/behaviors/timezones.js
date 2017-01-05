@@ -9,7 +9,7 @@ timezones.Behaviors.timezones = function(container) {
   var minutes_temp = 99; // initial value out of range
   var updating_weather = false;
   var lastWeatherCheck = 0;
-  var hidden, visibilityChange, secondInterval, hourInterval, weatherTimeout;
+  var hidden, visibilityChange, secondInterval, hourInterval, weatherTimeout, weatherRecievedCounter;
 
   if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
     hidden = "hidden";
@@ -64,19 +64,25 @@ timezones.Behaviors.timezones = function(container) {
 
   }();
 
-  function update_weather() {
-    if ((localStorage["show_current_weather"] === "true" || localStorage["show_temperature"] === "true") && !updating_weather && new Date().getTime() > lastWeatherCheck + 1800000) {
-      updating_weather = true;
-      timezones.locations.forEach(function(location,index){
-        var forecast = new ForecastIO();
-        var condition = forecast.getCurrentConditions(location.lat, location.long);
-        location.temperature = condition.getTemperature();
-        location.icon = condition.getIcon();
+  function get_weather(location,index) {
+    timezones.Helpers.ajaxRequest({
+      url: '/proxy.php',
+      type: 'GET',
+      data: {
+        lat: location.lat,
+        long: location.long
+      },
+      onSuccess: function(data){
+        data = JSON.parse(data);
+        //
+        location.temperature = data.currently.temperature;
+        location.icon = data.currently.icon;
         //
         var temp_unit = localStorage["temperature_unit"] || "c";
         var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
         //
         $("#location-"+index+" i",container).innerHTML = temp + "<span>&deg;"+temp_unit+"</span>";
+        $("#location-"+index+" .weather.js-loading").removeClass("js-loading");
         //
         if (innitted) {
           skycons.set("icon-"+index, location.icon);
@@ -84,13 +90,29 @@ timezones.Behaviors.timezones = function(container) {
           skycons.add("icon-"+index, location.icon);
           innitted = true;
         }
-      });
+        //
+        recieved_weather();
+      },
+      onError: function(data){
+        alert(data);
+      }
+    });
+  }
 
-      $(".weather.js-loading").removeClass("js-loading");
+  function recieved_weather() {
+    weatherRecievedCounter++;
+    if (weatherRecievedCounter === timezones.locations.length) {
       skycons.play();
-
       updating_weather = false;
       lastWeatherCheck = new Date().getTime();
+    }
+  }
+
+  function update_weather() {
+    if ((localStorage["show_current_weather"] === "true" || localStorage["show_temperature"] === "true") && !updating_weather && new Date().getTime() > lastWeatherCheck + 1800000) {
+      updating_weather = true;
+      weatherRecievedCounter = 0;
+      timezones.locations.forEach(get_weather);
     }
   }
 
