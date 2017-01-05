@@ -65,8 +65,8 @@ timezones.Behaviors.timezones = function(container) {
   }();
 
   function updateTemperatures(location,index) {
-    var rainChanceClass = (location.rainChance > .49) ? " raining" : "";
-    var umbrellaEmoji = (location.rainChance > .49) ? "☔" : "☂️";
+    var rainChanceClass = (location.rainChance > 49) ? " raining" : "";
+    var umbrellaEmoji = (location.rainChance > 49) ? "☔" : "☂️";
     var temperatureClass = (location.feelsLike < 33) ? " cold" : "";
     temperatureClass = (location.feelsLike > 86) ? " hot" : temperatureClass;
     temperatureClass = (location.feelsLike > 100) ? " really-hot" : temperatureClass;
@@ -107,7 +107,8 @@ timezones.Behaviors.timezones = function(container) {
         recieved_weather();
       },
       onError: function(data){
-        alert(data);
+        console.log(data);
+        recieved_weather();
       }
     });
   }

@@ -289,9 +289,3 @@
     animation: time_minutes_#{$i} 3600s infinite linear;
   }
 }
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
