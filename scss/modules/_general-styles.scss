@@ -15,16 +15,13 @@ a {
 }
 
 .logo {
-  @extend %hide_text;
   display: block;
   position: absolute;
   z-index: 9;
   left: 20px;
   top: 20px;
-  width: 119px;
-  height: 36px;
-  @include background-image("a17");
-  background-size: 50%;
+  width: 57px;
+  height: auto;
 }
 
 .instruction {

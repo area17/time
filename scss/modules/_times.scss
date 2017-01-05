@@ -63,19 +63,13 @@
   }
 
   .close {
-    @extend %hide_text;
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 76px;
-    width: 60px;
-    opacity: .7;
-    background: no-repeat 50%;
-    background-size: 18px;
-    @include background-image("close");
+    right: 20px;
+    top: 20px;
+    color: $dark-grey;
 
     &:hover {
-      opacity: 1;
+      color: $light-grey;
     }
   }
 }

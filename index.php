@@ -1,6 +1,9 @@
 <?php include "includes/_html_header.php"; ?>
 <header id="header">
-  <span class="logo">A17</span>
+  <svg class="logo" width="84px" height="53px" viewBox="0 0 84 53">
+    <path d="M30.711,0l21.2,53h-10.6l-4.476-12H15.165l-4.476,12h-10.6l21.2-53H30.711z M33.773,33L26,12.484L18.227,33H33.773z
+       M83.8,0L62.6,53h-5.3L78.5,0H83.8z"/>
+  </svg>
   <span class="instruction">Type a time and place, eg: 15:00 Paris, 3pm New York, 9:30 Tucumán</span>
   <a href="#settings" class="settings" data-behavior="settings">⚙</a>
 </header>
@@ -10,7 +13,7 @@
   <div class="times" data-behavior="times">
     <input type="text" placeholder="Paris, 2:30pm New York">
     <p></p>
-    <a href="#" class="close">Close</a>
+    <a href="#" class="close">╳</a>
   </div>
   <div id="settings">
     <p>Time</p>
