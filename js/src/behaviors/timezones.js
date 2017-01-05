@@ -64,6 +64,21 @@ timezones.Behaviors.timezones = function(container) {
 
   }();
 
+  function updateTemperatures(location,index) {
+    var rainChanceClass = (location.rainChance > .49) ? " raining" : "";
+    var umbrellaEmoji = (location.rainChance > .49) ? "☔" : "☂️";
+    var temperatureClass = (location.feelsLike < 33) ? " cold" : "";
+    temperatureClass = (location.feelsLike > 86) ? " hot" : temperatureClass;
+    temperatureClass = (location.feelsLike > 100) ? " really-hot" : temperatureClass;
+    //
+    var temp_unit = localStorage["temperature_unit"] || "c";
+    var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
+    var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
+    //
+    $("#location-"+index+" i",container).innerHTML = "<span class=\"temperature"+temperatureClass+"\">"+ temp + "<sup>&deg;"+temp_unit+"</sup></span> &bull; <span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\">"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span><span class=\"rainchance"+rainChanceClass+"\"><br><span class=\"umbrella\">"+umbrellaEmoji+"</span> "+location.rainChance+"%</span>";
+    $("#location-"+index+" .weather.js-loading").removeClass("js-loading");
+  }
+
   function get_weather(location,index) {
     timezones.Helpers.ajaxRequest({
       url: '/proxy.php',
@@ -75,22 +90,12 @@ timezones.Behaviors.timezones = function(container) {
       onSuccess: function(data){
         data = JSON.parse(data);
         //
-        location.temperature = data.currently.temperature;
+        location.temperature = Math.round(data.currently.temperature);
         location.icon = data.currently.icon;
-        location.feelsLike = data.currently.apparentTemperature;
-        location.rainChance = data.currently.precipProbability*100;
+        location.feelsLike = Math.round(data.currently.apparentTemperature);
+        location.rainChance = Math.round(data.currently.precipProbability*100);
         //
-        //
-        var rainChanceClass = (location.rainChance > .49) ? " rainchance--raining" : "";
-        var temperatureClass = (location.feelsLike < 33) ? " cold" : "";
-        temperatureClass = (location.feelsLike > 95) ? " hot" : temperatureClass;
-        //
-        var temp_unit = localStorage["temperature_unit"] || "c";
-        var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
-        var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
-        //
-        $("#location-"+index+" i",container).innerHTML = temp + "<sup>&deg;"+temp_unit+"</sup> <span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\">("+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup>)</span><br><span class=\"rainchance"+rainChanceClass+"\">☂ "+location.rainChance+"%</span>";
-        $("#location-"+index+" .weather.js-loading").removeClass("js-loading");
+        updateTemperatures(location,index);
         //
         if (innitted) {
           skycons.set("icon-"+index, location.icon);
@@ -144,7 +149,7 @@ timezones.Behaviors.timezones = function(container) {
         }
         var time_str = this_hour + ":" + this_minute;
         if (format !== "24") {
-          time_str = time_str + "<span>" + (this_pm ? "pm" : "am") + "<span>";
+          time_str = time_str + "<sup>" + (this_pm ? "pm" : "am") + "</sup>";
         }
         $("#location-"+index+" .time",container).innerHTML = time_str;
       });
@@ -215,11 +220,17 @@ timezones.Behaviors.timezones = function(container) {
       update_weather();
     }
   }
+  function hideShow_rainchance() {
+    var show_temperature = localStorage["show_rainchance"] || "true";
+    if (show_temperature === "false") {
+      container.addClass("hide_rainchance");
+    } else {
+      container.removeClass("hide_rainchance");
+    }
+  }
   function update_temperature_unit() {
     timezones.locations.forEach(function(location,index){
-      var temp_unit = localStorage["temperature_unit"] || "c";
-      var temp = Math.round( (temp_unit=== "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
-      $("#location-"+index+" i",container).innerHTML = temp + "<span>&deg;"+temp_unit+"</span>";
+      updateTemperatures(location,index);
     });
   }
   function setIntervals() {
@@ -246,6 +257,7 @@ timezones.Behaviors.timezones = function(container) {
   document.on("update_digital_format",update_digital_format);
   document.on("update_show_current_weather",hideShow_weather);
   document.on("update_show_temperature",hideShow_temperature);
+  document.on("update_show_rainchance",hideShow_rainchance);
   document.on("update_temperature_unit",update_temperature_unit);
 
   if (typeof document[hidden]) {

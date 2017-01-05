@@ -17,16 +17,25 @@
     <p>Time</p>
     <ul>
       <li><label><input type="checkbox" value="show_analog" checked> Analogue</label></li>
-      <li><label><input type="checkbox" value="show_digital" checked> Digital</label></li>
-      <li><label><input type="radio" name="digital_format" value="12"> 12 hour</label></li>
-      <li><label><input type="radio" name="digital_format" value="24" checked> 24 hour</label></li>
+      <li class="sublist">
+        <label><input type="checkbox" value="show_digital" checked> Digital</label>
+        <ul>
+          <li><label><input type="radio" name="digital_format" value="12"> 12 hour</label></li>
+          <li><label><input type="radio" name="digital_format" value="24" checked> 24 hour</label></li>
+        </ul>
+      </li>
     </ul>
     <p>Weather</p>
     <ul>
       <li><label><input type="checkbox" value="show_current_weather" checked> Current weather</label></li>
-      <li><label><input type="checkbox" value="show_temperature" checked> Temperature</label></li>
-      <li><label><input type="radio" name="temperature_unit" value="c" checked> &deg;C</label></li>
-      <li><label><input type="radio" name="temperature_unit" value="f"> &deg;F</label></li>
+      <li class="sublist">
+        <label><input type="checkbox" value="show_temperature" checked> Temperature</label>
+        <ul>
+          <li><label><input type="radio" name="temperature_unit" value="c" checked> &deg;C</label></li>
+          <li><label><input type="radio" name="temperature_unit" value="f"> &deg;F</label></li>
+          <li><label><input type="checkbox" value="show_rainchance" checked> Chance of rain</label></li>
+        </ul>
+      </li>
     </ul>
   </div>
   <p class="powered_by"><a href="http://forecast.io/">Powered by Forecast.io</a></p>

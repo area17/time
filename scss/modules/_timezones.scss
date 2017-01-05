@@ -74,7 +74,7 @@
   display: none;
 }
 
-.timezones .time span {
+.timezones .time sup {
   font-size: 12px;
   line-height: 12px;
   vertical-align: top;
@@ -119,6 +119,10 @@
   display: none;
 }
 
+.timezones.hide_rainchance .weather .rainchance {
+  display: none;
+}
+
 
 .timezones .weather canvas,
 .timezones .weather .icon,
@@ -134,6 +138,10 @@
   font-style: normal;
 }
 
+.timezones.hide_weather .weather i {
+  text-align: center;
+}
+
 .timezones .weather i .feelsLike {
   color: $light-grey;
 }
@@ -142,9 +150,26 @@
   color: $red;
 }
 
+.timezones .weather i .feelsLike.really-hot {
+  color: #f00;
+}
+
 .timezones .weather i .feelsLike.cold,
-.timezones .weather i .rainchance--raining {
+.timezones .weather i .raining {
   color: $blue;
+}
+
+.timezones .umbrella {
+  font-size: 15px;
+  filter: grayscale(1);
+}
+
+.timezones .weather i sup {
+  font-size: 12px;
+  line-height: 12px;
+  vertical-align: top;
+  position: relative;
+  top: 3px;
 }
 
 .timezones .weather .icon {
