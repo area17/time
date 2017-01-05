@@ -77,11 +77,19 @@ timezones.Behaviors.timezones = function(container) {
         //
         location.temperature = data.currently.temperature;
         location.icon = data.currently.icon;
+        location.feelsLike = data.currently.apparentTemperature;
+        location.rainChance = data.currently.precipProbability*100;
+        //
+        //
+        var rainChanceClass = (location.rainChance > .49) ? " rainchance--raining" : "";
+        var temperatureClass = (location.feelsLike < 33) ? " cold" : "";
+        temperatureClass = (location.feelsLike > 95) ? " hot" : temperatureClass;
         //
         var temp_unit = localStorage["temperature_unit"] || "c";
         var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
+        var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
         //
-        $("#location-"+index+" i",container).innerHTML = temp + "<span>&deg;"+temp_unit+"</span>";
+        $("#location-"+index+" i",container).innerHTML = temp + "<sup>&deg;"+temp_unit+"</sup> <span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\">("+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup>)</span><br><span class=\"rainchance"+rainChanceClass+"\">☂ "+location.rainChance+"%</span>";
         $("#location-"+index+" .weather.js-loading").removeClass("js-loading");
         //
         if (innitted) {

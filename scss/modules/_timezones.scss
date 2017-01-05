@@ -130,14 +130,21 @@
 }
 
 .timezones .weather i {
+  text-align: left;
   font-style: normal;
+}
 
-  span {
-    font-size: 10px;
-    vertical-align: super;
-    position: relative;
-    top: 1px;
-  }
+.timezones .weather i .feelsLike {
+  color: $light-grey;
+}
+
+.timezones .weather i .feelsLike.hot {
+  color: $red;
+}
+
+.timezones .weather i .feelsLike.cold,
+.timezones .weather i .rainchance--raining {
+  color: $blue;
 }
 
 .timezones .weather .icon {
