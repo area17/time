@@ -4,14 +4,14 @@
     <path d="M30.711,0l21.2,53h-10.6l-4.476-12H15.165l-4.476,12h-10.6l21.2-53H30.711z M33.773,33L26,12.484L18.227,33H33.773z
        M83.8,0L62.6,53h-5.3L78.5,0H83.8z"/>
   </svg>
-  <span class="instruction">Type a time and place, eg: 15:00 Paris, 3pm New York, 9:30 Tucumán</span>
+  <span class="instruction">🕘 → 🕑</span>
   <a href="#settings" class="settings" data-behavior="settings">⚙</a>
 </header>
 <section class="container">
   <ul class="timezones js-invisible" data-behavior="timezones">
   </ul>
   <div class="times" data-behavior="times">
-    <input type="text" placeholder="Paris, 2:30pm New York">
+    <input type="text" placeholder="15:00 Paris, 3pm New York, 9:30 Tucumán">
     <p></p>
     <a href="#" class="close">╳</a>
   </div>
