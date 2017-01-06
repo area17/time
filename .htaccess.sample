@@ -1,0 +1,15 @@
+Options -Indexes
+
+<FilesMatch "\.(css|js)$">
+Header set Cache-Control "max-age=86400"
+</FilesMatch>
+
+<Files .htaccess>
+Order allow,deny
+Deny from all
+</Files>
+
+<Files _forecastapi.php>
+Order allow,deny
+Deny from all
+</Files>

@@ -1,9 +1,16 @@
 body {
   font: $default-text;
-  color: $white;
-  background: $dark-grey;
+  color: $dark-grey;
+  background: $white;
+  -moz-font-feature-settings: "kern";
+  -webkit-font-feature-settings: "kern";
+  -ms-font-feature-settings: "kern";
+  -o-font-feature-settings: "kern";
+  font-feature-settings: "kern";
+  font-kerning: normal;
   text-rendering: optimizeLegibility;
-  -webkit-text-size-adjust: none;
+  font-variant-ligatures: common-ligatures;
+  -webkit-text-size-adjust: 100%;
 
   &:after {
     font: 0/0 a;

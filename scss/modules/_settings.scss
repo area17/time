@@ -1,17 +1,10 @@
 .settings {
-  @extend %hide_text;
   position: absolute;
   z-index: 5;
   right: 20px;
   top: 29px;
   width: 23px;
   height: 23px;
-  opacity: .7;
-  @include background-image("settings");
-
-  &:hover {
-    opacity: 1;
-  }
 }
 
 #settings {
@@ -24,10 +17,13 @@
   width: 300px;
   padding: 15px 0 10px;
   color: $light-grey;
-  display: none;
+  display: block;
+  transform: translateX(300px);
+  transition: all .15s ease-in-out;
 
   &.active {
     display: block;
+    transform: translateX(0);
   }
 
   p {
@@ -36,12 +32,15 @@
     padding: 15px 20px 0;
 
     & ~ p {
-      border-top: 1px solid $dark-grey;
+      border-top: 1px solid $white;
     }
   }
   ul {
     list-style-type: none;
     margin: 0 0 25px;
+  }
+  ul ul {
+    padding-left: 25px;
   }
   label {
     display: block;
@@ -54,5 +53,13 @@
   }
   input {
     margin-right: 10px;
+  }
+  .sublist ul {
+    opacity: .5;
+    pointer-events: none;
+  }
+  .sublist .checked + ul {
+    opacity: 1;
+    pointer-events: auto;
   }
 }

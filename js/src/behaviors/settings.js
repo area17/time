@@ -12,11 +12,13 @@ timezones.Behaviors.settings = function(container){
       localStorage[input.value] = input.checked;
     } else {
       input.checked = (localStorage[input.value] == "true") ? true : false;
+      input.parentNode.className = input.checked ? "checked" : "";
     }
   });
   // do some clicks
   $checkboxes.on("click",function(event){
     localStorage[this.value] = this.checked;
+    this.parentNode.className = this.checked ? "checked" : "";
     document.trigger("update_"+this.value);
   });
 

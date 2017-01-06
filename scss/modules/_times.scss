@@ -5,7 +5,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  background: $dark-grey;
+  background: $white;
   padding: 100px 20px 20px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -15,41 +15,61 @@
     display: block;
   }
 
+  &.js-loading::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 0 solid transparent;
+    border-top-color: $dark-grey;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    animation: spin 1.5s linear infinite;
+  }
+
   input {
     display: block;
     width: 100%;
     margin: 0 0 50px;
+    padding-right: 100px;
     border: 0 none;
     background: transparent;
-    color: $light-grey;
+    color: $dark-grey;
     font: 48px/1 $font-stack-helvetica;
-  }
 
-  li {
-    font-size: 48px;
-    line-height: 48px;
-    margin-bottom: 10px;
+    &::-webkit-input-placeholder {
+      color: $light-grey;
+    }
 
-    &.current {
-      color: $yellow;
-      margin-bottom: 38px;
+    &:-moz-placeholder {
+      color: $light-grey;
+    }
+
+    &::-moz-placeholder {
+      color: $light-grey;
+    }
+
+    &:-ms-input-placeholder {
+      color: $light-grey;
     }
   }
 
+  p {
+    font-size: 48px;
+    line-height: 48px;
+  }
+
   .close {
-    @extend %hide_text;
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 76px;
-    width: 60px;
-    opacity: .7;
-    background: no-repeat 50%;
-    background-size: 18px;
-    @include background-image("close");
+    right: 20px;
+    top: 20px;
+    color: $dark-grey;
 
     &:hover {
-      opacity: 1;
+      color: $light-grey;
     }
   }
 }
