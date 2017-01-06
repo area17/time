@@ -25,23 +25,20 @@ The A17 locale info is reasonably loose - you can use city, country, state, loca
 ### Grunt Tasks:
 
     $ grunt
-
-Concats and minifies CSS/JS and places the compiled files in /css/ and /js/. These files are not committed to the GIT repo.
-
     $ grunt watch
 
 For dev purposes: concats but doesn't minify CSS/JS and places the compiled files in /css/ and /js/. These files are not committed to the GIT repo.
 
-    $ grunt init
+    $ grunt dist
 
-Just cloned the GIT repo and want to get set up? Run this - does all of the above.
+Concats and minifies CSS/JS and places the compiled files in /css/ and /js/. These files are not committed to the GIT repo.
 
 
 ### When starting development:
 
 You'll probably want to run:
 
-    $ grunt init && grunt watch
+    $ grunt && grunt watch
 
 
 ### Breakpoints
