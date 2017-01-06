@@ -3,13 +3,12 @@ timezones.Behaviors.timezones = function(container) {
   var location_html = '<li id="{{locationID}}">\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<b>{{name}}</b>\n<div class="time">{{time}}</div>\n<div class="weather js-loading"><canvas class="icon" id="{{iconID}}" width="32" height="32"></canvas>\n<i></i>\n</div>\n</li>\n';
   var lis = "";
   var skycons = new Skycons({"color": "#111111"});
-  var now = new Date().getTime()/1000;
   var innitted = false;
   var timezones_style_block_id = "timezones_clock_anim";
   var minutes_temp = 99; // initial value out of range
   var updating_weather = false;
   var lastWeatherCheck = 0;
-  var hidden, visibilityChange, secondInterval, hourInterval, weatherTimeout, weatherRecievedCounter;
+  var now, hidden, visibilityChange, secondInterval, hourInterval, weatherTimeout, weatherRecievedCounter;
 
   if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
     hidden = "hidden";
@@ -106,6 +105,7 @@ timezones.Behaviors.timezones = function(container) {
     now = new Date();
     var hours_now = now.getHours();
     var minutes_now = now.getMinutes();
+    now = new Date( now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds() );
     now = now.getTime()/1000;
     if (minutes_now !== minutes_temp || override) {
       minutes_temp = minutes_now;
@@ -139,6 +139,7 @@ timezones.Behaviors.timezones = function(container) {
   function update_analogue_time(){
     now = new Date();
     var seconds_now = new Date().getSeconds() * 6;
+    now = new Date( now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds() );
     now = now.getTime()/1000;
     //
     var css_anims = "@-webkit-keyframes time_seconds { to { -webkit-transform: rotate(" + (seconds_now+360) + "deg); } }\n@keyframes time_seconds { to { transform: rotate(" + (seconds_now+360) + "deg); } }\n";
