@@ -22,48 +22,6 @@ timezones.Behaviors.timezones = function(container) {
     visibilityChange = "webkitvisibilitychange";
   }
 
-  var init = function() {
-    var timezones_style_block = document.createElement("style");
-    timezones_style_block.id = timezones_style_block_id;
-    $("head").appendChild(timezones_style_block);
-    //
-    var tempTimeHours = new Date();
-    tempTimeHours = tempTimeHours.getHours();
-    //
-    timezones.locations.forEach(function(location,index){
-      location.id = "location-"+index;
-      location.time = "";
-      location.temperature = "65";
-      location.icon = Skycons.CLOUDY;
-      location.isCurrent = (location.offset === 0);
-      //
-      var this_location_html = location_html;
-      this_location_html = this_location_html.replace("{{time}}",location.time);
-      this_location_html = this_location_html.replace("{{name}}",location.name);
-      this_location_html = this_location_html.replace("{{current}}",(location.isCurrent) ? "current" : "");
-      this_location_html = this_location_html.replace("{{iconID}}","icon-"+index);
-      this_location_html = this_location_html.replace("{{locationID}}",location.id);
-      //
-      lis += this_location_html;
-    });
-
-    container.innerHTML = lis;
-
-    update_digital_time();
-    update_analogue_time();
-
-    hideShow_analog();
-    hideShow_digital();
-
-    setIntervals();
-
-    window.on("load",function(){
-      hideShow_weather();
-      hideShow_temperature();
-    });
-
-  }();
-
   function updateTemperatures(location,index) {
     var rainChanceClass = (location.rainChance > 49) ? " raining" : "";
     //
@@ -129,10 +87,18 @@ timezones.Behaviors.timezones = function(container) {
   }
 
   function update_weather() {
-    if ((localStorage["show_current_weather"] === "true" || localStorage["show_temperature"] === "true") && !updating_weather && new Date().getTime() > lastWeatherCheck + 1800000) {
-      updating_weather = true;
-      weatherRecievedCounter = 0;
-      timezones.locations.forEach(get_weather);
+    if ((localStorage["show_current_weather"] === "true" || localStorage["show_temperature"] === "true") && !updating_weather) {
+      if (new Date().getTime() > lastWeatherCheck + 1800000) {
+        updating_weather = true;
+        weatherRecievedCounter = 0;
+        timezones.locations.forEach(get_weather);
+      } else {
+        timezones.locations.forEach(function(location,index){
+          updateTemperatures(location,index);
+          skycons.set("icon-"+index, location.icon);
+        });
+        skycons.play();
+      }
     }
   }
 
@@ -247,17 +213,62 @@ timezones.Behaviors.timezones = function(container) {
   }
   function handle_visibility_change() {
     if (document[hidden]) {
-      skycons.pause();
-      //clearInterval(secondInterval);
-      //clearInterval(hourInterval);
-      //clearInterval(weatherTimeout);
+      clearInterval(secondInterval);
+      clearInterval(hourInterval);
+      clearInterval(weatherTimeout);
+      container.innerHTML = '';
+      $("#"+timezones_style_block_id).textContent = '';
     } else {
-      //update_digital_time(true);
-      //update_analogue_time();
-      //setIntervals();
-      skycons.play();
+      container.innerHTML = lis;
+      update_digital_time(true);
+      update_analogue_time();
+      update_weather();
+      setIntervals();
     }
   }
+
+  function init() {
+    var timezones_style_block = document.createElement("style");
+    timezones_style_block.id = timezones_style_block_id;
+    $("head").appendChild(timezones_style_block);
+    //
+    var tempTimeHours = new Date();
+    tempTimeHours = tempTimeHours.getHours();
+    //
+    timezones.locations.forEach(function(location,index){
+      location.id = "location-"+index;
+      location.time = "";
+      location.temperature = "65";
+      location.icon = Skycons.CLOUDY;
+      location.isCurrent = (location.offset === 0);
+      //
+      var this_location_html = location_html;
+      this_location_html = this_location_html.replace("{{time}}",location.time);
+      this_location_html = this_location_html.replace("{{name}}",location.name);
+      this_location_html = this_location_html.replace("{{current}}",(location.isCurrent) ? "current" : "");
+      this_location_html = this_location_html.replace("{{iconID}}","icon-"+index);
+      this_location_html = this_location_html.replace("{{locationID}}",location.id);
+      //
+      lis += this_location_html;
+    });
+
+    container.innerHTML = lis;
+
+    update_digital_time();
+    update_analogue_time();
+
+    hideShow_analog();
+    hideShow_digital();
+
+    setIntervals();
+
+    window.on("load",function(){
+      hideShow_weather();
+      hideShow_temperature();
+    });
+  }
+
+  init();
 
   document.on("update_show_analog",hideShow_analog);
   document.on("update_show_digital",hideShow_digital);
