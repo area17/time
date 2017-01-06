@@ -1,6 +1,6 @@
 timezones.Behaviors.timezones = function(container) {
 
-  var location_html = '<li id="{{locationID}}" class={{current}}>\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<b>{{name}}</b>\n<div class="time">{{time}}</div>\n<div class="weather js-loading"><canvas class="icon" id="{{iconID}}" width="32" height="32"></canvas>\n<i></i>\n</div>\n</li>\n';
+  var location_html = '<li id="{{locationID}}">\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<b>{{name}}</b>\n<div class="time">{{time}}</div>\n<div class="weather js-loading"><canvas class="icon" id="{{iconID}}" width="32" height="32"></canvas>\n<i></i>\n</div>\n</li>\n';
   var lis = "";
   var skycons = new Skycons({"color": "#111111"});
   var now = new Date().getTime()/1000;
@@ -104,6 +104,7 @@ timezones.Behaviors.timezones = function(container) {
 
   function update_digital_time(override) {
     now = new Date();
+    var hours_now = now.getHours();
     var minutes_now = now.getMinutes();
     now = now.getTime()/1000;
     if (minutes_now !== minutes_temp || override) {
@@ -112,6 +113,7 @@ timezones.Behaviors.timezones = function(container) {
         var format = localStorage["digital_format"] || "24";
         var this_time = new Date((now+location.offset) * 1000);
         var this_hour = this_time.getHours();
+        var is_current = (this_hour === hours_now);
         location.hour = this_hour;
         var this_pm = (this_hour > 12);
         this_hour = (format !== "24" && this_hour > 12) ? this_hour - 12 : this_hour;
@@ -123,6 +125,11 @@ timezones.Behaviors.timezones = function(container) {
         var time_str = this_hour + ":" + this_minute;
         if (format !== "24") {
           time_str = time_str + "<sup>" + (this_pm ? "pm" : "am") + "</sup>";
+        }
+        if (is_current) {
+          $("#location-"+index,container).addClass("current");
+        } else {
+          $("#location-"+index,container).removeClass("current");
         }
         $("#location-"+index+" .time",container).innerHTML = time_str;
       });
@@ -240,12 +247,10 @@ timezones.Behaviors.timezones = function(container) {
       location.time = "";
       location.temperature = "65";
       location.icon = Skycons.CLOUDY;
-      location.isCurrent = (location.offset === 0);
       //
       var this_location_html = location_html;
       this_location_html = this_location_html.replace("{{time}}",location.time);
       this_location_html = this_location_html.replace("{{name}}",location.name);
-      this_location_html = this_location_html.replace("{{current}}",(location.isCurrent) ? "current" : "");
       this_location_html = this_location_html.replace("{{iconID}}","icon-"+index);
       this_location_html = this_location_html.replace("{{locationID}}",location.id);
       //
