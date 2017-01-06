@@ -86,7 +86,7 @@ timezones.Behaviors.timezones = function(container) {
 
   function get_weather(location,index) {
     timezones.Helpers.ajaxRequest({
-      url: '/proxy.php',
+      url: '/forecast.php',
       type: 'GET',
       data: {
         lat: location.lat,
