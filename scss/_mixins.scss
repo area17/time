@@ -1,12 +1,3 @@
-@mixin background-image($file_name) {
-  @if map-has-key($images, $file_name) {
-    background-repeat: no-repeat;
-    background-image: url(map-get($images, $file_name));
-  } @else {
-    @warn "Unknown `#{$file_name}` in $images.";
-  }
-}
-
 @mixin breakpoint($point) {
   @if map-has-key($breakpoints, $point) {
     @media #{map-get($breakpoints, $point)} {
