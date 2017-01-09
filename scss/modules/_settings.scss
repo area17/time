@@ -8,22 +8,20 @@
 }
 
 #settings {
-  position: absolute;
+  position: fixed;
   z-index: 4;
-  right: 0;
+  right: -300px;
   top: 0;
   bottom: 0;
   background: #000;
   width: 300px;
   padding: 15px 0 10px;
   color: $light-grey;
-  display: block;
-  transform: translateX(300px);
+
   transition: all .15s ease-in-out;
 
   &.active {
-    display: block;
-    transform: translateX(0);
+    right: 0;
   }
 
   p {

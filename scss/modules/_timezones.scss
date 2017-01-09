@@ -143,8 +143,19 @@
   text-align: center;
 }
 
+.timezones .weather i .bull,
+.timezones .weather i .rainchance {
+  @include breakpoint(small) {
+    display: none;
+  }
+}
+
 .timezones .weather i .feelsLike {
   color: $light-grey;
+
+  @include breakpoint(small) {
+    display: none;
+  }
 }
 
 .timezones .weather i .feelsLike.hot {

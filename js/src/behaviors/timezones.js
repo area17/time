@@ -37,7 +37,7 @@ timezones.Behaviors.timezones = function(container) {
     var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
     var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
     //
-    $("#location-"+index+" i",container).innerHTML = "<span class=\"temperature"+temperatureClass+"\">"+ temp + "<sup>&deg;"+temp_unit+"</sup></span> &bull; <span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\">"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span><span class=\"rainchance"+rainChanceClass+"\"><br><span class=\"umbrella"+umbrellaClass+"\">"+umbrellaEmoji+"</span> "+location.rainChance+"%</span>";
+    $("#location-"+index+" i",container).innerHTML = "<span class=\"temperature"+temperatureClass+"\">"+ temp + "<sup>&deg;"+temp_unit+"</sup></span><span class=\"bull\"> &bull; </span><span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\">"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span><span class=\"rainchance"+rainChanceClass+"\"><br><span class=\"umbrella"+umbrellaClass+"\">"+umbrellaEmoji+"</span> "+location.rainChance+"%</span>";
     $("#location-"+index+" .weather.js-loading").removeClass("js-loading");
   }
 
