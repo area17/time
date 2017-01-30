@@ -7,8 +7,8 @@
         "url": "http://www.area17.com/"
     },
     "links": {
-        "self": "http://time.area17.com/hipchat.json",
-        "homepage": "http://time.area17.com/hipchat.json"
+        "self": "https://time.area17.com/hipchat.json",
+        "homepage": "https://time.area17.com/hipchat.json"
     },
     "capabilities": {
         "hipchatApiConsumer": {
@@ -17,11 +17,11 @@
             ]
         },
         "installable": {
-            "callbackUrl": "http://time.area17.com/hipchat_install.php"
+            "callbackUrl": "https://time.area17.com/hipchat_install.php"
         },
         "webhook": [
             {
-                "url": "http://time.area17.com/hipchat.php",
+                "url": "https://time.area17.com/hipchat.php",
                 "pattern": "^/time",
                 "event": "room_message",
                 "authentication": "none",
