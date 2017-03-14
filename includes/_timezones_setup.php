@@ -54,7 +54,7 @@ function parseString($str) {
     $timezone = "Europe/London";
   }
 
-  if (preg_match('/(tucumán|tucuman|argentina|ar|art|luis|pablo|bernardo)$/i', $str)) {
+  if (preg_match('/(tucumán|tucuman|tuc|argentina|ar|art|luis|pablo|bernardo)$/i', $str)) {
     $timezone = "America/Argentina/Tucuman";
   }
 
