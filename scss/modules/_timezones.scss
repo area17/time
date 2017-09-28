@@ -1,17 +1,14 @@
 .timezones {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 80px;
-  bottom: 80px;
   display: flex;
-  flex-flow: row wrap;
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  left: 50px;
   justify-content: space-between;
   align-content: space-between;
   align-items: center;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  text-align: center;
 
   @include breakpoint(medium) {
     align-content: space-around;
@@ -42,32 +39,17 @@
   }
 }
 
-.timezones b {
-  position: relative;
-  display: inline-block;
+.timezones strong {
+  display: block;
   font-weight: normal;
-
-  @include breakpoint(small) {
-    font-size: 15px;
-  }
 }
 
-.timezones .current b {
+.timezones .current strong {
   font-weight: bold;
 }
 
 .timezones .time {
-  font-size: 48px;
-  line-height: 48px;
-  height: 48px;
-  margin-bottom: 10px;
-  vertical-align: middle;
-
-  @include breakpoint(small) {
-    font-size: 32px;
-    line-height: 32px;
-    height: 32px;
-  }
+  font-style: normal;
 }
 
 .timezones.hide_digital .time {
@@ -75,20 +57,14 @@
 }
 
 .timezones .time sup {
-  font-size: 12px;
-  line-height: 12px;
-  vertical-align: top;
-  position: relative;
-  top: 5px;
 }
 
 .timezones .weather {
   position: relative;
-  display: flex;
-  flex-flow: row no-wrap;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
+
+  &::before {
+    content: "─ ";
+  }
 
   &.js-loading::after {
     content: '';
@@ -126,36 +102,22 @@
 
 .timezones .weather canvas,
 .timezones .weather .icon,
-.timezones .weather i {
-  display: block;
-  flex: 0 0 auto;
+.timezones .weather span {
+  display: inline-block;
   margin-right: 5px;
   margin-left: 5px;
 }
 
-.timezones .weather i {
-  text-align: left;
-  font-style: normal;
-  line-height: 18px;
-}
-
-.timezones.hide_weather .weather i {
-  text-align: center;
-}
-
-.timezones .weather i .bull,
-.timezones .weather i .rainchance {
-  @include breakpoint(small) {
-    display: none;
-  }
+.timezones .weather .bull,
+.timezones .weather .rainchance,
+.timezones .weather .feelsLike,
+.timezones .weather .umbrella,
+.timezones .weather .rainchance {
+  display: none; // UPDATE
 }
 
 .timezones .weather i .feelsLike {
   color: $light-grey;
-
-  @include breakpoint(small) {
-    display: none;
-  }
 }
 
 .timezones .weather i .feelsLike.hot {

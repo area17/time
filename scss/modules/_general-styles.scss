@@ -16,12 +16,14 @@ a {
 
 .logo {
   display: block;
-  position: absolute;
+  position: fixed;
+  top: 50%;
+  left: 50px;
+  width: auto;
+  height: 80px;
+  margin-top: -40px;
+  color: $white;
   z-index: 9;
-  left: 20px;
-  top: 20px;
-  width: 57px;
-  height: auto;
 }
 
 .instruction {

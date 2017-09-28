@@ -1,2 +1,10 @@
-$font-stack-helvetica: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$default-text: 17px/23px $font-stack-helvetica;
+@font-face {
+  font-family: 'Suisse';
+  src: url('/fonts/SuisseIntl-Regular-WebXL.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+$font-stack-helvetica: 'Suisse', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$default-text: 15px/25px $font-stack-helvetica;
