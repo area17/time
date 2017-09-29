@@ -1,14 +1,24 @@
 timezones.Behaviors.timezones = function(container) {
 
-  var location_html = '<li id="{{locationID}}">\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<strong>{{name}}</strong>\n<em class="time">{{time}}</em>\n<span class="temperature"></span>\n<span class="weather js-loading"><canvas class="icon" id="{{iconID}}" width="20" height="20"></canvas>\n<span></span>\n</span>\n</li>\n';
+  var location_html = '<li id="{{locationID}}">\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<strong>{{name}}</strong>\n<em class="time">{{time}}</em>\n<span class="temperature"></span>\n<span class="weather js-loading">\n</span>\n</li>\n';
   var lis = "";
-  var skycons = new Skycons({"color": "#ffffff"});
-  var innitted = false;
   var timezones_style_block_id = "timezones_clock_anim";
   var minutes_temp = 99; // initial value out of range
   var updating_weather = false;
   var lastWeatherCheck = 0;
   var now, hidden, visibilityChange, secondInterval, hourInterval, weatherTimeout, weatherRecievedCounter;
+  var weatherEmojis = {
+    "clear-day" : "☀️",
+    "clear-night" : "🌙",
+    "partly-cloudy-day" : "⛅",
+    "partly-cloudy-night" : "☁️",
+    "cloudy" : "☁️",
+    "rain" : "🌧️",
+    "sleet" : "🌨️",
+    "snow" : "🌨️",
+    "wind" : "🌬",
+    "fog" : "🌫️"
+  };
 
   if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
     hidden = "hidden";
@@ -39,7 +49,7 @@ timezones.Behaviors.timezones = function(container) {
     var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
     //
     $("#location-"+index+" .temperature",container).innerHTML = temp + "<sup>&deg;"+temp_unit+"</sup>";
-    $("#location-"+index+" .weather span",container).innerHTML = "<span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\"><span class=\"thermometer\">🌡</span>"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span>\n<span class=\"rainchance"+rainChanceClass+"\"><span class=\"umbrella"+umbrellaClass+"\" title=\"Precipitation probability in the next hour\">"+umbrellaEmoji+"</span>"+location.rainChance+"%</span>";
+    $("#location-"+index+" .weather",container).innerHTML = "<span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\"><span class=\"thermometer\">"+weatherEmojis[location.icon]+"</span>"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span>\n<span class=\"rainchance"+rainChanceClass+"\"><span class=\"umbrella"+umbrellaClass+"\" title=\"Precipitation probability in the next hour\">"+umbrellaEmoji+"</span>"+location.rainChance+"%</span>";
     $("#location-"+index+" .weather.js-loading").removeClass("js-loading");
   }
 
@@ -62,13 +72,6 @@ timezones.Behaviors.timezones = function(container) {
         //
         updateTemperatures(location,index);
         //
-        if (innitted) {
-          skycons.set("icon-"+index, location.icon);
-        } else {
-          skycons.add("icon-"+index, location.icon);
-          innitted = true;
-        }
-        //
         recieved_weather();
       },
       onError: function(data){
@@ -81,7 +84,6 @@ timezones.Behaviors.timezones = function(container) {
   function recieved_weather() {
     weatherRecievedCounter++;
     if (weatherRecievedCounter === timezones.locations.length) {
-      skycons.play();
       updating_weather = false;
       lastWeatherCheck = new Date().getTime();
     }
@@ -96,9 +98,7 @@ timezones.Behaviors.timezones = function(container) {
       } else {
         timezones.locations.forEach(function(location,index){
           updateTemperatures(location,index);
-          skycons.set("icon-"+index, location.icon);
         });
-        skycons.play();
       }
     }
   }
@@ -249,7 +249,6 @@ timezones.Behaviors.timezones = function(container) {
       location.id = "location-"+index;
       location.time = "";
       location.temperature = "65";
-      location.icon = Skycons.CLOUDY;
       //
       var this_location_html = location_html;
       this_location_html = this_location_html.replace("{{time}}",location.time);
