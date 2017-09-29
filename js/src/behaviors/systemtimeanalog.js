@@ -1,7 +1,7 @@
 timezones.Behaviors.systemtimeanalog = function(container) {
 
   var timezones_style_block_id = "timezones_clock_anim";
-  var now, hidden, visibilityChange;
+  var minuteInterval, now, hidden, visibilityChange;
 
   if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
     hidden = "hidden";
@@ -43,11 +43,17 @@ timezones.Behaviors.systemtimeanalog = function(container) {
     document.getElementById(timezones_style_block_id).textContent = css_anims;
   }
 
+  function setIntervals() {
+    minuteInterval = setInterval(update_analogue_time,60000);
+  }
+
   function handle_visibility_change() {
     if (document[hidden]) {
       document.getElementById(timezones_style_block_id).textContent = '';
+       clearInterval(minuteInterval);
     } else {
       update_analogue_time();
+      setIntervals();
     }
   }
 
@@ -59,6 +65,7 @@ timezones.Behaviors.systemtimeanalog = function(container) {
     if (localStorage['clock_type'] === 'analog') {
       document.documentElement.classList.add('s-analog');
       update_analogue_time();
+      setIntervals();
     } else {
       document.documentElement.classList.remove('s-analog');
     }
@@ -69,6 +76,6 @@ timezones.Behaviors.systemtimeanalog = function(container) {
   init();
 
   if (typeof document[hidden]) {
-    document.on(visibilityChange, handle_visibility_change);
+    document.addEventListener(visibilityChange, handle_visibility_change, false);
   }
 };

@@ -84,6 +84,6 @@ timezones.Behaviors.systemtimedigital = function(container) {
   init();
 
   if (typeof document[hidden]) {
-    document.on(visibilityChange, handle_visibility_change);
+    document.addEventListener(visibilityChange, handle_visibility_change, false);
   }
 };

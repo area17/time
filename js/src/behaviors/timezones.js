@@ -232,6 +232,6 @@ timezones.Behaviors.timezones = function(container) {
   document.on("update_temperature_unit",update_temperature_unit);
 
   if (typeof document[hidden]) {
-    document.on(visibilityChange, handle_visibility_change);
+    document.addEventListener(visibilityChange, handle_visibility_change, false);
   }
 };
