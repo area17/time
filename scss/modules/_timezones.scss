@@ -26,7 +26,7 @@
   flex: 0 0 auto;
   min-width: 120px;
   margin-bottom: 20px;
-  opacity: .8;
+  opacity: .7;
   transition: opacity .25s linear;
 
   @include breakpoint(large) {
@@ -59,6 +59,8 @@
 }
 
 .timezones .temperature {
+  opacity: 1;
+  transition: opacity .25s linear;
 
   &::before {
     content: "─";
@@ -67,38 +69,18 @@
   }
 }
 
-.timezones .time sup {
-}
-
 .timezones .weather {
   display: block;
   position: relative;
   opacity: 1;
   transition: opacity .25s linear;
-
-  &.js-loading {
-    opacity: 0;
-  }
 }
 
-.timezones.hide_weather.hide_temperature .weather.js-loading::after {
-}
-
-.timezones.hide_weather .weather .icon {
-}
-
-.timezones.hide_temperature .weather i {
-}
-
-.timezones.hide_rainchance .weather .rainchance {
-}
-
-
-.timezones .weather canvas,
-.timezones .weather .icon,
-.timezones .weather span {
-  display: inline-block;
-  vertical-align: middle;
+.s-hide-temperature .timezones .temperature,
+.s-hide-weather .timezones .weather,
+.timezones .s-loading .temperature,
+.timezones .s-loading .weather {
+  opacity: 0;
 }
 
 .timezones .weather i .feelsLike {
@@ -128,130 +110,4 @@
 
 .timezones .umbrella.windy {
   transform: rotate(-40deg);
-}
-
-.timezones .weather i sup {
-  font-size: 12px;
-  line-height: 12px;
-  vertical-align: top;
-  position: relative;
-  top: 3px;
-}
-
-.timezones .weather .icon {
-  display: block;
-  width: 20px;
-  height: 20px;
-}
-
-.timezones .clock {
-  position: relative;
-  margin: 0 auto 10px;
-  width: 120px;
-  height: 120px;
-  border: 3px solid $dark-grey;
-  border-radius: 50%;
-
-  @include breakpoint(small) {
-    width: 80px;
-    height: 80px;
-    border-width: 2px;
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    margin: -3px 0 0 -3px;
-    background: $dark-grey;
-    border-radius: 50%;
-  }
-}
-
-.timezones.hide_analog .clock {
-  display: none;
-}
-
-.timezones .hours,
-.timezones .minutes,
-.timezones .seconds {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  top: 50%;
-  width: 4px;
-  margin: 0 0 0 -2px;
-  background: $dark-grey;
-  border-radius: 2px;
-  -webkit-transform-origin: 50% 100%;
-  transform-origin: 50% 100%;
-
-  @include breakpoint(small) {
-    width: 2px;
-    margin-left: -1px;
-  }
-}
-
-.timezones .hours {
-  height: 30px;
-  margin-top: -30px;
-
-  @include breakpoint(small) {
-    height: 18px;
-    margin-top: -18px;
-  }
-}
-
-.timezones .minutes {
-  height: 50px;
-  margin-top: -50px;
-
-  @include breakpoint(small) {
-    height: 30px;
-    margin-top: -30px;
-  }
-}
-
-.timezones .seconds {
-  background: $red;
-  z-index: 3;
-  width: 2px;
-  height: 48px;
-  margin: -48px 0 0 -1px;
-  -webkit-animation: time_seconds 60s steps(60 ,end) infinite;
-  animation: time_seconds 60s steps(60 ,end) infinite;
-
-  &::after {
-    content: "";
-    position: absolute;
-    background: $red;
-    height: 10px;
-    left: 0;
-    right: 0;
-    top: 100%;
-  }
-
-  @include breakpoint(small) {
-    height: 29px;
-    margin-top: -29px;
-
-    &::after {
-      height: 5px;
-    }
-  }
-}
-
-@for $i from 1 through 10 {
-  .timezones li:nth-child(#{$i}) .clock .hours {
-    -webkit-animation: time_hours_#{$i} 43200s infinite linear;
-    animation: time_hours_#{$i} 43200s infinite linear;
-  }
-  .timezones li:nth-child(#{$i}) .clock .minutes {
-    -webkit-animation: time_minutes_#{$i} 3600s infinite linear;
-    animation: time_minutes_#{$i} 3600s infinite linear;
-  }
 }

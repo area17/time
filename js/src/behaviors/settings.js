@@ -2,7 +2,8 @@ timezones.Behaviors.settings = function(container){
 
   var $settings = $("#settings");
   var $checkboxes = $("input[type=checkbox]",$settings);
-  var radios_arr = ["digital_format","temperature_unit"];
+  var radios_arr = ["clock_type", "digital_format","temperature_unit"];
+  var $clock_type = $("input[type=radio][name=clock_type]",$settings);
   var $digital_format = $("input[type=radio][name=digital_format]",$settings);
   var $temperature_unit = $("input[type=radio][name=temperature_unit]",$settings);
 

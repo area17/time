@@ -17,13 +17,23 @@ a {
 .logo {
   display: block;
   position: fixed;
-  top: 50%;
   left: 50px;
   width: auto;
   height: 80px;
-  margin-top: -40px;
   color: $white;
+  opacity: 0;
   z-index: 9;
+  transition: opacity .25s linear;
+
+  .s-digital & {
+    bottom: calc(50% - 40px);
+    opacity: 1;
+  }
+
+  .s-analog & {
+    bottom: 50px;
+    opacity: 1;
+  }
 }
 
 .instruction {
@@ -88,3 +98,55 @@ a {
       transform: rotate(360deg);
     }
   }
+
+
+
+.systemtime-digital {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  color: $white;
+  font-size: 110px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .25s linear;
+
+  .s-digital & {
+    opacity: 1;
+  }
+}
+
+.systemtime-analog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 425px;
+  height: 425px;
+  transform: translateY(-50%) translateX(-50%);
+  opacity: 0;
+  color: $white;
+  transition: opacity .25s linear;
+
+  .s-analog & {
+    opacity: 1;
+  }
+}
+
+.systemtime-analog__hour {
+  transform-origin: 50% 50%;
+  -webkit-animation: time_hours 43200s infinite linear;
+  animation: time_hours 43200s infinite linear;
+}
+.systemtime-analog__minute {
+  transform-origin: 50% 50%;
+  -webkit-animation: time_minutes 3600s infinite linear;
+  animation: time_minutes 3600s infinite linear;
+}
+.systemtime-analog__second {
+  transform-origin: 50% 50%;
+  -webkit-animation: time_seconds 60s infinite linear;
+  animation: time_seconds 60s infinite linear;
+}
+
