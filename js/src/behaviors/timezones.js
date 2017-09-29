@@ -6,7 +6,6 @@ timezones.Behaviors.timezones = function(container) {
   var minutes_temp = 99; // initial value out of range
   var updating_weather = false;
   var lastWeatherCheck = 0;
-  var now, hidden, visibilityChange, secondInterval, hourInterval, weatherTimeout, weatherRecievedCounter;
   var weatherEmojis = {
     "clear-day" : "☀️",
     "clear-night" : "🌙",
@@ -19,6 +18,9 @@ timezones.Behaviors.timezones = function(container) {
     "wind" : "🌬",
     "fog" : "🌫️"
   };
+  var officeOpen = 9;
+  var officeClosed = 19;
+  var now, hidden, visibilityChange, secondInterval, hourInterval, weatherTimeout, weatherRecievedCounter;
 
   if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
     hidden = "hidden";
@@ -116,6 +118,7 @@ timezones.Behaviors.timezones = function(container) {
         var this_time = new Date((now+location.offset) * 1000);
         var this_hour = this_time.getHours();
         var is_current = (this_hour === hours_now);
+        var is_open = (this_hour >= officeOpen && this_hour < officeClosed);
         location.hour = this_hour;
         var this_pm = (this_hour > 12);
         this_hour = (format !== "24" && this_hour > 12) ? this_hour - 12 : this_hour;
@@ -129,9 +132,14 @@ timezones.Behaviors.timezones = function(container) {
           time_str = time_str + "<sup>" + (this_pm ? "pm" : "am") + "</sup>";
         }
         if (is_current) {
-          $("#location-"+index,container).addClass("current");
+          $("#location-"+index,container).addClass("s-current");
         } else {
-          $("#location-"+index,container).removeClass("current");
+          $("#location-"+index,container).removeClass("s-current");
+        }
+        if (is_open) {
+          $("#location-"+index,container).addClass("s-open");
+        } else {
+          $("#location-"+index,container).removeClass("s-open");
         }
         $("#location-"+index+" .time",container).innerHTML = time_str;
       });

@@ -26,6 +26,8 @@
   flex: 0 0 auto;
   min-width: 120px;
   margin-bottom: 20px;
+  opacity: .8;
+  transition: opacity .25s linear;
 
   @include breakpoint(large) {
   }
@@ -34,15 +36,18 @@
   @include breakpoint(small) {
     margin-bottom: 40px;
   }
+
+  &.s-current {
+  }
+
+  &.s-open {
+    opacity: 1;
+  }
 }
 
 .timezones strong {
   display: block;
   font-weight: normal;
-}
-
-.timezones .current strong {
-  font-weight: bold;
 }
 
 .timezones .time {
