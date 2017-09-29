@@ -1,8 +1,8 @@
 timezones.Behaviors.timezones = function(container) {
 
-  var location_html = '<li id="{{locationID}}">\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<strong>{{name}}</strong>\n<em class="time">{{time}}</em>\n<span class="weather js-loading"><canvas class="icon" id="{{iconID}}" width="32" height="32"></canvas>\n<span></span>\n</span>\n</li>\n';
+  var location_html = '<li id="{{locationID}}">\n<div class="clock">\n<div class="hours"></div>\n<div class="minutes"></div>\n<div class="seconds"></div>\n</div>\n<strong>{{name}}</strong>\n<em class="time">{{time}}</em>\n<span class="temperature"></span>\n<span class="weather js-loading"><canvas class="icon" id="{{iconID}}" width="20" height="20"></canvas>\n<span></span>\n</span>\n</li>\n';
   var lis = "";
-  var skycons = new Skycons({"color": "#111111"});
+  var skycons = new Skycons({"color": "#ffffff"});
   var innitted = false;
   var timezones_style_block_id = "timezones_clock_anim";
   var minutes_temp = 99; // initial value out of range
@@ -38,7 +38,8 @@ timezones.Behaviors.timezones = function(container) {
     var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
     var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
     //
-    $("#location-"+index+" .weather span",container).innerHTML = "<span class=\"temperature"+temperatureClass+"\">"+ temp + "<sup>&deg;"+temp_unit+"</sup></span><span class=\"bull\"> &bull; </span><span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\">"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span><span class=\"rainchance"+rainChanceClass+"\"><br><span class=\"umbrella"+umbrellaClass+"\" title=\"Precipitation probability in the next hour\">"+umbrellaEmoji+"</span> "+location.rainChance+"%</span>";
+    $("#location-"+index+" .temperature",container).innerHTML = temp + "<sup>&deg;"+temp_unit+"</sup>";
+    $("#location-"+index+" .weather span",container).innerHTML = "<span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\"><span class=\"thermometer\">🌡</span>"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span>\n<span class=\"rainchance"+rainChanceClass+"\"><span class=\"umbrella"+umbrellaClass+"\" title=\"Precipitation probability in the next hour\">"+umbrellaEmoji+"</span>"+location.rainChance+"%</span>";
     $("#location-"+index+" .weather.js-loading").removeClass("js-loading");
   }
 

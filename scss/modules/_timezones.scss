@@ -24,17 +24,14 @@
 
 .timezones li {
   flex: 0 0 auto;
-  width: 16.666666667%;
+  min-width: 120px;
   margin-bottom: 20px;
 
   @include breakpoint(large) {
   }
   @include breakpoint(medium) {
-    width: 33.33%;
   }
   @include breakpoint(small) {
-    width: auto;
-    min-width: 120px;
     margin-bottom: 40px;
   }
 }
@@ -56,47 +53,39 @@
   display: none;
 }
 
+.timezones .temperature {
+
+  &::before {
+    content: "─";
+    display: inline-block;
+    margin: 0 10px 0 7px;
+  }
+}
+
 .timezones .time sup {
 }
 
 .timezones .weather {
+  display: block;
   position: relative;
+  opacity: 1;
+  transition: opacity .25s linear;
 
-  &::before {
-    content: "─ ";
-  }
-
-  &.js-loading::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 16px;
-    height: 16px;
-    margin: -8px 0 0 -8px;
-    border-radius: 50%;
-    border: 0 solid transparent;
-    border-top-color: $dark-grey;
-    border-top-width: 3px;
-    border-right-width: 3px;
-    animation: spin 1.5s linear infinite;
+  &.js-loading {
+    opacity: 0;
   }
 }
 
 .timezones.hide_weather.hide_temperature .weather.js-loading::after {
-  display: none;
 }
 
 .timezones.hide_weather .weather .icon {
-  display: none;
 }
 
 .timezones.hide_temperature .weather i {
-  display: none;
 }
 
 .timezones.hide_rainchance .weather .rainchance {
-  display: none;
 }
 
 
@@ -104,16 +93,7 @@
 .timezones .weather .icon,
 .timezones .weather span {
   display: inline-block;
-  margin-right: 5px;
-  margin-left: 5px;
-}
-
-.timezones .weather .bull,
-.timezones .weather .rainchance,
-.timezones .weather .feelsLike,
-.timezones .weather .umbrella,
-.timezones .weather .rainchance {
-  display: none; // UPDATE
+  vertical-align: middle;
 }
 
 .timezones .weather i .feelsLike {
@@ -132,10 +112,13 @@
   color: $blue;
 }
 
+.timezones .rainchance {
+  margin-left: 8px;
+}
+
+.timezones .thermometer,
 .timezones .umbrella {
-  display: inline-block;
-  font-size: 15px;
-  filter: grayscale(1);
+  margin-right: 5px;
 }
 
 .timezones .umbrella.windy {
@@ -152,8 +135,8 @@
 
 .timezones .weather .icon {
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
 }
 
 .timezones .clock {
