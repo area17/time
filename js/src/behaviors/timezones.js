@@ -114,6 +114,7 @@ timezones.Behaviors.timezones = function(container) {
     var hours_now = now.getHours();
     var minutes_now = now.getMinutes();
     now = new Date( now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds() );
+    var day = now.getDay();
     now = now.getTime()/1000;
     if (minutes_now !== minutes_temp || override) {
       minutes_temp = minutes_now;
@@ -123,7 +124,7 @@ timezones.Behaviors.timezones = function(container) {
         var this_time = new Date((now+location.offset) * 1000);
         var this_hour = this_time.getHours();
         var is_current = (this_hour === hours_now);
-        var is_open = (this_hour >= officeOpen && this_hour < officeClosed);
+        var is_open = (this_hour >= officeOpen && this_hour < officeClosed && day !== 0 && day !== 6);
         location.hour = this_hour;
         var this_pm = (this_hour > 12);
         this_hour = (format !== "24" && this_hour > 12) ? this_hour - 12 : this_hour;
