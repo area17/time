@@ -49,9 +49,13 @@ timezones.Behaviors.timezones = function(container) {
     var temp_unit = localStorage["temperature_unit"] || "c";
     var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
     var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
+    var moonphase = timezones.Helpers.moonphase();
+    var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + ".";
+    var weatherEmoji = (location.icon !== 'clear-night') ? weatherEmojis[location.icon] : moonphase.emoji;
+    weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + " Moon phase is " + moonphase.phase.toLowerCase() + ".";
     //
     $(".temperature",locationEl).innerHTML = temp + "<sup>&deg;"+temp_unit+"</sup>";
-    $(".weather",locationEl).innerHTML = "<span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\"><span class=\"thermometer\">"+weatherEmojis[location.icon]+"</span>"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span>\n<span class=\"rainchance"+rainChanceClass+"\"><span class=\"umbrella"+umbrellaClass+"\" title=\"Precipitation probability in the next hour\">"+umbrellaEmoji+"</span>"+location.rainChance+"%</span>";
+    $(".weather",locationEl).innerHTML = "<span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\"><span class=\"thermometer\" title=\""+weatherSummary+"\">"+weatherEmoji+"</span>"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span>\n<span class=\"rainchance"+rainChanceClass+"\"><span class=\"umbrella"+umbrellaClass+"\" title=\"Precipitation probability in the next hour\">"+umbrellaEmoji+"</span>"+location.rainChance+"%</span>";
     locationEl.classList.remove("s-loading");
   }
 
