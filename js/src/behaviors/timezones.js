@@ -47,7 +47,7 @@ timezones.Behaviors.timezones = function(container) {
       // add class for high/low temps, frustratingly DarkSky returns temps in °F
       // WTF is a °F
       var temperatureClass = '';
-      if (location.feelsLike < 33) {
+      if (location.feelsLike <= 33) {
         // 33°F is 0°C
         temperatureClass = ' cold';
       } else if (location.feelsLike > 86) {
@@ -65,9 +65,12 @@ timezones.Behaviors.timezones = function(container) {
       var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + '.';
       var weatherEmoji = (location.icon !== 'clear-night') ? weatherEmojis[location.icon] : moonPhase.emoji;
       weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + ' Moon phase is ' + moonPhase.phase.toLowerCase() + '.';
+      var emojiClass = (location.icon === 'clear-day') ? ' sunny' : '';
+      //
+      tempUnit = tempUnit.toUpperCase();
       //
       locationEl.querySelector('.temperature').innerHTML = temp + '&deg;'+tempUnit;
-      locationEl.querySelector('.weather').innerHTML = '<span class="feelsLike' + temperatureClass + '" title="feels like"><span class="thermometer" title="' + weatherSummary + '">' + weatherEmoji + '</span>' + tempFeelsLike + '&deg;' + tempUnit + '</span>\n<span class="rainchance' + rainChanceClass + '"><span class="umbrella' + umbrellaClass + '" title="Precipitation probability in the next hour: ' + location.rainChance + '%">' + umbrellaEmoji + '</span>' + location.rainChance + '%</span>';
+      locationEl.querySelector('.weather').innerHTML = '<span class="feelsLike' + temperatureClass + '" title="feels like"><span class="emoji' + emojiClass + '" title="' + weatherSummary + '">' + weatherEmoji + '</span>' + tempFeelsLike + '&deg;' + tempUnit + '</span>\n<span class="rainchance' + rainChanceClass + '"><span class="emoji' + umbrellaClass + '" title="Precipitation probability in the next hour: ' + location.rainChance + '%">' + umbrellaEmoji + '</span>' + location.rainChance + '%</span>';
       //
       locationEl.classList.remove('s-loading');
     }

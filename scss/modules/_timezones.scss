@@ -83,31 +83,37 @@
   opacity: 0;
 }
 
-.timezones .weather i .feelsLike {
-  color: $light-grey;
+.timezones .weather .feelsLike.hot {
+  color: #ffbfbf;
 }
 
-.timezones .weather i .feelsLike.hot {
-  color: $red;
+.timezones .weather .feelsLike.really-hot {
+  color: red;
 }
 
-.timezones .weather i .feelsLike.really-hot {
-  color: #f00;
-}
-
-.timezones .weather i .feelsLike.cold {
-  color: $blue;
+.timezones .weather .feelsLike.cold {
+  color: #bfbfff;
 }
 
 .timezones .rainchance {
   margin-left: 8px;
 }
 
-.timezones .thermometer,
-.timezones .umbrella {
+.timezones .emoji {
+  display: inline-block;
   margin-right: 5px;
+  line-height: 15px;
 }
 
-.timezones .umbrella.windy {
+.timezones .emoji.windy {
   transform: rotate(-40deg);
+}
+
+.timezones .hot .emoji.sunny {
+  filter: hue-rotate(-10deg) saturate(5);
+}
+
+.timezones .really-hot .emoji.sunny {
+  transform: scale(1.2);
+  filter: hue-rotate(-10deg) saturate(5);
 }
