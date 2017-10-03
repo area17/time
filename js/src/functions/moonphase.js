@@ -1,22 +1,22 @@
-timezones.Helpers.moonphase = function() {
+timezones.Helpers.moonPhase = function() {
   /*
   A rehashed version of https://gist.github.com/L-A/3497902
   */
   var AG = 0;
-  var phase = "";
-  var phaseEmojis = ["🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘"];
-  var emoji = "🌘";
+  var phase = '';
+  var phaseEmojis = ['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
+  var emoji = '🌘';
   var now = new Date();
   var year = now.getUTCFullYear();
   var month = now.getUTCMonth() + 1;
   var day = now.getUTCDate();
   var YY = 0,
-    MM = 0,
-    K1 = 0,
-    K2 = 0,
-    K3 = 0,
-    JD = 0,
-    IP = 0;
+      MM = 0,
+      K1 = 0,
+      K2 = 0,
+      K3 = 0,
+      JD = 0,
+      IP = 0;
 
   // calculate the Julian date at 12h UT
   YY = year - Math.floor((12 - month) / 10);
@@ -43,31 +43,31 @@ timezones.Helpers.moonphase = function() {
   AG = IP * 29.53;
 
   if(AG < 1.84566) {
-    phase = "A new moon";
+    phase = 'A new moon';
     emoji = phaseEmojis[0];
   } else if(AG <  5.53699) {
-    phase = "An evening crescent";
+    phase = 'An evening crescent';
     emoji = phaseEmojis[1];
   } else if(AG < 9.22831) {
-    phase = "A first quarter";
+    phase = 'A first quarter';
     emoji = phaseEmojis[2];
   } else if(AG < 12.91963) {
-    phase = "A waxing gibbous";
+    phase = 'A waxing gibbous';
     emoji = phaseEmojis[3];
   } else if(AG < 16.61096) {
-    phase = "A full moon";
+    phase = 'A full moon';
     emoji = phaseEmojis[4];
   } else if(AG < 20.30228) {
-    phase = "A waning gibbous";
+    phase = 'A waning gibbous';
     emoji = phaseEmojis[5];
   } else if(AG < 23.99361) {
-    phase = "A Last quarter";
+    phase = 'A Last quarter';
     emoji = phaseEmojis[6];
   } else if(AG < 27.68493) {
-    phase = "A Morning crescent";
+    phase = 'A Morning crescent';
     emoji = phaseEmojis[7];
   } else {
-    phase = "A new moon";
+    phase = 'A new moon';
     emoji = phaseEmojis[0];
   }
 
