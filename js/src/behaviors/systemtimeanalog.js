@@ -3,15 +3,35 @@ timezones.Behaviors.systemtimeanalog = function(container) {
   var timezones_style_block_id = "timezones_clock_anim";
   var minuteInterval, now, hidden, visibilityChange;
 
-  if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
-    hidden = "hidden";
-    visibilityChange = "visibilitychange";
-  } else if (typeof document.msHidden !== "undefined") {
-    hidden = "msHidden";
-    visibilityChange = "msvisibilitychange";
-  } else if (typeof document.webkitHidden !== "undefined") {
-    hidden = "webkitHidden";
-    visibilityChange = "webkitvisibilitychange";
+  function setClock(h,m,s) {
+    var str = '';
+    if (h && m && s) {
+      s = s * 6; // 60 seconds in 360 degrees
+      //
+      m = m * 6; // 60 minutes in 360 degrees
+      m = m + (s / 60); // adjust for how many seconds have passed
+      //
+      h = (h > 12) ? h - 12 : h; // 24h/12h fix
+      h = (h * 30); // 12 hours in 360 degrees plus
+      h = h + (m / 60); // adjust for how many minutes have passed
+      //
+      // lets start at less than 360deg
+      m = (m >= 360) ? m - 360 : m;
+      h = (h >= 360) ? h - 360 : h;
+      //
+      str = "@-webkit-keyframes time_seconds { to { -webkit-transform: rotate(" + (s+360) + "deg); } }\n@keyframes time_seconds { to { transform: rotate(" + (s+360) + "deg); } }\n";
+      str += "@-webkit-keyframes time_hours { to { -webkit-transform: rotate(" + (h+360) + "deg); } }\n@keyframes time_hours { to { transform: rotate(" + (h+360) + "deg); } }\n";
+      str += "@-webkit-keyframes time_minutes { to { -webkit-transform: rotate(" + (m+360) + "deg); } }\n@keyframes time_minutes { to { transform: rotate(" + (m+360) + "deg); } }\n";
+    } else {
+      h = 0;
+      m = 0;
+      s = 0;
+    }
+    $(".systemtime-analog__hour",container).css("-webkit-transform", "rotate(" + h + "deg)").css("transform", "rotate(" + h + "deg)");
+    $(".systemtime-analog__minute",container).css("-webkit-transform", "rotate(" + m + "deg)").css("transform", "rotate(" + m + "deg)");
+    $(".systemtime-analog__second",container).css("-webkit-transform", "rotate(" + s + "deg)").css("transform", "rotate(" + s + "deg)");
+    //
+    document.getElementById(timezones_style_block_id).textContent = str;
   }
 
   function update_analogue_time(){
@@ -25,32 +45,17 @@ timezones.Behaviors.systemtimeanalog = function(container) {
     var this_minute = this_time.getMinutes();
     var this_second = this_time.getSeconds();
     //
-    this_minute = this_minute * 6 + this_second / 60;
-    //
-    this_hour = (this_hour > 12) ? this_hour - 12 : this_hour;
-    this_hour = (this_hour * 30) + (this_minute / 12);
-    this_hour = (this_hour >= 360) ? this_hour - 360 : this_hour;
-    //
-    var css_anims = "@-webkit-keyframes time_seconds { to { -webkit-transform: rotate(" + (this_second+360) + "deg); } }\n@keyframes time_seconds { to { transform: rotate(" + (this_second+360) + "deg); } }\n";
-    //
-    $(".systemtime-analog__hour",container).css("-webkit-transform", "rotate(" + this_hour + "deg)").css("transform", "rotate(" + this_hour + "deg)");
-    $(".systemtime-analog__minute",container).css("-webkit-transform", "rotate(" + this_minute + "deg)").css("transform", "rotate(" + this_minute + "deg)");
-    $(".systemtime-analog__second",container).css("-webkit-transform", "rotate(" + this_second + "deg)").css("transform", "rotate(" + this_second + "deg)");
-    //
-    css_anims += "@-webkit-keyframes time_hours { to { -webkit-transform: rotate(" + (this_hour+360) + "deg); } }\n@keyframes time_hours { to { transform: rotate(" + (this_hour+360) + "deg); } }\n";
-    css_anims += "@-webkit-keyframes time_minutes { to { -webkit-transform: rotate(" + (this_minute+360) + "deg); } }\n@keyframes time_minutes { to { transform: rotate(" + (this_minute+360) + "deg); } }\n";
-
-    document.getElementById(timezones_style_block_id).textContent = css_anims;
+    setClock(this_hour, this_minute, this_second);
   }
 
   function setIntervals() {
     minuteInterval = setInterval(update_analogue_time,60000);
   }
 
-  function handle_visibility_change() {
-    if (document[hidden]) {
-      document.getElementById(timezones_style_block_id).textContent = '';
-       clearInterval(minuteInterval);
+  function handle_visibility_change(event) {
+    if (document.hidden) {
+      clearInterval(minuteInterval);
+       setClock(false, false, false);
     } else {
       update_analogue_time();
       setIntervals();
@@ -71,11 +76,8 @@ timezones.Behaviors.systemtimeanalog = function(container) {
     }
   }
 
-  document.on("update_clock_type",init);
-
   init();
 
-  if (typeof document[hidden]) {
-    document.addEventListener(visibilityChange, handle_visibility_change, false);
-  }
+  document.addEventListener("update_clock_type",init, false);
+  document.addEventListener("visibilitychange", handle_visibility_change, false);
 };

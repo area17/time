@@ -134,18 +134,24 @@ a {
   }
 }
 
-.systemtime-analog__hour {
+.systemtime-analog__hour,
+.systemtime-analog__minute,
+.systemtime-analog__second {
   transform-origin: 50% 50%;
+  transition: all .25s linear;
+}
+
+.systemtime-analog__hour {
   -webkit-animation: time_hours 43200s infinite linear;
   animation: time_hours 43200s infinite linear;
 }
+
 .systemtime-analog__minute {
-  transform-origin: 50% 50%;
   -webkit-animation: time_minutes 3600s infinite linear;
   animation: time_minutes 3600s infinite linear;
 }
+
 .systemtime-analog__second {
-  transform-origin: 50% 50%;
   -webkit-animation: time_seconds 60s infinite linear;
   animation: time_seconds 60s infinite linear;
 }
