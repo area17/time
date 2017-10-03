@@ -2,10 +2,10 @@ timezones.Behaviors.settings = function(container){
 
   var $settings = $("#settings");
   var $checkboxes = $("input[type=checkbox]",$settings);
-  var radios_arr = ["clock_type", "digital_format","temperature_unit"];
-  var $clock_type = $("input[type=radio][name=clock_type]",$settings);
-  var $digital_format = $("input[type=radio][name=digital_format]",$settings);
-  var $temperature_unit = $("input[type=radio][name=temperature_unit]",$settings);
+  var radios_arr = ["ClockType", "DigitalFormat","TemperatureUnit"];
+  var $clockType = $("input[type=radio][name=ClockType]",$settings);
+  var $digitalFormat = $("input[type=radio][name=DigitalFormat]",$settings);
+  var $temperature_unit = $("input[type=radio][name=TemperatureUnit]",$settings);
 
   // check for locally stored setting
   $checkboxes.forEach(function(input,index){
@@ -20,7 +20,7 @@ timezones.Behaviors.settings = function(container){
   $checkboxes.on("click",function(event){
     localStorage[this.value] = this.checked;
     this.parentNode.className = this.checked ? "checked" : "";
-    document.trigger("update_"+this.value);
+    document.trigger("update"+this.value);
   });
 
 
@@ -36,7 +36,7 @@ timezones.Behaviors.settings = function(container){
     // do some clicks
     inputs.on("click",function(event){
       localStorage[this.name] = this.value;
-      document.trigger("update_"+this.name);
+      document.trigger("update"+this.name);
     });
   });
 

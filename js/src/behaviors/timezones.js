@@ -36,7 +36,7 @@ timezones.Behaviors.timezones = function(container) {
       temperatureClass = (location.feelsLike > 86) ? " hot" : temperatureClass;
       temperatureClass = (location.feelsLike > 100) ? " really-hot" : temperatureClass;
       //
-      var temp_unit = localStorage["temperature_unit"] || "c";
+      var temp_unit = localStorage["TemperatureUnit"] || "c";
       var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
       var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
       var moonphase = timezones.Helpers.moonphase();
@@ -87,7 +87,7 @@ timezones.Behaviors.timezones = function(container) {
   }
 
   function update_weather() {
-    if ((localStorage["show_current_weather"] === "true" || localStorage["show_temperature"] === "true") && !updating_weather) {
+    if ((localStorage["ShowCurrentWeather"] === "true" || localStorage["ShowTemperature"] === "true") && !updating_weather) {
       if (new Date().getTime() > lastWeatherCheck + 1800000) {
         updating_weather = true;
         weatherRecievedCounter = 0;
@@ -111,7 +111,7 @@ timezones.Behaviors.timezones = function(container) {
       minutes_temp = minutes_now;
       timezones.locations.forEach(function(location,index){
         var locationEl = document.getElementById('location-'+index);
-        var format = localStorage["digital_format"] || "24";
+        var format = localStorage["DigitalFormat"] || "24";
         var this_time = new Date((now+location.offset) * 1000);
         var this_hour = this_time.getHours();
         var is_current = (this_hour === hours_now);
@@ -144,12 +144,12 @@ timezones.Behaviors.timezones = function(container) {
   }
 
   //
-  function update_digital_format() {
+  function update_digitalFormat() {
     update_digital_time(true);
   }
 
   function hideShow_weather() {
-    var show_weather = localStorage["show_current_weather"] || "true";
+    var show_weather = localStorage["ShowCurrentWeather"] || "true";
     if (show_weather === "false") {
       document.documentElement.classList.add('s-hide-weather');
     } else {
@@ -159,7 +159,7 @@ timezones.Behaviors.timezones = function(container) {
   }
 
   function hideShow_temperature() {
-    var show_temperature = localStorage["show_temperature"] || "true";
+    var show_temperature = localStorage["ShowTemperature"] || "true";
     if (show_temperature === "false") {
       document.documentElement.classList.add('s-hide-temperature');
     } else {
@@ -222,9 +222,9 @@ timezones.Behaviors.timezones = function(container) {
 
   init();
 
-  document.addEventListener("update_digital_format",update_digital_format, false);
-  document.addEventListener("update_show_current_weather",hideShow_weather, false);
-  document.addEventListener("update_show_temperature",hideShow_temperature, false);
-  document.addEventListener("update_temperature_unit",update_temperature_unit, false);
+  document.addEventListener("updateDigitalFormat",update_digitalFormat, false);
+  document.addEventListener("updateShowCurrentWeather",hideShow_weather, false);
+  document.addEventListener("updateShowTemperature",hideShow_temperature, false);
+  document.addEventListener("updateTemperatureUnit",update_temperature_unit, false);
   document.addEventListener("visibilitychange", handle_visibility_change, false);
 };

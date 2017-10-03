@@ -22,23 +22,23 @@
   <div id="settings">
     <p>Time</p>
     <ul>
-      <li><label><input type="radio" name="clock_type" value="analog"> Analog</label></li>
-      <li><label><input type="radio" name="clock_type" value="digital" checked> Digital</label></li>
+      <li><label><input type="radio" name="ClockType" value="analog"> Analog</label></li>
+      <li><label><input type="radio" name="ClockType" value="digital" checked> Digital</label></li>
     </ul>
     <ul>
-      <li><label><input type="radio" name="digital_format" value="12"> 12 hour</label></li>
-      <li><label><input type="radio" name="digital_format" value="24" checked> 24 hour</label></li>
+      <li><label><input type="radio" name="DigitalFormat" value="12"> 12 hour</label></li>
+      <li><label><input type="radio" name="DigitalFormat" value="24" checked> 24 hour</label></li>
     </ul>
     <p>Weather</p>
     <ul>
       <li class="sublist">
-        <label><input type="checkbox" value="show_temperature" checked> Temperature</label>
+        <label><input type="checkbox" value="ShowTemperature" checked> Temperature</label>
         <ul>
-          <li><label><input type="radio" name="temperature_unit" value="c" checked> &deg;C</label></li>
-          <li><label><input type="radio" name="temperature_unit" value="f"> &deg;F</label></li>
+          <li><label><input type="radio" name="TemperatureUnit" value="c" checked> &deg;C</label></li>
+          <li><label><input type="radio" name="TemperatureUnit" value="f"> &deg;F</label></li>
         </ul>
       </li>
-      <li><label><input type="checkbox" value="show_current_weather" checked> Weather</label></li>
+      <li><label><input type="checkbox" value="ShowCurrentWeather" checked> Weather</label></li>
     </ul>
   </div>
   <p class="powered_by"><a href="http://forecast.io/">Powered by Forecast.io</a></p>

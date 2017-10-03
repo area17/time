@@ -10,7 +10,7 @@ timezones.Behaviors.systemtimedigital = function(container) {
     now = new Date( now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds() );
     now = now.getTime()/1000;
 
-    var format = localStorage["digital_format"] || "24";
+    var format = localStorage["DigitalFormat"] || "24";
     var this_time = new Date((now) * 1000);
     var this_hour = this_time.getHours();
     var this_minute = this_time.getMinutes();
@@ -36,7 +36,7 @@ timezones.Behaviors.systemtimedigital = function(container) {
     }
   }
 
-  function update_digital_format() {
+  function update_digitalFormat() {
     update_digital_time(true);
   }
 
@@ -56,7 +56,7 @@ timezones.Behaviors.systemtimedigital = function(container) {
 
 
   function init() {
-    if (localStorage['clock_type'] === 'digital') {
+    if (localStorage['ClockType'] === 'digital') {
       document.documentElement.classList.add('s-digital');
       update_digital_time();
       setIntervals();
@@ -69,7 +69,7 @@ timezones.Behaviors.systemtimedigital = function(container) {
 
   init();
 
-  document.addEventListener("update_digital_format",update_digital_format, false);
-  document.addEventListener("update_clock_type",init, false);
+  document.addEventListener("updateDigitalFormat",update_digitalFormat, false);
+  document.addEventListener("updateClockType",init, false);
   document.addEventListener("visibilitychange", handle_visibility_change, false);
 };
