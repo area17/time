@@ -1,59 +1,67 @@
 timezones.Behaviors.settings = function(container){
 
-  var $settings = $("#settings");
-  var $checkboxes = $("input[type=checkbox]",$settings);
-  var radios_arr = ["ClockType", "DigitalFormat","TemperatureUnit"];
-  var $clockType = $("input[type=radio][name=ClockType]",$settings);
-  var $digitalFormat = $("input[type=radio][name=DigitalFormat]",$settings);
-  var $temperature_unit = $("input[type=radio][name=TemperatureUnit]",$settings);
+  var $settings = document.getElementById('settings');
+  var $checkboxes = $settings.querySelectorAll('input[type=checkbox]');
+  var radiosArr = ['ClockType', 'DigitalFormat','TemperatureUnit'];
+  var $clockType = $settings.querySelector('input[type=radio][name=ClockType]');
+  var $digitalFormat = $settings.querySelectorAll('input[type=radio][name=DigitalFormat]');
+  var $temperature_unit = $settings.querySelectorAll('input[type=radio][name=TemperatureUnit]');
+  var i, j, value;
+
+  function checkboxClicked(event) {
+    localStorage[this.value] = this.checked;
+    this.parentNode.className = this.checked ? 'checked' : '';
+    document.trigger('update'+this.value);
+  }
+
+  function showHideSettings(event) {
+    event.preventDefault();
+    if ($settings.classList.contains('s-active')) {
+      $settings.classList.remove('s-active');
+    } else {
+      $settings.classList.add('s-active');
+    }
+  }
+
+  function escapeToClose(event) {
+    if ($settings.classList.contains('s-active') && event.keyCode == 27) {
+      $settings.classList.remove('s-active');
+    }
+  }
+
+  function radioClicked(event) {
+    localStorage[this.name] = this.value;
+    document.trigger('update'+this.name);
+  }
 
   // check for locally stored setting
-  $checkboxes.forEach(function(input,index){
+  for (i = 0; i < $checkboxes.length; i++) {
+    input = $checkboxes[i];
     if (localStorage[input.value] === undefined) {
       localStorage[input.value] = input.checked;
     } else {
-      input.checked = (localStorage[input.value] == "true") ? true : false;
-      input.parentNode.className = input.checked ? "checked" : "";
+      input.checked = (localStorage[input.value] == 'true') ? true : false;
+      input.parentNode.className = input.checked ? 's-active' : '';
     }
-  });
-  // do some clicks
-  $checkboxes.on("click",function(event){
-    localStorage[this.value] = this.checked;
-    this.parentNode.className = this.checked ? "checked" : "";
-    document.trigger("update"+this.value);
-  });
+    $checkboxes[i].addEventListener('click', checkboxClicked, false);
+  }
 
-
-  radios_arr.forEach(function(radio_name,index){
-    // check for locally stored
-    var inputs = $("input[type=radio][name="+radio_name+"]",$settings);
-    var input = (inputs[0].checked) ? inputs[0] : inputs[1];
-    if (localStorage[input.name] === undefined) {
-      localStorage[input.name] = input.value;
+  for (i = 0; i < radiosArr.length; i++) {
+    var name = radiosArr[i];
+    var inputs = $settings.querySelectorAll('input[type=radio][name='+name+']');
+    var checkedInput = (inputs[0].checked) ? inputs[0] : inputs[1];
+    if (localStorage[checkedInput.name] === undefined) {
+      localStorage[checkedInput.name] = checkedInput.value;
     } else {
-      $("input[type=radio][name="+radio_name+"][value=\""+localStorage[input.name]+"\"]",$settings).checked = true;
+      $settings.querySelector('input[type=radio][name='+name+'][value=\''+localStorage[checkedInput.name]+'\']').checked = true;
     }
-    // do some clicks
-    inputs.on("click",function(event){
-      localStorage[this.name] = this.value;
-      document.trigger("update"+this.name);
-    });
-  });
+    for (j = 0; j < inputs.length; j++) {
+      inputs[j].addEventListener('click', radioClicked, false);
+    }
+  }
 
   // hide show settings
-  container.on("click",function(event){
-    event.preventDefault();
-    if ($settings.hasClass("active")) {
-      $settings.removeClass("active");
-    } else {
-      $settings.addClass("active");
-    }
-  });
-
-  document.on("keyup",function(event) {
-    if ($settings.hasClass("active") && event.keyCode == 27) {
-      $settings.removeClass("active");
-    }
-  });
+  container.addEventListener('click', showHideSettings, false);
+  document.addEventListener('keyup', escapeToClose, false);
 
 };

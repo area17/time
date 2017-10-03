@@ -20,7 +20,7 @@
 
   transition: all .15s ease-in-out;
 
-  &.active {
+  &.s-active {
     right: 0;
   }
 
@@ -56,7 +56,7 @@
     opacity: .5;
     pointer-events: none;
   }
-  .sublist .checked + ul {
+  .sublist .s-active + ul {
     opacity: 1;
     pointer-events: auto;
   }
