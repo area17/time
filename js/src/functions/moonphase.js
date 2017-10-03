@@ -1,4 +1,4 @@
-timezones.Helpers.moonPhase = function() {
+A17.Functions.moonPhase = function() {
   /*
   A rehashed version of https://gist.github.com/L-A/3497902
   */

@@ -1,9 +1,9 @@
-timezones.Behaviors.digital = function(container) {
+A17.Behaviors.digital = function(container) {
 
   var minutes_temp = 99;
   var secondInterval, str;
 
-  function updateDigitalTime(override) {
+  function _updateDigitalTime(override) {
     var format = localStorage.DigitalFormat || '24';
     var time = new Date();
     var h = time.getHours();
@@ -30,30 +30,30 @@ timezones.Behaviors.digital = function(container) {
     }
   }
 
-  function update_digitalFormat() {
-    updateDigitalTime(true);
+  function _updateDigitalFormat() {
+    _updateDigitalTime(true);
   }
 
-  function setIntervals() {
-    secondInterval = setInterval(updateDigitalTime, 1000);
+  function _setIntervals() {
+    secondInterval = setInterval(_updateDigitalTime, 1000);
   }
 
-  function handle_visibility_change() {
+  function _handleVisibilityChange() {
     if (document.hidden) {
       clearInterval(secondInterval);
       container.innerHTML = '';
     } else {
-      updateDigitalTime(true);
-      setIntervals();
+      _updateDigitalTime(true);
+      _setIntervals();
     }
   }
 
 
-  function init() {
+  function _init() {
     if (localStorage.ClockType === 'digital') {
       document.documentElement.classList.add('s-digital');
-      updateDigitalTime();
-      setIntervals();
+      _updateDigitalTime();
+      _setIntervals();
     } else {
       document.documentElement.classList.remove('s-digital');
       clearInterval(secondInterval);
@@ -61,9 +61,11 @@ timezones.Behaviors.digital = function(container) {
     }
   }
 
-  init();
+  this.init = function() {
+    _init();
 
-  document.addEventListener('updateDigitalFormat',update_digitalFormat, false);
-  document.addEventListener('updateClockType',init, false);
-  document.addEventListener('visibilitychange', handle_visibility_change, false);
+    document.addEventListener('updateDigitalFormat', _updateDigitalFormat, false);
+    document.addEventListener('updateClockType', _init, false);
+    document.addEventListener('visibilitychange', _handleVisibilityChange, false);
+  };
 };

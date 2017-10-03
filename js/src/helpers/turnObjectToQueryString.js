@@ -1,4 +1,4 @@
-timezones.Helpers.turnObjectToQueryString = function(obj) {
+A17.Helpers.turnObjectToQueryString = function(obj) {
   // Doc: https://code.area17.com/mike/a17-js-helpers/wikis/A17-Helpers-turnObjectToQueryString
 
   var queryString = '';

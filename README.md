@@ -51,7 +51,7 @@ We have some very very basic responsive happening. There is a $breakpoints sassm
 
 These values are read by JavaScript and stored in a variable:
 
-    timezones.media_query_in_use
+    timezones.currentMediaQuery
 
 This variable is updated as breakpoints are crossed.
 

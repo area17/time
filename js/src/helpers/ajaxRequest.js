@@ -1,4 +1,4 @@
-timezones.Helpers.ajaxRequest = function(settings) {
+A17.Helpers.ajaxRequest = function(settings) {
   // Doc: https://code.area17.com/mike/a17-js-helpers/wikis/A17-Helpers-ajaxRequest
 
   var options = settings;
@@ -7,10 +7,10 @@ timezones.Helpers.ajaxRequest = function(settings) {
 
   options.queryString = '';
   if (options.data !== undefined) {
-    if (timezones.Helpers.turnObjectToQueryString) {
-      options.queryString = timezones.Helpers.turnObjectToQueryString(options.data);
+    if (A17.Helpers.turnObjectToQueryString) {
+      options.queryString = A17.Helpers.turnObjectToQueryString(options.data);
     } else {
-      throw new ReferenceError('Missing: timezones.Helpers.turnObjectToQueryString');
+      throw new ReferenceError('Missing: A17.Helpers.turnObjectToQueryString');
     }
   }
 

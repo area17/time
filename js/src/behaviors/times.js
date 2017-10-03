@@ -1,4 +1,4 @@
-timezones.Behaviors.times = function(container) {
+A17.Behaviors.times = function(container) {
 
   var $body = document.body;
   var $searchField = container.querySelector('input[type=text]');
@@ -44,7 +44,7 @@ timezones.Behaviors.times = function(container) {
       lastSearchTime = Date.now();
       var thisSearchTime = lastSearchTime;
       container.addClass('js-loading');
-      timezones.Helpers.ajaxRequest({
+      A17.Helpers.ajaxRequest({
         url: '/convert.php',
         type: 'GET',
         data: {
@@ -100,12 +100,13 @@ timezones.Behaviors.times = function(container) {
     }
   }
 
-
-  $instruction.addEventListener('click', _showTimes, false);
-  $searchField.addEventListener('focus', _searchFieldFocus, false);
-  $searchField.addEventListener('blur', _searchFieldBlur, false);
-  $searchField.addEventListener('keyup', _searchFieldKeyUp, false);
-  $close.addEventListener('click', _hideTimes, false);
-  document.addEventListener('keydown', _documentKeyDown, false);
-  document.addEventListener('keyup', _documentKeyUp, false);
+  this.init = function() {
+    $instruction.addEventListener('click', _showTimes, false);
+    $searchField.addEventListener('focus', _searchFieldFocus, false);
+    $searchField.addEventListener('blur', _searchFieldBlur, false);
+    $searchField.addEventListener('keyup', _searchFieldKeyUp, false);
+    $close.addEventListener('click', _hideTimes, false);
+    document.addEventListener('keydown', _documentKeyDown, false);
+    document.addEventListener('keyup', _documentKeyUp, false);
+  };
 };

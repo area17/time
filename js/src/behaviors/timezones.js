@@ -1,4 +1,4 @@
-timezones.Behaviors.timezones = function(container) {
+A17.Behaviors.timezones = function(container) {
 
   var locationTemplate = '<li id="{{locationID}}" class="s-loading">\n<strong>{{name}}</strong>\n<em class="time">{{time}}</em>\n<span class="temperature"></span>\n<span class="weather">\n</span>\n</li>\n';
   var liHtml = '';
@@ -21,7 +21,11 @@ timezones.Behaviors.timezones = function(container) {
   var officeClosed = 19;
   var time, secondInterval, weatherTimeout, weatherRecievedCounter;
 
-  function updateTemperatures(location,index) {
+  function _convertFtoC(f) {
+    return (f - 32) * (5 / 9);
+  }
+
+  function _updateTemperatures(location,index) {
     var locationEl = document.getElementById('location-'+index);
     if (locationEl) {
       var rainChanceClass = (location.rainChance > 49) ? ' raining' : '';
@@ -59,9 +63,9 @@ timezones.Behaviors.timezones = function(container) {
       }
       //
       var tempUnit = localStorage.TemperatureUnit || 'c';
-      var temp = Math.round( (tempUnit === 'c') ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
-      var tempFeelsLike = Math.round( (tempUnit === 'c') ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
-      var moonPhase = timezones.Helpers.moonPhase();
+      var temp = Math.round( (tempUnit === 'c') ? _convertFtoC(location.temperature) : location.temperature );
+      var tempFeelsLike = Math.round( (tempUnit === 'c') ? _convertFtoC(location.feelsLike) : location.feelsLike );
+      var moonPhase = A17.Functions.moonPhase();
       var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + '.';
       var weatherEmoji = (location.icon !== 'clear-night') ? weatherEmojis[location.icon] : moonPhase.emoji;
       weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + ' Moon phase is ' + moonPhase.phase.toLowerCase() + '.';
@@ -76,8 +80,8 @@ timezones.Behaviors.timezones = function(container) {
     }
   }
 
-  function get_weather(location,index) {
-    timezones.Helpers.ajaxRequest({
+  function _getWeather(location,index) {
+    A17.Helpers.ajaxRequest({
       url: '/forecast.php',
       type: 'GET',
       data: {
@@ -93,18 +97,18 @@ timezones.Behaviors.timezones = function(container) {
         location.rainChance = Math.round(data.currently.precipProbability * 100);
         location.summary = data.currently.summary;
         //
-        updateTemperatures(location, index);
+        _updateTemperatures(location, index);
         //
-        recieved_weather();
+        _recievedWeather();
       },
       onError: function(data){
         console.log(data);
-        recieved_weather();
+        _recievedWeather();
       }
     });
   }
 
-  function recieved_weather() {
+  function _recievedWeather() {
     weatherRecievedCounter++;
     if (weatherRecievedCounter === timezones.locations.length) {
       updatingWeather = false;
@@ -112,21 +116,21 @@ timezones.Behaviors.timezones = function(container) {
     }
   }
 
-  function updateWeather() {
+  function _updateWeather() {
     if ((localStorage.ShowCurrentWeather === 'true' || localStorage.ShowTemperature === 'true') && !updatingWeather) {
       if (new Date().getTime() > lastWeatherCheck + 1800000) {
         updatingWeather = true;
         weatherRecievedCounter = 0;
-        timezones.locations.forEach(get_weather);
+        timezones.locations.forEach(_getWeather);
       } else {
         timezones.locations.forEach(function(location, index){
-          updateTemperatures(location, index);
+          _updateTemperatures(location, index);
         });
       }
     }
   }
 
-  function updateDigitalTime(override) {
+  function _updateDigitalTime(override) {
     time = new Date();
     var systemH = time.getHours();
     var systemM = time.getMinutes();
@@ -172,55 +176,60 @@ timezones.Behaviors.timezones = function(container) {
   }
 
   //
-  function updateDigitalFormat() {
-    updateDigitalTime(true);
+  function _updateDigitalFormat() {
+    _updateDigitalTime(true);
   }
 
-  function hideshowWeather() {
+  function _hideshowWeather() {
     var showWeather = localStorage.ShowCurrentWeather || 'true';
     if (showWeather === 'false') {
       document.documentElement.classList.add('s-hide-weather');
     } else {
       document.documentElement.classList.remove('s-hide-weather');
-      updateWeather();
+      _updateWeather();
     }
   }
 
-  function hideshowTemperature() {
+  function _hideshowTemperature() {
     var showTemperature = localStorage.ShowTemperature || 'true';
     if (showTemperature === 'false') {
       document.documentElement.classList.add('s-hide-temperature');
     } else {
       document.documentElement.classList.remove('s-hide-temperature');
-      updateWeather();
+      _updateWeather();
     }
   }
 
-  function update_temperature_unit() {
+  function _updateTemperatureUnit() {
     timezones.locations.forEach(function(location, index){
-      updateTemperatures(location, index);
+      _updateTemperatures(location, index);
     });
   }
 
-  function setIntervals() {
-    secondInterval = setInterval(updateDigitalTime, 1000);
-    weatherInterval = setInterval(updateWeather, 60 * 30 * 1000);
+  function _setIntervals() {
+    secondInterval = setInterval(_updateDigitalTime, 1000);
+    weatherInterval = setInterval(_updateWeather, 60 * 30 * 1000);
   }
 
-  function handleVisibilityChange() {
+  function _handleVisibilityChange() {
     if (document.hidden) {
       clearInterval(secondInterval);
       clearInterval(weatherTimeout);
       container.innerHTML = '';
     } else {
       container.innerHTML = liHtml;
-      updateDigitalTime(true);
-      updateWeather();
-      setIntervals();
+      _updateDigitalTime(true);
+      _updateWeather();
+      _setIntervals();
     }
   }
 
-  function init() {
+  function _windowLoad() {
+    _hideshowWeather();
+    _hideshowTemperature();
+  }
+
+  function _init() {
     //
     timezones.locations.forEach(function(location,index){
       location.id = 'location-'+index;
@@ -238,21 +247,19 @@ timezones.Behaviors.timezones = function(container) {
 
     container.innerHTML = liHtml;
 
-    updateDigitalTime();
+    _updateDigitalTime();
 
-    setIntervals();
-
-    window.on('load',function(){
-      hideshowWeather();
-      hideshowTemperature();
-    });
+    _setIntervals();
   }
 
-  init();
+  this.init = function() {
+    _init();
 
-  document.addEventListener('updateDigitalFormat', updateDigitalFormat, false);
-  document.addEventListener('updateShowCurrentWeather', hideshowWeather, false);
-  document.addEventListener('updateShowTemperature', hideshowTemperature, false);
-  document.addEventListener('updateTemperatureUnit', update_temperature_unit, false);
-  document.addEventListener('visibilitychange', handleVisibilityChange, false);
+    document.addEventListener('updateDigitalFormat', _updateDigitalFormat, false);
+    document.addEventListener('updateShowCurrentWeather', _hideshowWeather, false);
+    document.addEventListener('updateShowTemperature', _hideshowTemperature, false);
+    document.addEventListener('updateTemperatureUnit', _updateTemperatureUnit, false);
+    document.addEventListener('visibilitychange', _handleVisibilityChange, false);
+    window.addEventListener('load', _windowLoad, false);
+  };
 };

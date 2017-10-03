@@ -1,4 +1,4 @@
-timezones.Helpers.oritentaitonChangeFix = function() {
+A17.Helpers.oritentaitonChangeFix = function() {
   //http://stackoverflow.com/questions/5434656/ipad-layout-scales-up-when-rotating-from-portrait-to-landcape
   if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
       var viewportmeta = document.querySelector('meta[name="viewport"]');
@@ -10,4 +10,4 @@ timezones.Helpers.oritentaitonChangeFix = function() {
       }
   }
 };
-timezones.Helpers.oritentaitonChangeFix();
+A17.Helpers.oritentaitonChangeFix();
