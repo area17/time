@@ -10,8 +10,7 @@ timezones.Behaviors.analogue = function(container) {
   }
 
   function animationString(hand,num) {
-    num += 360;
-    return '@-webkit-keyframes time_' + hand + ' { to { -webkit-transform: rotate(' + num + 'deg); } }\n@keyframes time_' + hand + ' { to { transform: rotate(' + num + 'deg); } }\n';
+    return '@-webkit-keyframes time_' + hand + ' { from { -webkit-transform: rotate(' + num + 'deg); } to { -webkit-transform: rotate(' + (num + 360) + 'deg); } }\n@keyframes time_' + hand + ' { from { transform: rotate(' + num + 'deg); } to { transform: rotate(' + (num + 360) + 'deg); } }\n';
   }
 
   function setClock(reset) {
@@ -44,14 +43,22 @@ timezones.Behaviors.analogue = function(container) {
       str += animationString('minutes', m);
       str += animationString('seconds', s);
     }
-    hourHand.setAttribute('style', transformString(h));
-    minuteHand.setAttribute('style', transformString(m));
-    secondHand.setAttribute('style', transformString(s));
-    //
-    timezonesStyleBlock.textContent = str;
+    // reset
+    timezonesStyleBlock.textContent = '';
+    // position hands to new location
+    window.requestAnimationFrame(function(){
+      hourHand.setAttribute('style', transformString(h));
+      minuteHand.setAttribute('style', transformString(m));
+      secondHand.setAttribute('style', transformString(s));
+      // start animating
+      window.requestAnimationFrame(function(){
+        timezonesStyleBlock.textContent = str;
+      });
+    });
   }
 
   function setIntervals() {
+    // updates once a minute to maintain accuracy
     minuteInterval = setInterval(setClock, (60 * 1000));
   }
 
