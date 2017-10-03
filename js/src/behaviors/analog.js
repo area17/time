@@ -14,9 +14,19 @@ timezones.Behaviors.analog = function(container) {
     return '@-webkit-keyframes time_' + hand + ' { to { -webkit-transform: rotate(' + num + 'deg); } }\n@keyframes time_' + hand + ' { to { transform: rotate(' + num + 'deg); } }\n';
   }
 
-  function setClock(h,m,s) {
-    var str = ''; // string to hold clock animation CSS
-    if (h && m && s) {
+  function setClock(reset) {
+    var str = '';
+    var h = 0;
+    var m = 0;
+    var s = 0;
+    var time;
+    //
+    if (!reset) {
+      time = new Date();
+      h = time.getHours();
+      m = time.getMinutes();
+      s = time.getSeconds();
+      //
       s = s * 6; // 60 seconds in 360 degrees
       //
       m = m * 6; // 60 minutes in 360 degrees
@@ -33,11 +43,6 @@ timezones.Behaviors.analog = function(container) {
       str = animationString('hours', h);
       str += animationString('minutes', m);
       str += animationString('seconds', s);
-    } else {
-      // resetting because page hidden
-      h = 0;
-      m = 0;
-      s = 0;
     }
     hourHand.setAttribute('style', transformString(h));
     minuteHand.setAttribute('style', transformString(m));
@@ -46,13 +51,8 @@ timezones.Behaviors.analog = function(container) {
     timezonesStyleBlock.textContent = str;
   }
 
-  function updateAnalogueTime(){
-    var time = new Date();
-    setClock(time.getHours(), time.getMinutes(), time.getSeconds());
-  }
-
   function setIntervals() {
-    minuteInterval = setInterval(updateAnalogueTime, (60 * 1000));
+    minuteInterval = setInterval(setClock, (60 * 1000));
   }
 
   function handleVisibilityChange(event) {
@@ -60,7 +60,7 @@ timezones.Behaviors.analog = function(container) {
       clearInterval(minuteInterval);
       setClock(false, false, false);
     } else {
-      updateAnalogueTime();
+      setClock();
       setIntervals();
     }
   }
@@ -71,12 +71,12 @@ timezones.Behaviors.analog = function(container) {
     //
     if (localStorage.ClockType === 'analog') {
       document.documentElement.classList.add('s-analog');
-      updateAnalogueTime();
+      setClock();
       setIntervals();
     } else {
       document.documentElement.classList.remove('s-analog');
       clearInterval(minuteInterval);
-      setClock(false, false, false);
+      setClock(true);
     }
   }
 
