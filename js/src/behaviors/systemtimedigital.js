@@ -3,17 +3,6 @@ timezones.Behaviors.systemtimedigital = function(container) {
   var minutes_temp = 99;
   var secondInterval, now, hidden, visibilityChange, time_str;
 
-  if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
-    hidden = "hidden";
-    visibilityChange = "visibilitychange";
-  } else if (typeof document.msHidden !== "undefined") {
-    hidden = "msHidden";
-    visibilityChange = "msvisibilitychange";
-  } else if (typeof document.webkitHidden !== "undefined") {
-    hidden = "webkitHidden";
-    visibilityChange = "webkitvisibilitychange";
-  }
-
   function update_digital_time(override) {
     now = new Date();
     var hours_now = now.getHours();
@@ -56,7 +45,7 @@ timezones.Behaviors.systemtimedigital = function(container) {
   }
 
   function handle_visibility_change() {
-    if (document[hidden]) {
+    if (document.hidden) {
       clearInterval(secondInterval);
       container.innerHTML = '';
     } else {
@@ -78,12 +67,9 @@ timezones.Behaviors.systemtimedigital = function(container) {
     }
   }
 
-  document.on("update_digital_format",update_digital_format);
-  document.on("update_clock_type",init);
-
   init();
 
-  if (typeof document[hidden]) {
-    document.addEventListener(visibilityChange, handle_visibility_change, false);
-  }
+  document.addEventListener("update_digital_format",update_digital_format, false);
+  document.addEventListener("update_clock_type",init, false);
+  document.addEventListener("visibilitychange", handle_visibility_change, false);
 };

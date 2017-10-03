@@ -21,42 +21,33 @@ timezones.Behaviors.timezones = function(container) {
   var officeClosed = 19;
   var now, hidden, visibilityChange, secondInterval, weatherTimeout, weatherRecievedCounter;
 
-  if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
-    hidden = "hidden";
-    visibilityChange = "visibilitychange";
-  } else if (typeof document.msHidden !== "undefined") {
-    hidden = "msHidden";
-    visibilityChange = "msvisibilitychange";
-  } else if (typeof document.webkitHidden !== "undefined") {
-    hidden = "webkitHidden";
-    visibilityChange = "webkitvisibilitychange";
-  }
-
   function updateTemperatures(location,index) {
     var locationEl = document.getElementById('location-'+index);
-    var rainChanceClass = (location.rainChance > 49) ? " raining" : "";
-    //
-    umbrellaEmoji = (location.rainChance < 20) ? "🌂" : "☂️";
-    umbrellaEmoji = (location.rainChance > 80) ? "☔" : umbrellaEmoji;
-    var umbrellaClass = ((/wind/i.test(location.icon) || /wind/i.test(location.summary)) && location.rainChance > 80) ? " windy" : "";
-    umbrellaEmoji = (/rain|sleet|snow/i.test(location.icon)) ? "☔" : umbrellaEmoji;
-    umbrellaEmoji = (/snow/i.test(location.icon)) ? "⛄️" : umbrellaEmoji;
-    //
-    var temperatureClass = (location.feelsLike < 33) ? " cold" : "";
-    temperatureClass = (location.feelsLike > 86) ? " hot" : temperatureClass;
-    temperatureClass = (location.feelsLike > 100) ? " really-hot" : temperatureClass;
-    //
-    var temp_unit = localStorage["temperature_unit"] || "c";
-    var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
-    var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
-    var moonphase = timezones.Helpers.moonphase();
-    var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + ".";
-    var weatherEmoji = (location.icon !== 'clear-night') ? weatherEmojis[location.icon] : moonphase.emoji;
-    weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + " Moon phase is " + moonphase.phase.toLowerCase() + ".";
-    //
-    $(".temperature",locationEl).innerHTML = temp + "<sup>&deg;"+temp_unit+"</sup>";
-    $(".weather",locationEl).innerHTML = "<span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\"><span class=\"thermometer\" title=\""+weatherSummary+"\">"+weatherEmoji+"</span>"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span>\n<span class=\"rainchance"+rainChanceClass+"\"><span class=\"umbrella"+umbrellaClass+"\" title=\"Precipitation probability in the next hour\">"+umbrellaEmoji+"</span>"+location.rainChance+"%</span>";
-    locationEl.classList.remove("s-loading");
+    if (locationEl) {
+      var rainChanceClass = (location.rainChance > 49) ? " raining" : "";
+      //
+      umbrellaEmoji = (location.rainChance < 20) ? "🌂" : "☂️";
+      umbrellaEmoji = (location.rainChance > 80) ? "☔" : umbrellaEmoji;
+      var umbrellaClass = ((/wind/i.test(location.icon) || /wind/i.test(location.summary)) && location.rainChance > 80) ? " windy" : "";
+      umbrellaEmoji = (/rain|sleet|snow/i.test(location.icon)) ? "☔" : umbrellaEmoji;
+      umbrellaEmoji = (/snow/i.test(location.icon)) ? "⛄️" : umbrellaEmoji;
+      //
+      var temperatureClass = (location.feelsLike < 33) ? " cold" : "";
+      temperatureClass = (location.feelsLike > 86) ? " hot" : temperatureClass;
+      temperatureClass = (location.feelsLike > 100) ? " really-hot" : temperatureClass;
+      //
+      var temp_unit = localStorage["temperature_unit"] || "c";
+      var temp = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.temperature) : location.temperature );
+      var tempFeelsLike = Math.round( (temp_unit === "c") ? timezones.Helpers.convert_f_to_c(location.feelsLike) : location.feelsLike );
+      var moonphase = timezones.Helpers.moonphase();
+      var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + ".";
+      var weatherEmoji = (location.icon !== 'clear-night') ? weatherEmojis[location.icon] : moonphase.emoji;
+      weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + " Moon phase is " + moonphase.phase.toLowerCase() + ".";
+      //
+      $(".temperature",locationEl).innerHTML = temp + "<sup>&deg;"+temp_unit+"</sup>";
+      $(".weather",locationEl).innerHTML = "<span class=\"feelsLike"+temperatureClass+"\" title=\"feels like\"><span class=\"thermometer\" title=\""+weatherSummary+"\">"+weatherEmoji+"</span>"+tempFeelsLike+"<sup>&deg;"+temp_unit+"</sup></span>\n<span class=\"rainchance"+rainChanceClass+"\"><span class=\"umbrella"+umbrellaClass+"\" title=\"Precipitation probability in the next hour\">"+umbrellaEmoji+"</span>"+location.rainChance+"%</span>";
+      locationEl.classList.remove("s-loading");
+    }
   }
 
   function get_weather(location,index) {
@@ -189,7 +180,7 @@ timezones.Behaviors.timezones = function(container) {
   }
 
   function handle_visibility_change() {
-    if (document[hidden]) {
+    if (document.hidden) {
       clearInterval(secondInterval);
       clearInterval(weatherTimeout);
       container.innerHTML = '';
@@ -231,12 +222,9 @@ timezones.Behaviors.timezones = function(container) {
 
   init();
 
-  document.on("update_digital_format",update_digital_format);
-  document.on("update_show_current_weather",hideShow_weather);
-  document.on("update_show_temperature",hideShow_temperature);
-  document.on("update_temperature_unit",update_temperature_unit);
-
-  if (typeof document[hidden]) {
-    document.addEventListener(visibilityChange, handle_visibility_change, false);
-  }
+  document.addEventListener("update_digital_format",update_digital_format, false);
+  document.addEventListener("update_show_current_weather",hideShow_weather, false);
+  document.addEventListener("update_show_temperature",hideShow_temperature, false);
+  document.addEventListener("update_temperature_unit",update_temperature_unit, false);
+  document.addEventListener("visibilitychange", handle_visibility_change, false);
 };
