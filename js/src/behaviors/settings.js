@@ -42,7 +42,6 @@ A17.Behaviors.settings = function(container){
         localStorage[input.value] = input.checked;
       } else {
         input.checked = (localStorage[input.value] == 'true') ? true : false;
-        input.parentNode.className = input.checked ? 's-active' : '';
       }
       $checkboxes[i].addEventListener('click', _checkboxClicked, false);
     }

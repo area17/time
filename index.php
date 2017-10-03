@@ -20,7 +20,6 @@
     <a href="#" class="close">╳</a>
   </div>
   <div id="settings">
-    <p>Time</p>
     <ul>
       <li><label><input type="radio" name="ClockType" value="digital" checked> Digital</label></li>
       <li><label><input type="radio" name="ClockType" value="analogue"> Analog</label></li>
@@ -29,16 +28,13 @@
       <li><label><input type="radio" name="DigitalFormat" value="12"> 12 hour</label></li>
       <li><label><input type="radio" name="DigitalFormat" value="24" checked> 24 hour</label></li>
     </ul>
-    <p>Weather</p>
     <ul>
-      <li class="sublist">
-        <label><input type="checkbox" value="ShowTemperature" checked> Temperature</label>
-        <ul>
-          <li><label><input type="radio" name="TemperatureUnit" value="c" checked> &deg;C</label></li>
-          <li><label><input type="radio" name="TemperatureUnit" value="f"> &deg;F</label></li>
-        </ul>
-      </li>
-      <li><label><input type="checkbox" value="ShowCurrentWeather" checked> Weather</label></li>
+      <li><label><input type="checkbox" value="ShowTemperature" checked> Temperature</label></li>
+      <li><label><input type="checkbox" value="ShowCurrentWeather" checked> Feels like/chance of rain</label></li>
+    </ul>
+    <ul>
+      <li><label><input type="radio" name="TemperatureUnit" value="c" checked> &deg;C</label></li>
+      <li><label><input type="radio" name="TemperatureUnit" value="f"> &deg;F</label></li>
     </ul>
   </div>
   <p class="powered_by"><a href="http://forecast.io/">Powered by Forecast.io</a></p>

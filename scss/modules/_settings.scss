@@ -52,12 +52,4 @@
   input {
     margin-right: 10px;
   }
-  .sublist ul {
-    opacity: .5;
-    pointer-events: none;
-  }
-  .sublist .s-active + ul {
-    opacity: 1;
-    pointer-events: auto;
-  }
 }
