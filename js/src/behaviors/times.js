@@ -1,85 +1,59 @@
 timezones.Behaviors.times = function(container) {
 
-  var $body = $("body");
-  var $search_field = $("input[type=text]",container);
-  var $search_results = $("p",container);
-  var $close = $(".close",container);
-  var active_class = "show-times";
+  var $body = document.body;
+  var $searchField = container.querySelector('input[type=text]');
+  var $searchResults = container.querySelector('p');
+  var $close = container.querySelector('.close');
+  var $instruction = document.querySelector('.instruction');
+  var activeClass = 's-active';
   var debouncer;
   var focussed = false;
-  var times_active = false;
+  var timesActive = false;
   var keysDown = {};
   var ajaxing = false;
   var lastSearchTime;
 
-  $('.instruction').on("click",show_times);
-
-  $search_field.on("focus",function(){
-    show_times();
-  }).on("blur",function(event){
-    if (times_active && $search_results.innerHTML === "" || !event.relatedTarget) {
-      hide_times();
-    }
-  }).on("keyup",function(event){
-    if($search_field.value.length > 0 && event.keyCode != 27) {
-      clearTimeout(debouncer);
-      debouncer = setTimeout(function(){
-        doSearch($search_field.value);
-      },500);
-    }
-  });
-
-  $close.on("click",function(event){
-    event.preventDefault();
-    hide_times();
-  });
-
-  document.on("keydown",function(event) {
-    keysDown[event.keyCode] = true;
-    if (event.target.tagName.toLowerCase() !== 'input' && !keysDown["91"] && !keysDown["17"]) {
-      if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode >= 48 && event.keyCode <= 57 || event.keyCode >= 96 && event.keyCode <= 105) {
-        show_times();
-      }
-    }
-  }).on("keyup",function(event) {
-    keysDown[event.keyCode] = false;
-    if (times_active && event.keyCode == 27) {
-      hide_times();
-    }
-  });
-
-  function show_times(){
-    if (!times_active) {
-      times_active = true;
-      $body.addClass(active_class);
-      $search_field.focus();
+  function _showTimes(){
+    if (!timesActive) {
+      timesActive = true;
+      $body.classList.add(activeClass);
+      $searchField.focus();
     }
   }
 
-  function hide_times(){
-    times_active = false;
-    $body.removeClass(active_class);
-    $search_field.blur();
-    $search_field.value = "";
-    $search_results.innerHTML = "";
+  function _hideTimes(event){
+    if (event) {
+      event.preventDefault();
+    }
+    timesActive = false;
+    $body.classList.remove(activeClass);
+    $searchField.blur();
+    $searchField.value = '';
+    $searchResults.innerHTML = '';
   }
 
-  function doSearch(value){
+  function _fixedEncodeURIComponent(str) {
+    return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+      return '%' + c.charCodeAt(0).toString(16);
+    });
+  }
+
+  function _doSearch(value){
     if (!ajaxing) {
       ajaxing = true;
       lastSearchTime = Date.now();
       var thisSearchTime = lastSearchTime;
-      container.addClass("js-loading");
+      container.addClass('js-loading');
       timezones.Helpers.ajaxRequest({
         url: '/convert.php',
         type: 'GET',
         data: {
-          str: fixedEncodeURIComponent(value)
+          str: _fixedEncodeURIComponent(value)
         },
         onSuccess: function(data){
           if (data.length > 0 && thisSearchTime === lastSearchTime) {
-            $search_results.innerHTML = data;
-            container.removeClass("js-loading");
+            $searchResults.innerHTML = data;
+            container.removeClass('js-loading');
           }
           ajaxing = false;
         },
@@ -91,9 +65,47 @@ timezones.Behaviors.times = function(container) {
     }
   }
 
-  function fixedEncodeURIComponent(str) {
-    return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
-      return '%' + c.charCodeAt(0).toString(16);
-    });
+  function _searchFieldFocus() {
+    _showTimes();
   }
+
+  function _searchFieldBlur(event) {
+    if (timesActive && $searchResults.innerHTML === '' || !event.relatedTarget) {
+      _hideTimes();
+    }
+  }
+
+  function _searchFieldKeyUp(event) {
+    if($searchField.value.length > 0 && event.keyCode != 27) {
+      clearTimeout(debouncer);
+      debouncer = setTimeout(function(){
+        _doSearch($searchField.value);
+      },500);
+    }
+  }
+
+  function _documentKeyDown(event) {
+    keysDown[event.keyCode] = true;
+    if (event.target.tagName.toLowerCase() !== 'input' && !keysDown['91'] && !keysDown['17']) {
+      if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode >= 48 && event.keyCode <= 57 || event.keyCode >= 96 && event.keyCode <= 105) {
+        _showTimes();
+      }
+    }
+  }
+
+  function _documentKeyUp(event) {
+    keysDown[event.keyCode] = false;
+    if (timesActive && event.keyCode == 27) {
+      _hideTimes();
+    }
+  }
+
+
+  $instruction.addEventListener('click', _showTimes, false);
+  $searchField.addEventListener('focus', _searchFieldFocus, false);
+  $searchField.addEventListener('blur', _searchFieldBlur, false);
+  $searchField.addEventListener('keyup', _searchFieldKeyUp, false);
+  $close.addEventListener('click', _hideTimes, false);
+  document.addEventListener('keydown', _documentKeyDown, false);
+  document.addEventListener('keyup', _documentKeyUp, false);
 };
