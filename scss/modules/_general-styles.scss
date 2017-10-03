@@ -30,7 +30,7 @@ a {
     opacity: 1;
   }
 
-  .s-analog & {
+  .s-analogue & {
     bottom: 50px;
     opacity: 1;
   }
@@ -118,7 +118,7 @@ a {
   }
 }
 
-.systemtime-analog {
+.systemtime-analogue {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -129,29 +129,29 @@ a {
   color: $white;
   transition: opacity .25s linear;
 
-  .s-analog & {
+  .s-analogue & {
     opacity: 1;
   }
 }
 
-.systemtime-analog__hour,
-.systemtime-analog__minute,
-.systemtime-analog__second {
+.systemtime-analogue__hour,
+.systemtime-analogue__minute,
+.systemtime-analogue__second {
   transform-origin: 50% 50%;
   transition: all .25s linear;
 }
 
-.systemtime-analog__hour {
+.systemtime-analogue__hour {
   -webkit-animation: time_hours 43200s infinite linear;
   animation: time_hours 43200s infinite linear;
 }
 
-.systemtime-analog__minute {
+.systemtime-analogue__minute {
   -webkit-animation: time_minutes 3600s infinite linear;
   animation: time_minutes 3600s infinite linear;
 }
 
-.systemtime-analog__second {
+.systemtime-analogue__second {
   -webkit-animation: time_seconds 60s infinite linear;
   animation: time_seconds 60s infinite linear;
 }

@@ -1,9 +1,9 @@
-timezones.Behaviors.analog = function(container) {
+timezones.Behaviors.analogue = function(container) {
 
   var timezonesStyleBlock, minuteInterval;
-  var hourHand = container.querySelector('.systemtime-analog__hour');
-  var minuteHand = container.querySelector('.systemtime-analog__minute');
-  var secondHand = container.querySelector('.systemtime-analog__second');
+  var hourHand = container.querySelector('.systemtime-analogue__hour');
+  var minuteHand = container.querySelector('.systemtime-analogue__minute');
+  var secondHand = container.querySelector('.systemtime-analogue__second');
 
   function transformString(num) {
     return '-webkit-transform:rotate(' + num + 'deg);transform:rotate(' + num + 'deg);';
@@ -69,12 +69,12 @@ timezones.Behaviors.analog = function(container) {
     timezonesStyleBlock = document.createElement('style');
     document.head.appendChild(timezonesStyleBlock);
     //
-    if (localStorage.ClockType === 'analog') {
-      document.documentElement.classList.add('s-analog');
+    if (localStorage.ClockType === 'analogue') {
+      document.documentElement.classList.add('s-analogue');
       setClock();
       setIntervals();
     } else {
-      document.documentElement.classList.remove('s-analog');
+      document.documentElement.classList.remove('s-analogue');
       clearInterval(minuteInterval);
       setClock(true);
     }
