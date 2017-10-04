@@ -28,7 +28,7 @@ A17.settings.TemperatureUnit = 'c';
 A17.onReady = function(){
 
   if (A17.screensaver) {
-    A17.settings = A17.Helpers.turnQueryStringToObject(window.location.search);
+    A17.settings = A17.Helpers.extend(A17.settings, A17.Helpers.turnQueryStringToObject(window.location.search));
   } else {
     A17.settings.ClockType = localStorage.ClockType || A17.settings.ClockType;
     A17.settings.DigitalFormat = localStorage.DigitalFormat || A17.settings.DigitalFormat;
