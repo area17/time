@@ -8,14 +8,16 @@
 
   @include breakpoint('medium+') {
     position: absolute;
-    left: 20px;
+    right: 20px;
     bottom: 12px;
     margin-top: 0;
-    text-align: left;
   }
+}
 
-  @include breakpoint('large+') {
-    left: 50px;
+.legal br {
+
+  @include breakpoint('medium+') {
+    display: none;
   }
 }
 
