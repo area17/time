@@ -11,6 +11,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $meta_title; ?></title>
+    <script>
+      var A17 = window.A17 || {};
+      if (window.location.search.indexOf('screensaver=true') > 0) {
+        A17.screensaver = true;
+        document.documentElement.classList.add('s-screensaver');
+      } else {
+        A17.screensaver = false;
+      }
+    </script>
     <link href="/css/timezones.css" rel="stylesheet" />
 
     <?php if(isset($meta_social_title)) { ?>

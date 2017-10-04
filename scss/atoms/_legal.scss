@@ -12,6 +12,10 @@
     bottom: 12px;
     margin-top: 0;
   }
+
+  .s-screensaver & {
+    display: none;
+  }
 }
 
 .legal br {

@@ -18,6 +18,10 @@
   &.s-active {
     right: 0;
   }
+
+  .s-screensaver & {
+    display: none;
+  }
 }
 
 .o-settings p {

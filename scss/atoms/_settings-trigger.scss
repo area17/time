@@ -13,4 +13,8 @@
   font-size: 12px;
   line-height: 23px;
   cursor: pointer;
+
+  .s-screensaver & {
+    display: none;
+  }
 }

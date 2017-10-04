@@ -104,12 +104,14 @@ A17.Behaviors.conversion = function(container) {
   }
 
   this.init = function() {
-    $instruction.addEventListener('click', _showTimes, false);
-    $searchField.addEventListener('focus', _searchFieldFocus, false);
-    $searchField.addEventListener('blur', _searchFieldBlur, false);
-    $searchField.addEventListener('keyup', _searchFieldKeyUp, false);
-    $close.addEventListener('click', _hideTimes, false);
-    document.addEventListener('keydown', _documentKeyDown, false);
-    document.addEventListener('keyup', _documentKeyUp, false);
+    if (!A17.screensaver) {
+      $instruction.addEventListener('click', _showTimes, false);
+      $searchField.addEventListener('focus', _searchFieldFocus, false);
+      $searchField.addEventListener('blur', _searchFieldBlur, false);
+      $searchField.addEventListener('keyup', _searchFieldKeyUp, false);
+      $close.addEventListener('click', _hideTimes, false);
+      document.addEventListener('keydown', _documentKeyDown, false);
+      document.addEventListener('keyup', _documentKeyUp, false);
+    }
   };
 };

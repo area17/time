@@ -25,29 +25,6 @@ A17.Behaviors.timezones = function(container) {
     return (f - 32) * (5 / 9);
   }
 
-  function _updateWeather() {
-    if ((localStorage.ShowCurrentWeather === 'true' || localStorage.ShowTemperature === 'true') && !updatingWeather) {
-      if (new Date().getTime() > lastWeatherCheck + 1800000) {
-        updatingWeather = true;
-        weatherRecievedCounter = 0;
-        A17.locations.forEach(_getWeather);
-      } else {
-        A17.locations.forEach(function(location, index){
-          _updateTemperatures(location, index);
-        });
-      }
-    }
-  }
-
-  function _recievedWeather() {
-    weatherRecievedCounter++;
-    if (weatherRecievedCounter === A17.locations.length) {
-      updatingWeather = false;
-      lastWeatherCheck = new Date().getTime();
-      _updateWeather();
-    }
-  }
-
   function _updateTemperatures(location,index) {
     var locationEl = document.getElementById('location-'+index);
     if (locationEl) {
@@ -85,7 +62,7 @@ A17.Behaviors.timezones = function(container) {
         temperatureClass = ' m-timezone__feels-like--really-hot';
       }
       //
-      var tempUnit = localStorage.TemperatureUnit || 'c';
+      var tempUnit = A17.settings.TemperatureUnit || 'c';
       var temp = Math.round( (tempUnit === 'c') ? _convertFtoC(location.temperature) : location.temperature );
       var tempFeelsLike = Math.round( (tempUnit === 'c') ? _convertFtoC(location.feelsLike) : location.feelsLike );
       var moonPhase = A17.Functions.moonPhase();
@@ -100,6 +77,29 @@ A17.Behaviors.timezones = function(container) {
       locationEl.querySelector('.m-timezone__weather').innerHTML = '<span class="m-timezone__feels-like' + temperatureClass + '" title="feels like"><span class="m-timezone__emoji' + emojiClass + '" title="' + weatherSummary + '">' + weatherEmoji + '</span>' + tempFeelsLike + '&deg;' + tempUnit + '</span>\n<span class="m-timezone__rain-chance' + rainChanceClass + '"><span class="m-timezone__emoji' + umbrellaClass + '" title="Precipitation probability in the next hour: ' + location.rainChance + '%">' + umbrellaEmoji + '</span>' + location.rainChance + '%</span>';
       //
       locationEl.classList.remove('s-loading');
+    }
+  }
+
+  function _updateWeather() {
+    if ((A17.settings.ShowCurrentWeather === 'true' || A17.settings.ShowTemperature === 'true') && !updatingWeather) {
+      if (new Date().getTime() > lastWeatherCheck + 1800000) {
+        updatingWeather = true;
+        weatherRecievedCounter = 0;
+        A17.locations.forEach(_getWeather);
+      } else {
+        A17.locations.forEach(function(location, index){
+          _updateTemperatures(location, index);
+        });
+      }
+    }
+  }
+
+  function _recievedWeather() {
+    weatherRecievedCounter++;
+    if (weatherRecievedCounter === A17.locations.length) {
+      updatingWeather = false;
+      lastWeatherCheck = new Date().getTime();
+      _updateWeather();
     }
   }
 
@@ -142,7 +142,7 @@ A17.Behaviors.timezones = function(container) {
       mTemp = systemM;
       A17.locations.forEach(function(location,index){
         var locationEl = document.getElementById('location-'+index);
-        var format = localStorage.DigitalFormat || '24';
+        var format = A17.settings.DigitalFormat || '24';
         var thisTime = new Date((time + location.offset) * 1000);
         var thisH = thisTime.getHours();
         var thisM = thisTime.getMinutes();
@@ -182,7 +182,7 @@ A17.Behaviors.timezones = function(container) {
   }
 
   function _hideshowWeather() {
-    var showWeather = localStorage.ShowCurrentWeather || 'true';
+    var showWeather = A17.settings.ShowCurrentWeather || 'true';
     if (showWeather === 'false') {
       document.documentElement.classList.add('s-hide-weather');
     } else {
@@ -192,7 +192,7 @@ A17.Behaviors.timezones = function(container) {
   }
 
   function _hideshowTemperature() {
-    var showTemperature = localStorage.ShowTemperature || 'true';
+    var showTemperature = A17.settings.ShowTemperature || 'true';
     if (showTemperature === 'false') {
       document.documentElement.classList.add('s-hide-temperature');
     } else {

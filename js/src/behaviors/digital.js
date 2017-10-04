@@ -1,10 +1,10 @@
 A17.Behaviors.digital = function(container) {
 
-  var minutes_temp = 99;
+  var minutesTemp = 99;
   var secondInterval, str;
 
   function _updateDigitalTime(override) {
-    var format = localStorage.DigitalFormat || '24';
+    var format = A17.settings.DigitalFormat || '24';
     var time = new Date();
     var h = time.getHours();
     var m = time.getMinutes();
@@ -56,7 +56,7 @@ A17.Behaviors.digital = function(container) {
 
 
   function _init() {
-    if (localStorage.ClockType === 'digital') {
+    if (A17.settings.ClockType === 'digital') {
       document.documentElement.classList.add('s-digital');
       _updateDigitalTime();
       _setIntervals();

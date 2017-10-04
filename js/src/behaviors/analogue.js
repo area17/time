@@ -76,7 +76,7 @@ A17.Behaviors.analogue = function(container) {
     timezonesStyleBlock = document.createElement('style');
     document.head.appendChild(timezonesStyleBlock);
     //
-    if (localStorage.ClockType === 'analogue') {
+    if (A17.settings.ClockType === 'analogue') {
       document.documentElement.classList.add('s-analogue');
       _setClock();
       _setIntervals();
