@@ -10,75 +10,80 @@
   }
 }
 
-.m-timezone strong {
+.m-timezone__name {
   display: block;
   font-weight: normal;
 }
 
-.m-timezone .time {
+.m-timezone__time {
   font-style: normal;
 }
 
-.m-timezone.hide_digital .time {
-  display: none;
-}
+.m-timezone__temperature {
 
-.m-timezone .temperature {
-  opacity: 1;
-  transition: opacity .25s linear;
+  @include breakpoint('small+') {
+    &::before {
+      content: '─';
+      display: inline-block;
+      margin: 0 10px 0 7px;
+    }
+  }
 
   &::before {
-    content: '─';
-    display: inline-block;
-    margin: 0 10px 0 7px;
+    content: ' - ';
   }
 }
 
-.m-timezone .weather {
+.m-timezone__weather {
   display: block;
   position: relative;
-  opacity: 1;
-  transition: opacity .25s linear;
 }
 
-.s-hide-temperature .m-timezone .temperature,
-.s-hide-weather .m-timezone .weather,
-.m-timezone .s-loading .temperature,
-.m-timezone .s-loading .weather {
-  opacity: 0;
+.s-hide-temperature .m-timezone__temperature,
+.s-hide-weather .m-timezone__weather,
+.m-timezone.s-loading .m-timezone__temperature,
+.m-timezone.s-loading .m-timezone__weather {
+  display: none;
 }
 
-.m-timezone .feelsLike.hot {
+.m-timezone__feels-like--hot {
   color: #ffbfbf;
 }
 
-.m-timezone .feelsLike.really-hot {
+.m-timezone__feels-like--really-hot {
   color: red;
 }
 
-.m-timezone .feelsLike.cold {
+.m-timezone__feels-like--cold {
   color: #bfbfff;
 }
 
-.m-timezone .rainchance {
-  margin-left: 8px;
+.m-timezone__rain-chance {
+  display: block;
+
+  @include breakpoint('small+') {
+    display: inline-block;
+    margin-left: 8px;
+  }
 }
 
-.m-timezone .emoji {
+.m-timezone__emoji {
   display: inline-block;
   margin-right: 5px;
+  font-size: 20px;
   line-height: 15px;
+  vertical-align: bottom;
 }
 
-.m-timezone .emoji.windy {
+.m-timezone__emoji--windy {
   transform: rotate(-40deg);
 }
 
-.m-timezone .hot .emoji.sunny {
+.m-timezone__feels-like--hot .m-timezone__emoji--sunny {
   filter: hue-rotate(-10deg) saturate(5);
 }
 
-.m-timezone .really-hot .emoji.sunny {
+.m-timezone__feels-like--really-hot .m-timezone__emoji--sunny {
   transform: scale(1.2);
   filter: hue-rotate(-10deg) saturate(5);
 }
