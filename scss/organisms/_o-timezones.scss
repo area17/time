@@ -1,32 +1,19 @@
 .o-timezones {
   display: flex;
-  position: fixed;
-  left: 50px;
-  right: 50px;
-  top: 50px;
-  align-content: space-between;
-  align-items: center;
-  justify-content: space-between;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-
-  @include breakpoint(medium) {
-    align-content: space-around;
-  }
-
-  @include breakpoint(small) {
-    bottom: 0;
-    align-content: flex-start;
-    justify-content: space-around;
-    padding-bottom: 10px;
-  }
+  flex-flow: row wrap;
 }
 
 .o-timezones > .m-timezone {
   flex: 0 0 auto;
-  min-width: 120px;
+  width: 50%;
+  margin-top: 20px;
 
-  @include breakpoint(small) {
-    margin-bottom: 40px;
+  @include breakpoint('large+') {
+    width: 33.33%;
+    margin-top: 40px;
+  }
+
+  @include breakpoint('xlarge+') {
+    width: 20%;
   }
 }

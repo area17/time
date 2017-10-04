@@ -1,21 +1,31 @@
 .logo {
   display: block;
-  position: fixed;
-  z-index: 9;
-  left: 50px;
+  position: absolute;
+  left: 20px;
+  top: 20px;
   width: auto;
-  height: 80px;
+  height: 40px;
   color: $color__white;
-  opacity: 0;
-  transition: opacity .25s linear;
 
-  .s-digital & {
-    bottom: calc(50% - 40px);
-    opacity: 1;
+  @include breakpoint('medium+') {
+    top: auto;
+    height: 70px;
+
+    .s-digital & {
+      bottom: calc(50% - 35px);
+    }
+
+    .s-analogue & {
+      bottom: 50px;
+    }
   }
 
-  .s-analogue & {
-    bottom: 50px;
-    opacity: 1;
+  @include breakpoint('large+') {
+    left: 50px;
+    height: 80px;
+
+    .s-digital & {
+      bottom: calc(50% - 40px);
+    }
   }
 }

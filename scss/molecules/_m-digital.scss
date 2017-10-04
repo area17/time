@@ -1,16 +1,32 @@
 .m-digital {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 50%;
+  display: none;
   color: $color__white;
-  font-size: 110px;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(-50%);
-  transition: opacity .25s linear;
+  font-size: 16vw;
+  text-align: justify;
+  text-align-last: justify;
+
+  @include breakpoint('medium+') {
+    font-size: 100px;
+    line-height: 110px;
+  }
+
+  @include breakpoint('large+') {
+    font-size: 110px;
+  }
+
+  &.m-digital--24 {
+    font-size: 22vw;
+
+    @include breakpoint('medium+') {
+      font-size: 110px;
+    }
+
+    @include breakpoint('large+') {
+      font-size: 110px;
+    }
+  }
 
   .s-digital & {
-    opacity: 1;
+    display: block;
   }
 }

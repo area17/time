@@ -1,14 +1,19 @@
 .o-settings {
   position: fixed;
   z-index: 4;
-  right: -300px;
+  right: -100vw;
   top: 0;
   bottom: 0;
-  width: 300px;
+  width: 100vw;
   padding: 15px 0 10px;
   background: $color--white;
   color: $color--text--settings;
   transition: all .15s ease-in-out;
+
+  @include breakpoint('small+') {
+    right: -300px;
+    width: 300px;
+  }
 
   &.s-active {
     right: 0;

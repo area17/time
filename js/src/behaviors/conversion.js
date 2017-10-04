@@ -3,7 +3,7 @@ A17.Behaviors.conversion = function(container) {
   var $body = document.body;
   var $searchField = container.querySelector('input[type=text]');
   var $searchResults = $searchField.nextElementSibling;
-  var $close = container.querySelector('.close');
+  var $close = container.querySelector('.o-conversion__close');
   var $instruction = document.querySelector('.instruction');
   var activeClass = 's-active';
   var debouncer;

@@ -21,7 +21,13 @@ A17.Behaviors.digital = function(container) {
     //
     var newStr = h + ':' + m + ':' + s;
     if (format !== '24') {
-      newStr = newStr + '<sup>' + (pm ? 'PM' : 'AM') + '</sup>';
+      newStr = newStr + ' <sup>' + (pm ? 'PM' : 'AM') + '</sup>';
+    }
+    //
+    if(format === '24') {
+      container.classList.add('m-digital--24');
+    } else {
+      container.classList.remove('m-digital--24');
     }
     //
     if (str !== newStr) {

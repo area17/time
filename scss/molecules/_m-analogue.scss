@@ -1,16 +1,11 @@
 .m-analogue {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 425px;
-  height: 425px;
+  display: none;
+  max-width: 420px;
+  max-height: 420px;
   color: $color__white;
-  opacity: 0;
-  transform: translateY(-50%) translateX(-50%);
-  transition: opacity .25s linear;
 
   .s-analogue & {
-    opacity: 1;
+    display: block;
   }
 }
 

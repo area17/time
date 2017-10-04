@@ -1,20 +1,21 @@
 .legal {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-  margin: 0;
+  display: block;
+  margin-top: 40px;
   color: $color__text--off;
   font-size: 10px;
-  line-height: 12px;
-  text-align: right;
+  line-height: 15px;
+  text-align: center;
 
-  @include breakpoint(small) {
-    display: block;
-    left: 0;
-    right: 0;
-    bottom: 10px;
-    text-align: center;
-    text-shadow: -3px 0 3px $color__white, 3px 0 3px $color__white, 0 -3px 3px $color__white, 0 3px 3px $color__white;
+  @include breakpoint('medium+') {
+    position: absolute;
+    left: 20px;
+    bottom: 12px;
+    margin-top: 0;
+    text-align: left;
+  }
+
+  @include breakpoint('large+') {
+    left: 50px;
   }
 }
 
