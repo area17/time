@@ -1,8 +1,8 @@
-A17.Behaviors.times = function(container) {
+A17.Behaviors.conversion = function(container) {
 
   var $body = document.body;
   var $searchField = container.querySelector('input[type=text]');
-  var $searchResults = container.querySelector('p');
+  var $searchResults = $searchField.nextElementSibling;
   var $close = container.querySelector('.close');
   var $instruction = document.querySelector('.instruction');
   var activeClass = 's-active';
@@ -13,7 +13,10 @@ A17.Behaviors.times = function(container) {
   var ajaxing = false;
   var lastSearchTime;
 
-  function _showTimes(){
+  function _showTimes(event){
+    if (event && event.target === $instruction) {
+      $instruction.blur();
+    }
     if (!timesActive) {
       timesActive = true;
       $body.classList.add(activeClass);
@@ -43,7 +46,7 @@ A17.Behaviors.times = function(container) {
       ajaxing = true;
       lastSearchTime = Date.now();
       var thisSearchTime = lastSearchTime;
-      container.addClass('js-loading');
+      container.classList.add('js-loading');
       A17.Helpers.ajaxRequest({
         url: '/convert.php',
         type: 'GET',
@@ -53,7 +56,7 @@ A17.Behaviors.times = function(container) {
         onSuccess: function(data){
           if (data.length > 0 && thisSearchTime === lastSearchTime) {
             $searchResults.innerHTML = data;
-            container.removeClass('js-loading');
+            container.classList.remove('js-loading');
           }
           ajaxing = false;
         },

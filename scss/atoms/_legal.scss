@@ -1,0 +1,28 @@
+.legal {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  margin: 0;
+  color: $color__text--off;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: right;
+
+  @include breakpoint(small) {
+    display: block;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    text-align: center;
+    text-shadow: -3px 0 3px $color__white, 3px 0 3px $color__white, 0 -3px 3px $color__white, 0 3px 3px $color__white;
+  }
+}
+
+
+.legal a {
+  color: inherit;
+
+  &:hover {
+    color: $color__text;
+  }
+}

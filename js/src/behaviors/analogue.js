@@ -1,9 +1,9 @@
 A17.Behaviors.analogue = function(container) {
 
   var timezonesStyleBlock, minuteInterval;
-  var hourHand = container.querySelector('.systemtime-analogue__hour');
-  var minuteHand = container.querySelector('.systemtime-analogue__minute');
-  var secondHand = container.querySelector('.systemtime-analogue__second');
+  var hourHand = container.querySelector('.m-analogue__hour');
+  var minuteHand = container.querySelector('.m-analogue__minute');
+  var secondHand = container.querySelector('.m-analogue__second');
 
   function _transformString(num) {
     return '-webkit-transform:rotate(' + num + 'deg);transform:rotate(' + num + 'deg);';

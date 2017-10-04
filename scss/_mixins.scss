@@ -1,9 +1,0 @@
-@mixin breakpoint($point) {
-  @if map-has-key($breakpoints, $point) {
-    @media #{map-get($breakpoints, $point)} {
-      @content;
-    }
-  } @else {
-    @warn "Unknown breakpoint `#{$point}` in $breakpoints.";
-  }
-}

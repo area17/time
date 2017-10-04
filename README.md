@@ -77,7 +77,3 @@ Among other things:
 * minified SVG
 * env file
 
-### no jQuery
-
-Uses my fork of Remy Sharp's min.js - https://github.com/13twelve/min_v1.js
-

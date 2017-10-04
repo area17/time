@@ -1,0 +1,84 @@
+.m-timezone {
+  opacity: .7;
+  transition: opacity .25s linear;
+
+  &.s-current {
+  }
+
+  &.s-open {
+    opacity: 1;
+  }
+}
+
+.m-timezone strong {
+  display: block;
+  font-weight: normal;
+}
+
+.m-timezone .time {
+  font-style: normal;
+}
+
+.m-timezone.hide_digital .time {
+  display: none;
+}
+
+.m-timezone .temperature {
+  opacity: 1;
+  transition: opacity .25s linear;
+
+  &::before {
+    content: '─';
+    display: inline-block;
+    margin: 0 10px 0 7px;
+  }
+}
+
+.m-timezone .weather {
+  display: block;
+  position: relative;
+  opacity: 1;
+  transition: opacity .25s linear;
+}
+
+.s-hide-temperature .m-timezone .temperature,
+.s-hide-weather .m-timezone .weather,
+.m-timezone .s-loading .temperature,
+.m-timezone .s-loading .weather {
+  opacity: 0;
+}
+
+.m-timezone .feelsLike.hot {
+  color: #ffbfbf;
+}
+
+.m-timezone .feelsLike.really-hot {
+  color: red;
+}
+
+.m-timezone .feelsLike.cold {
+  color: #bfbfff;
+}
+
+.m-timezone .rainchance {
+  margin-left: 8px;
+}
+
+.m-timezone .emoji {
+  display: inline-block;
+  margin-right: 5px;
+  line-height: 15px;
+}
+
+.m-timezone .emoji.windy {
+  transform: rotate(-40deg);
+}
+
+.m-timezone .hot .emoji.sunny {
+  filter: hue-rotate(-10deg) saturate(5);
+}
+
+.m-timezone .really-hot .emoji.sunny {
+  transform: scale(1.2);
+  filter: hue-rotate(-10deg) saturate(5);
+}

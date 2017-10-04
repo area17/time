@@ -1,6 +1,6 @@
 A17.Behaviors.timezones = function(container) {
 
-  var locationTemplate = '<li id="{{locationID}}" class="s-loading">\n<strong>{{name}}</strong>\n<em class="time">{{time}}</em>\n<span class="temperature"></span>\n<span class="weather">\n</span>\n</li>\n';
+  var locationTemplate = '<li id="{{locationID}}" class="m-timezone s-loading">\n<strong>{{name}}</strong>\n<em class="time">{{time}}</em>\n<span class="temperature"></span>\n<span class="weather">\n</span>\n</li>\n';
   var liHtml = '';
   var mTemp = 99; // initial value out of range
   var updatingWeather = false;

@@ -1,66 +1,47 @@
-html,
-body,
-#timezones {
+html {
+  position: relative;
+  right: 50%;
+  left: 50%;
+  width: 100vw;
+  min-height: 100%;
+  margin-right: -50vw;
+  margin-left: -50vw;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 body {
-  font: $default-text;
-  color: $white;
-  background: $black;
-  -moz-font-feature-settings: "kern";
-  -webkit-font-feature-settings: "kern";
-  -ms-font-feature-settings: "kern";
-  -o-font-feature-settings: "kern";
-  font-feature-settings: "kern";
+  background: $color__black;
+  color: $color__text;
+  font: 15px/25px $sans-serif;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'kern', 'lnum', 'liga';
   font-kerning: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 
-  &:after {
-    font: 0/0 a;
-    color: transparent;
-    text-shadow: none;
-    width: 1px;
-    height: 1px;
-    margin: -1px 0 0 -1px;
+  &::after {
     position: absolute;
     left: -1px;
     top: -1px;
+    width: 1px;
+    height: 1px;
+    margin: -1px 0 0 -1px;
+    color: transparent;
+    font: 0/0 a;
+    text-shadow: none;
   }
 }
-  @include breakpoint(small) {
-    head {
-      font-family: 'small';
-    }
-    body:after {
-      content: 'small';
-    }
-  }
-  @include breakpoint(medium) {
-    head {
-      font-family: 'medium';
-    }
-    body:after {
-      content: 'medium';
-    }
-  }
-  @include breakpoint(large) {
-    head {
-      font-family: 'large';
-    }
-    body:after {
-      content: 'large';
-    }
-  }
-  @include breakpoint(xlarge) {
-    head {
-      font-family: 'xlarge';
-    }
-    body:after {
-      content: 'xlarge';
-    }
-  }
 
+@each $name, $point in $breakpoints {
+  @include breakpoint('#{$name}') {
+    head {
+      font-family: '#{$name}';
+    }
 
+    body::after {
+      content: '#{$name}';
+    }
+  }
+}

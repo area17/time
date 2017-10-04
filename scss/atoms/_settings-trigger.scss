@@ -1,0 +1,16 @@
+.settings-trigger {
+  position: absolute;
+  z-index: 5;
+  right: 10px;
+  top: 10px;
+  width: 23px;
+  height: 23px;
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+  background: transparent;
+  color: $color__text--off;
+  font-size: 12px;
+  line-height: 23px;
+  cursor: pointer;
+}

@@ -1,0 +1,45 @@
+.o-settings {
+  position: fixed;
+  z-index: 4;
+  right: -300px;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  padding: 15px 0 10px;
+  background: $color--white;
+  color: $color--text--settings;
+  transition: all .15s ease-in-out;
+
+  &.s-active {
+    right: 0;
+  }
+}
+
+.o-settings p {
+  margin: 0;
+  padding: 15px 20px 0;
+  font-weight: bold;
+
+  & ~ p {
+    border-top: 1px solid $color__rules--settings;
+  }
+}
+
+.o-settings ul {
+  list-style-type: none;
+  margin: 0 0 25px;
+}
+
+.o-settings label {
+  display: block;
+  margin: 0;
+  padding: 5px 20px;
+
+  &:hover {
+    color: $color__text--hover--settings;
+  }
+}
+
+.o-settings input {
+  margin-right: 10px;
+}

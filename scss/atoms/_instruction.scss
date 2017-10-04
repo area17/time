@@ -1,0 +1,21 @@
+.instruction {
+  position: absolute;
+  right: 50px;
+  top: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+  background: transparent;
+  color: $color__text--off;
+  font-size: 12px;
+  line-height: 23px;
+  cursor: pointer;
+
+  @include breakpoint(small) {
+    display: none;
+  }
+
+  &:hover {
+    color: $color__text;
+  }
+}

@@ -1,0 +1,87 @@
+.o-conversion {
+  display: none;
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 50px;
+  background: $color__white;
+  color: $color__text--times;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  .s-active & {
+    display: block;
+  }
+
+  &.js-loading::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 0 solid transparent;
+    border-top-color: $color__spinner--times;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    animation: spin 1.5s linear infinite;
+  }
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 20px 0 0;
+  padding-right: 100px;
+  border: 0 none;
+  background: $color__black--2;
+  color: $color__text--times;
+  font: 48px/1 $sans-serif;
+
+  &::-webkit-input-placeholder {
+    color: $color__text--off;
+  }
+
+  &:-moz-placeholder {
+    color: $color__text--off;
+  }
+
+  &::-moz-placeholder {
+    color: $color__text--off;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color__text--off;
+  }
+
+  &:focus {
+    outline: 0 none;
+  }
+}
+
+.o-conversion p {
+  margin: 50px 0 0;
+  color: $color__text--times;
+  font-size: 48px;
+  line-height: 48px;
+
+  &:first-child {
+    margin-top: 0;
+    color: $color__text--off;
+  }
+}
+
+.o-conversion .a-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: $color__text--times;
+
+  &:hover {
+    color: $color__text--off;
+  }
+}

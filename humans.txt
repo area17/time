@@ -1,0 +1,25 @@
+/* SITE BY */
+Name: AREA 17, http://www.area17.com/
+
+/* A17 TEAM */
+Role: Front End Development
+Name: Mike Byrne
+Site: https://area17.com/about/mike-byrne
+Twitter: @13twelve
+
+Role: Designer
+Name: David Lamothe
+Site: https://area17.com/about/david-lamothe
+Twitter: @davidlamothe
+
+/* SPECIAL THANKS */
+
+George Eid (https://area17.com/about/george-eid) for embracing engineering and enthusiastically encouraging us towards better things.
+
+Quentin Renard (https://area17.com/about/quentin-renard) for the PHP support.
+
+/* SITE */
+
+Standards: HTML5, CSS3
+Components: SCSS, Vanilla JS, PHP
+Software: Sublime Text 3

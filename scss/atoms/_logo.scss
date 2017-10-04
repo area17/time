@@ -1,0 +1,21 @@
+.logo {
+  display: block;
+  position: fixed;
+  z-index: 9;
+  left: 50px;
+  width: auto;
+  height: 80px;
+  color: $color__white;
+  opacity: 0;
+  transition: opacity .25s linear;
+
+  .s-digital & {
+    bottom: calc(50% - 40px);
+    opacity: 1;
+  }
+
+  .s-analogue & {
+    bottom: 50px;
+    opacity: 1;
+  }
+}
