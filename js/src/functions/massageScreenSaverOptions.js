@@ -13,21 +13,21 @@ A17.Functions.massageScreebSaverOptions = function() {
     queryStringObj.DigitalFormat = (parseInt(queryStringObj.digitalformat) === 24) ? '24' : '12';
     delete queryStringObj.digitalformat;
   }
-  if (queryStringObj.temperatureunits) {
-    if (queryStringObj.temperatureunits.toLowerCase() === 'fahrenheit') {
+  if (queryStringObj.temperatureunit) {
+    if (queryStringObj.temperatureunit.toLowerCase() === 'fahrenheit') {
       queryStringObj.TemperatureUnit = 'f';
     } else {
       queryStringObj.TemperatureUnit = 'c';
     }
     delete queryStringObj.temperatureunits;
   }
-  if (queryStringObj.temperature) {
-    queryStringObj.ShowTemperature = (queryStringObj.temperature.toLowerCase() === 'yes') ? 'true' : 'false';
-    delete queryStringObj.temperature;
+  if (queryStringObj.showtemperature) {
+    queryStringObj.ShowTemperature = queryStringObj.showtemperature.toLowerCase();
+    delete queryStringObj.showtemperature;
   }
-  if (queryStringObj.weather) {
-    queryStringObj.ShowCurrentWeather = (queryStringObj.weather.toLowerCase() === 'yes') ? 'true' : 'false';
-    delete queryStringObj.weather;
+  if (queryStringObj.showcurrentweather) {
+    queryStringObj.ShowCurrentWeather = queryStringObj.showcurrentweather.toLowerCase();
+    delete queryStringObj.showcurrentweather;
   }
   return queryStringObj;
 };
