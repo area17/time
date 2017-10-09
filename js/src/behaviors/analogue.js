@@ -1,9 +1,7 @@
 A17.Behaviors.analogue = function(container) {
 
-  var timezonesStyleBlock, minuteInterval;
-  var hourHand = container.querySelector('.m-analogue__hour');
-  var minuteHand = container.querySelector('.m-analogue__minute');
-  var secondHand = container.querySelector('.m-analogue__second');
+  var minuteInterval;
+  var timezonesStyleBlock = document.getElementById('animations');
 
   function _transformString(num) {
     return '-webkit-transform:rotate(' + num + 'deg);transform:rotate(' + num + 'deg);';
@@ -43,18 +41,11 @@ A17.Behaviors.analogue = function(container) {
       str += _animationString('minutes', m);
       str += _animationString('seconds', s);
     }
-    // reset
-    timezonesStyleBlock.textContent = '';
-    // position hands to new location
-    window.requestAnimationFrame(function(){
-      hourHand.setAttribute('style', _transformString(h));
-      minuteHand.setAttribute('style', _transformString(m));
-      secondHand.setAttribute('style', _transformString(s));
-      // start animating
-      window.requestAnimationFrame(function(){
-        timezonesStyleBlock.textContent = str;
-      });
-    });
+    // set
+    container.querySelector('.m-analogue__hour').setAttribute('style', _transformString(h));
+    container.querySelector('.m-analogue__minute').setAttribute('style', _transformString(m));
+    container.querySelector('.m-analogue__second').setAttribute('style', _transformString(s));
+    timezonesStyleBlock.textContent = str;
   }
 
   function _setIntervals() {
@@ -73,9 +64,6 @@ A17.Behaviors.analogue = function(container) {
   }
 
   function _init() {
-    timezonesStyleBlock = document.createElement('style');
-    document.head.appendChild(timezonesStyleBlock);
-    //
     if (A17.settings.ClockType === 'analogue') {
       document.documentElement.classList.add('s-analogue');
       _setClock();

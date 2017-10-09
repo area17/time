@@ -21,6 +21,7 @@
       }
     </script>
     <link href="/css/timezones.css" rel="stylesheet" />
+    <style id="animations"></style>
 
     <?php if(isset($meta_social_title)) { ?>
     <meta property="og:title" content="<?php echo $meta_social_title ?>" />
