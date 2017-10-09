@@ -2,23 +2,79 @@
 
 AREA 17 covers multiple timezones around the world. This project displays each timezone, shows the current weather and temperature in the city using Forecast.io and allows you to type a time to see what that time is in the other A17 timezones.
 
-## 2017 Refresh
+<a href="https://time.area17.com/" target="blank">time.area17.com</a>
 
-* Redesigned to reflect new AREA17 website.
-* Added HipChat integration with hook '/time' which is powered by a PHP file.
-* Timezone differences and conversions are done via shared PHP now.
-* Written out moment.js and moment-timezones.js and replaced with using PHP to provide timezone info. Takes 130kb off the JS weight.
-* Written out ForecastIO.js which caused a hang on load. Replaced with a different PHP proxy to ajax weather info. Much faster, no hang and reduces JS by 20kb.
-* Added display of feels like temperature and % chance of rain, with emoji.
+Default settings are:
+* digital clock
+* 12 hour time format
+* temperature displayed
+* degrees Celsius
+
+Optionally can:
+* show an analogue clock
+* show 24 hour time format for the digital clocks
+* hide the current temperature
+* show weather information (with rain chance %age, feels like temperature)
+
+## Timezone conversion
 
 Timezone conversion, in page and in Hipchat can accept:
 
 * `5:12pm NYC` which will convert 5:12pm to the other time zones
 * `Paris` which will show you the current time in Paris
-* *HipChat only* `/time` which prints out the current time in all timezones
+* `Luis` which will show you the current time in Tucumán
+* `6pm Pablo` which will convert 6pm Tucumán to the other time zones
 
-The A17 locale info is reasonably loose - you can use city, country, state, local airport code and in some instances staff member names.
+The A17 locale info is [reasonably loose](https://github.com/area17/time/blob/master/includes/_timezones_setup.php#L48) - you can use city, country, state, local airport code and in some instances staff member names. 
 
+NB: If Luis is in the Paris office, time.area17.com doesn't know that and so will always show his time as being in Tucumán.
+
+### In HipChat
+
+For A17 staff who use Hipchat, there is a `/time` command available in project rooms:
+
+* `/time` which prints out the current time in all timezones
+* `/time Paris` which prints out the current time in Paris
+* `/time 3:30pm NYC` which will convert 3:30pm NYC to the other time zones
+* `/time Tim` which prints out the current time for Tim in Memphis
+* `/time 6pm Mike` which will convert 6pm UK to the other time zones
+
+## Screen saver mode
+
+Appending `?screensaver=true` to the URL switches the JavaScript to check for query string parameters for its settings and for the CSS to hide the conversion and settings prompt: <a href="https://time.area17.com/" target="blank">time.area17.com?screensaver=true</a>.
+
+Used in [A17TimeZones-ScreenSaver](https://github.com/area17/A17TimeZones-ScreenSaver).
+
+Additional parameters set different options:
+
+* `&clocktype=analogue` - sets the clock type to analogue
+* `&digitalformat=24` - sets the digital time format to 24 hour
+* `&temperature=false` - hides the temperature display
+* `&weather=true` - shows the weather info
+* `&temperatureunits=fahrenheit` - switches temperature units to Fahrenheit
+
+## 2017 Refresh 2 (v3)
+
+* Redesigned to reflect [David's](https://area17.com/about/david-lamothe) art direction,
+* Written out skycons.js to use emoji to display the weather instead, looses 20kb (7kb minified) JavaScript,
+* Written out min.js as it was using an old version, looses 3kb (1kb minified) JavaScript,
+* Split the clock types up into separate behaviors
+* Updated settings panel
+* Updated JavaScript and SCSS to be A17 Boilerplate structure,
+* Updated SCSS to use BEM,
+* Added moon phase display of the moon on clear nights,
+* Settings method revamped to use an internal object,
+* Added screen saver mode with parameter controlled options,
+* Somehow dropped the minified CSS down another 2kb
+
+## 2017 Refresh 1 (v2)
+
+* Redesigned to reflect new AREA17 website,
+* Added HipChat integration with hook '/time' which is powered by a PHP file,
+* Timezone differences and conversions are done via shared PHP now,
+* Written out moment.js and moment-timezones.js and replaced with using PHP to provide timezone info. Takes 130kb off the JS weight,
+* Written out ForecastIO.js which caused a hang on load. Replaced with a different PHP proxy to ajax weather info. Much faster, no hang and reduces JS by 20kb,
+* Added display of feels like temperature and % chance of rain, with emoji.
 
 ## Developing
 
