@@ -61,9 +61,5 @@ $bezier--ease-out-circ: cubic-bezier(.075, .82, .165, 1);
 $bezier--ease-in-circ: cubic-bezier(.6, .04, .98, .335);
 
 // font stacks
-$sans-serif: Helvetica, Arial, sans-serif;
-$sans-serif--loaded: "ff-scala-sans-web-pro", Helvetica, Arial, sans-serif;
-
-$serif: "Times New Roman", serif;
-$serif--loaded: "ff-quadraat-web-pro", "Times New Roman", serif;
+$sans-serif: 'Suisse', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
