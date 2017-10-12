@@ -3,8 +3,8 @@
   $meta_title = "time.area17.com - AREA 17";
   $meta_social_title = "AREA 17";
   $meta_description = "Time, weather and timezone conversion between international A17 locations.";
-  $meta_url = "http://time.area17.com/";
-  $meta_image = "http://time.area17.com/img/og.png";
+  $meta_url = "https://time.area17.com/";
+  $meta_image = "https://time.area17.com/img/og.png";
 ?>
 <html dir="ltr" lang="en-US">
   <head>
