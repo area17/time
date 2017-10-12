@@ -1,9 +1,10 @@
 .m-digital {
   display: none;
   color: $color__white;
-  font-size: 16vw;
+  font-size: 15vw;
   text-align: justify;
   text-align-last: justify;
+  white-space: nowrap;
 
   @include breakpoint('medium+') {
     font-size: 100px;
@@ -15,7 +16,7 @@
   }
 
   &.m-digital--24 {
-    font-size: 22vw;
+    font-size: 21vw;
 
     @include breakpoint('medium+') {
       font-size: 110px;
