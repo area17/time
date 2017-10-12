@@ -14,6 +14,18 @@
   line-height: 23px;
   cursor: pointer;
 
+  .s-settings-active &::before {
+    @include breakpoint('small+') {
+      content: '';
+      position: fixed;
+      left: 0;
+      right: 300px;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,.5);
+    }
+  }
+
   .s-screensaver & {
     display: none;
   }

@@ -16,16 +16,16 @@ A17.Behaviors.settings = function(container){
   function _showHideSettings(event) {
     event.preventDefault();
     this.blur();
-    if (container.classList.contains('s-active')) {
-      container.classList.remove('s-active');
+    if (document.documentElement.classList.contains('s-settings-active')) {
+      document.documentElement.classList.remove('s-settings-active');
     } else {
-      container.classList.add('s-active');
+      document.documentElement.classList.add('s-settings-active');
     }
   }
 
   function _escapeToClose(event) {
-    if (container.classList.contains('s-active') && event.keyCode === 27) {
-      container.classList.remove('s-active');
+    if (document.documentElement.classList.contains('s-settings-active') && event.keyCode === 27) {
+      document.documentElement.classList.remove('s-settings-active');
     }
   }
 
