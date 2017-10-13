@@ -43,19 +43,19 @@
   font: 48px/1 $sans-serif;
 
   &::-webkit-input-placeholder {
-    color: $color__text--off;
+    color: $color__text--times-off;
   }
 
   &:-moz-placeholder {
-    color: $color__text--off;
+    color: $color__text--times-off;
   }
 
   &::-moz-placeholder {
-    color: $color__text--off;
+    color: $color__text--times-off;
   }
 
   &:-ms-input-placeholder {
-    color: $color__text--off;
+    color: $color__text--times-off;
   }
 
   &:focus {
@@ -71,7 +71,7 @@
 
   &:first-child {
     margin-top: 0;
-    color: $color__text--off;
+    color: $color__text--times-off;
   }
 }
 

@@ -1,12 +1,11 @@
 .m-timezone {
-  opacity: .7;
-  transition: opacity .25s linear;
+  color: $color__text--off;
 
-  &.s-current {
-  }
+  //&.s-current {
+  //}
 
   &.s-open {
-    opacity: 1;
+    color: $color__text;
   }
 }
 
@@ -21,16 +20,16 @@
 
 .m-timezone__temperature {
 
+  &::before {
+    content: ' - ';
+  }
+
   @include breakpoint('small+') {
     &::before {
       content: '─';
       display: inline-block;
       margin: 0 10px 0 7px;
     }
-  }
-
-  &::before {
-    content: ' - ';
   }
 }
 
@@ -72,7 +71,12 @@
   margin-right: 5px;
   font-size: 20px;
   line-height: 15px;
+  opacity: .6;
   vertical-align: bottom;
+
+  .s-open & {
+    opacity: 1;
+  }
 }
 
 .m-timezone__emoji--windy {
