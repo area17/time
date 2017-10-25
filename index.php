@@ -82,10 +82,7 @@
   </head>
   <body>
     <div class="o-clocks">
-      <svg class="logo" viewBox="0 0 84 53">
-        <path fill="#fff" d="M30.711,0l21.2,53h-10.6l-4.476-12H15.165l-4.476,12h-10.6l21.2-53H30.711z M33.773,33L26,12.484L18.227,33H33.773z
-           M83.8,0L62.6,53h-5.3L78.5,0H83.8z"/>
-      </svg>
+      <svg class="logo" aria-hidden="true"><use xlink:href="#logo" /></svg>
       <a href="/downloads/A17TimeZones.saver.zip" class="screensaver-link">🖥️</a>
       <button class="instruction">🕘 → 🕑</button>
       <button class="settings-trigger">⚙</button>
@@ -111,7 +108,8 @@
       </ul>
       <ul>
         <li><label><input type="checkbox" value="ShowTemperature" checked> Temperature</label></li>
-        <li><label><input type="checkbox" value="ShowCurrentWeather" checked> Feels like/chance of rain</label></li>
+        <li><label><input type="checkbox" value="ShowCurrentWeather"> Feels like/chance of rain</label></li>
+        <li><label><input type="checkbox" value="AnimatedIcons"> Animated icons</label></li>
       </ul>
       <ul>
         <li><label><input type="radio" name="TemperatureUnit" value="c" checked> &deg;C</label></li>
@@ -121,6 +119,7 @@
     <script src="/js/timezones.js"></script>
     <?php include "includes/_timezones_setup.php" ?>
     <script>A17.locations = <?php echo json_encode(array_reverse($locations)); ?>;</script>
+    <?php include "includes/_icons.php" ?>
   </body>
 </html>
 

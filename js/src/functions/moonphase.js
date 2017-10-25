@@ -6,6 +6,7 @@ A17.Functions.moonPhase = function() {
   var phase = '';
   var phaseEmojis = ['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
   var emoji = '🌘';
+  var icon = 'waning_crescent';
   var now = new Date();
   var year = now.getUTCFullYear();
   var month = now.getUTCMonth() + 1;
@@ -45,34 +46,44 @@ A17.Functions.moonPhase = function() {
   if(AG < 1.84566) {
     phase = 'A new moon';
     emoji = phaseEmojis[0];
+    icon = 'new-moon';
   } else if(AG <  5.53699) {
     phase = 'An evening crescent';
     emoji = phaseEmojis[1];
+    icon = 'waxing-crescent';
   } else if(AG < 9.22831) {
     phase = 'A first quarter';
     emoji = phaseEmojis[2];
+    icon = 'first-quarter';
   } else if(AG < 12.91963) {
     phase = 'A waxing gibbous';
+    icon = 'waxing-gibbous';
     emoji = phaseEmojis[3];
   } else if(AG < 16.61096) {
     phase = 'A full moon';
     emoji = phaseEmojis[4];
+    icon = 'full-moon';
   } else if(AG < 20.30228) {
     phase = 'A waning gibbous';
     emoji = phaseEmojis[5];
+    icon = 'waning-gibbous';
   } else if(AG < 23.99361) {
     phase = 'A Last quarter';
     emoji = phaseEmojis[6];
+    icon = 'last-quarter';
   } else if(AG < 27.68493) {
     phase = 'A Morning crescent';
     emoji = phaseEmojis[7];
+    icon = 'waning-crescent';
   } else {
     phase = 'A new moon';
     emoji = phaseEmojis[0];
+    icon = 'new-moon';
   }
 
   return {
     phase: phase,
     emoji: emoji,
+    icon: icon
   };
 };

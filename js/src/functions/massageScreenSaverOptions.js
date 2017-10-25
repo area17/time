@@ -29,5 +29,9 @@ A17.Functions.massageScreebSaverOptions = function() {
     queryStringObj.ShowCurrentWeather = queryStringObj.showcurrentweather.toLowerCase();
     delete queryStringObj.showcurrentweather;
   }
+  if (queryStringObj.animtedicons) {
+    queryStringObj.AnimatedIcons = queryStringObj.animtedicons.toLowerCase();
+    delete queryStringObj.animtedicons;
+  }
   return queryStringObj;
 };

@@ -1,25 +1,15 @@
 A17.Behaviors.timezones = function(container) {
 
   var locationTemplate = '<li id="{{locationID}}" class="m-timezone s-loading">\n<strong class="m-timezone__name">{{name}}</strong>\n<em class="m-timezone__time">{{time}}</em>\n<span class="m-timezone__temperature"></span>\n<span class="m-timezone__weather">\n</span>\n</li>\n';
+  var iconTemplate = '<svg class="icon" aria-hidden="true"><use xlink:href="#{{name}}" /></svg>';
   var liHtml = '';
   var mTemp = 99; // initial value out of range
   var updatingWeather = false;
   var lastWeatherCheck = 0;
-  var weatherEmojis = {
-    'clear-day' : '☀️',
-    'clear-night' : '🌙',
-    'partly-cloudy-day' : '⛅',
-    'partly-cloudy-night' : '☁️',
-    'cloudy' : '☁️',
-    'rain' : '🌧️',
-    'sleet' : '🌨️',
-    'snow' : '🌨️',
-    'wind' : '🌬',
-    'fog' : '🌫️'
-  };
   var officeOpen = 9;
   var officeClosed = 19;
   var time, secondInterval, weatherInterval, weatherRecievedCounter;
+  var animatedIcons = ['clear-day','partly-cloudy-day','partly-cloudy-night','rain'];
 
   function _convertFtoC(f) {
     return (f - 32) * (5 / 9);
@@ -28,6 +18,7 @@ A17.Behaviors.timezones = function(container) {
   function _updateTemperatures(location,index) {
     var locationEl = document.getElementById('location-'+index);
     if (locationEl) {
+      var rainChanceClass = '';
       var rainChanceClass = (location.rainChance > 49) ? ' m-timezone__rain-chance--raining' : '';
       // show umbrella emoji to illustrate rain chance
       var umbrellaEmoji = '🌂'; // default, low chance of rain
@@ -67,14 +58,17 @@ A17.Behaviors.timezones = function(container) {
       var tempFeelsLike = Math.round( (tempUnit === 'c') ? _convertFtoC(location.feelsLike) : location.feelsLike );
       var moonPhase = A17.Functions.moonPhase();
       var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + '.';
-      var weatherEmoji = (location.icon !== 'clear-night') ? weatherEmojis[location.icon] : moonPhase.emoji;
-      weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + ' Moon phase is ' + moonPhase.phase.toLowerCase() + '.';
+      var weatherEmoji = (location.icon !== 'clear-night') ? iconTemplate.replace('{{name}}',location.icon) : iconTemplate.replace('{{name}}',moonPhase.icon);
+      if (A17.settings.AnimatedIcons === 'true' && location.icon !== 'clear-night' && (animatedIcons.indexOf(location.icon) !== -1)) {
+        weatherEmoji = iconTemplate.replace('{{name}}',location.icon + '--animated');
+      }
+      weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + ' Moon phase is ' + moonPhase.phase.toLowerCase() + ' ' + moonPhase.emoji + '.';
       var emojiClass = (location.icon === 'clear-day') ? ' m-timezone__emoji--sunny' : '';
       //
       tempUnit = tempUnit.toUpperCase();
       //
       locationEl.querySelector('.m-timezone__temperature').innerHTML = temp + '&deg;'+tempUnit;
-      locationEl.querySelector('.m-timezone__weather').innerHTML = '<span class="m-timezone__feels-like' + temperatureClass + '" title="feels like"><span class="m-timezone__emoji' + emojiClass + '" title="' + weatherSummary + '">' + weatherEmoji + '</span>' + tempFeelsLike + '&deg;' + tempUnit + '</span>\n<span class="m-timezone__rain-chance' + rainChanceClass + '"><span class="m-timezone__emoji' + umbrellaClass + '" title="Precipitation probability in the next hour: ' + location.rainChance + '%">' + umbrellaEmoji + '</span>' + location.rainChance + '%</span>';
+      locationEl.querySelector('.m-timezone__weather').innerHTML = '<span class="m-timezone__feels-like' + temperatureClass + '" title="feels like"><span class="m-timezone__emoji' + emojiClass + '" title="' + weatherSummary + '">' + weatherEmoji + '</span>' + tempFeelsLike + '&deg;' + tempUnit + '</span>\n<span class="m-timezone__rain-chance' + rainChanceClass + '"><span class="m-timezone__emoji' + umbrellaClass + '" title="Precipitation probability in the next hour: ' + location.rainChance + '% ' + umbrellaEmoji + '">' + iconTemplate.replace('{{name}}', 'rain-drops') + '</span>' + location.rainChance + '%</span>';
       //
       locationEl.classList.remove('s-loading');
     }
@@ -260,6 +254,7 @@ A17.Behaviors.timezones = function(container) {
     document.addEventListener('updateShowCurrentWeather', _hideshowWeather, false);
     document.addEventListener('updateShowTemperature', _hideshowTemperature, false);
     document.addEventListener('updateTemperatureUnit', _updateTemperatureUnit, false);
+    document.addEventListener('updateAnimatedIcons', _hideshowWeather, false);
     document.addEventListener('visibilitychange', _handleVisibilityChange, false);
     window.addEventListener('load', _windowLoad, false);
   };
