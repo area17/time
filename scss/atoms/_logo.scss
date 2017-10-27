@@ -3,29 +3,20 @@
   position: absolute;
   left: 20px;
   top: 20px;
-  width: auto;
+  width: 63px;
   height: 40px;
   color: $color__white;
 
   @include breakpoint('medium+') {
-    top: auto;
+    top: calc(50% - 38px);
+    width: 111px;
     height: 70px;
-
-    .s-digital & {
-      bottom: calc(50% - 38px);
-    }
-
-    .s-analogue & {
-      bottom: 50px;
-    }
   }
 
   @include breakpoint('large+') {
     left: 50px;
+    top: calc(50% - 40px);
+    width: 127px;
     height: 80px;
-
-    .s-digital & {
-      bottom: calc(50% - 40px);
-    }
   }
 }

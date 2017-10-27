@@ -11,6 +11,7 @@ html {
 }
 
 body {
+  @include font-smoothing(on);
   background: $color__black;
   color: $color__text;
   font: 15px/25px $sans-serif;

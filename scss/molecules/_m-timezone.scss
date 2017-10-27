@@ -9,28 +9,22 @@
   }
 }
 
-.m-timezone__name {
-  display: block;
+.m-timezone__time,
+.m-timezone__name,
+.m-timezone__feels-like,
+.m-timezone__rain-chance {
+  display: inline-block;
+  font-style: normal;
   font-weight: normal;
 }
 
+.m-timezone__rain-chance,
 .m-timezone__time {
-  font-style: normal;
+  padding-left: 16px;
 }
 
-.m-timezone__temperature {
-
-  &::before {
-    content: ' - ';
-  }
-
-  @include breakpoint('small+') {
-    &::before {
-      content: '─';
-      display: inline-block;
-      margin: 0 10px 0 7px;
-    }
-  }
+.m-timezone__time {
+  text-transform: uppercase;
 }
 
 .m-timezone__weather {
@@ -38,13 +32,21 @@
   position: relative;
 }
 
-.s-hide-temperature .m-timezone__temperature,
 .s-hide-weather .m-timezone__weather,
-.m-timezone.s-loading .m-timezone__temperature,
 .m-timezone.s-loading .m-timezone__weather {
   display: none;
 }
 
+.m-timezone__emoji {
+  display: inline-block;
+  margin-right: 6px;
+
+  .m-timezone__rain-chance & {
+    margin-right: 2px;
+  }
+}
+
+/*
 .m-timezone__feels-like--hot {
   color: #ffbfbf;
 }
@@ -55,28 +57,6 @@
 
 .m-timezone__feels-like--cold {
   color: #bfbfff;
-}
-
-.m-timezone__rain-chance {
-  display: block;
-
-  @include breakpoint('small+') {
-    display: inline-block;
-    margin-left: 8px;
-  }
-}
-
-.m-timezone__emoji {
-  display: inline-block;
-  margin-right: 5px;
-  font-size: 20px;
-  line-height: 15px;
-  opacity: .6;
-  vertical-align: bottom;
-
-  .s-open & {
-    opacity: 1;
-  }
 }
 
 .m-timezone__emoji--windy {
@@ -91,3 +71,4 @@
   transform: scale(1.2);
   filter: hue-rotate(-10deg) saturate(5);
 }
+*/
