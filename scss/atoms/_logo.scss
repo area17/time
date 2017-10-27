@@ -20,3 +20,19 @@
     height: 80px;
   }
 }
+
+.logo svg {
+  display: block;
+  width: 63px;
+  height: 40px;
+
+  @include breakpoint('medium+') {
+    width: 111px;
+    height: 70px;
+  }
+
+  @include breakpoint('large+') {
+    width: 127px;
+    height: 80px;
+  }
+}

@@ -21,10 +21,6 @@ A17.Functions.massageScreebSaverOptions = function() {
     }
     delete queryStringObj.temperatureunits;
   }
-  if (queryStringObj.showtemperature) {
-    queryStringObj.ShowTemperature = queryStringObj.showtemperature.toLowerCase();
-    delete queryStringObj.showtemperature;
-  }
   if (queryStringObj.showcurrentweather) {
     queryStringObj.ShowCurrentWeather = queryStringObj.showcurrentweather.toLowerCase();
     delete queryStringObj.showcurrentweather;

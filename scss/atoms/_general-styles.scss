@@ -23,3 +23,17 @@ a {
   height: 1px;
   overflow: hidden;
 }
+
+.close-settings-trigger {
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+  background: transparent;
+  color: $color__link;
+  font: 15px/25px $sans-serif;
+  cursor: pointer;
+
+  &:hover::after {
+    content: ' →';
+  }
+}

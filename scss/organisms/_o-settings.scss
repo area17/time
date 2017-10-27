@@ -1,11 +1,13 @@
 .o-settings {
+  display: flex;
   position: fixed;
   z-index: 4;
   right: -100vw;
   top: 0;
   bottom: 0;
+  flex-flow: column nowrap;
   width: 100vw;
-  padding: 50px 0 10px;
+  padding: 50px 0;
   background: $color--white;
   color: $color--text--settings;
   transition: all .15s ease-in-out;
@@ -25,28 +27,41 @@
 }
 
 .o-settings p {
-  margin: 0;
-  padding: 15px 20px 0;
+  flex: 0 0 auto;
+  margin: 25px 0 0;
+  padding: 0 20px;
+  color: $color--text--settings;
   font-weight: bold;
 
-  & ~ p {
-    border-top: 1px solid $color__rules--settings;
+  &:first-child {
+    margin-top: 0;
   }
 }
 
+.o-settings .o-settings__save {
+  margin-top: auto;
+}
+
 .o-settings ul {
+  flex: 0 0 auto;
   list-style-type: none;
-  margin: 0 0 25px;
+  margin: 0;
+}
+
+[setting-dependant-on-weather] {
+  transition: opacity .25s;
+
+  .s-hide-weather & {
+    opacity: .25;
+    pointer-events: none;
+  }
 }
 
 .o-settings label {
   display: block;
   margin: 0;
   padding: 5px 20px;
-
-  &:hover {
-    color: $color__text--hover--settings;
-  }
+  color: $color__label;
 }
 
 .o-settings input {

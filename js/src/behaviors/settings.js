@@ -1,6 +1,7 @@
 A17.Behaviors.settings = function(container){
 
   var $trigger = document.querySelector('.settings-trigger');
+  var $close = document.querySelector('.close-settings-trigger');
   var $checkboxes = container.querySelectorAll('input[type=checkbox]');
   var radiosArr = ['ClockType', 'DigitalFormat','TemperatureUnit'];
   var $clockType = container.querySelector('input[type=radio][name=ClockType]');
@@ -58,6 +59,7 @@ A17.Behaviors.settings = function(container){
     if (!A17.screensaver) {
       _init();
       $trigger.addEventListener('click', _showHideSettings, false);
+      $close.addEventListener('click', _showHideSettings, false);
       document.addEventListener('keyup', _escapeToClose, false);
     }
   };

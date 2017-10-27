@@ -74,7 +74,7 @@ A17.Behaviors.timezones = function(container) {
   }
 
   function _updateWeather() {
-    if ((A17.settings.ShowCurrentWeather === 'true' || A17.settings.ShowTemperature === 'true') && !updatingWeather) {
+    if ((A17.settings.ShowCurrentWeather === 'true') && !updatingWeather) {
       if (new Date().getTime() > lastWeatherCheck + 1800000) {
         updatingWeather = true;
         weatherRecievedCounter = 0;
@@ -184,16 +184,6 @@ A17.Behaviors.timezones = function(container) {
     }
   }
 
-  function _hideshowTemperature() {
-    var showTemperature = A17.settings.ShowTemperature || 'true';
-    if (showTemperature === 'false') {
-      document.documentElement.classList.add('s-hide-temperature');
-    } else {
-      document.documentElement.classList.remove('s-hide-temperature');
-      _updateWeather();
-    }
-  }
-
   function _updateTemperatureUnit() {
     A17.locations.forEach(function(location, index){
       _updateTemperatures(location, index);
@@ -220,7 +210,6 @@ A17.Behaviors.timezones = function(container) {
 
   function _windowLoad() {
     _hideshowWeather();
-    _hideshowTemperature();
   }
 
   function _init() {
@@ -251,7 +240,6 @@ A17.Behaviors.timezones = function(container) {
 
     document.addEventListener('updateDigitalFormat', _updateDigitalFormat, false);
     document.addEventListener('updateShowCurrentWeather', _hideshowWeather, false);
-    document.addEventListener('updateShowTemperature', _hideshowTemperature, false);
     document.addEventListener('updateTemperatureUnit', _updateTemperatureUnit, false);
     document.addEventListener('updateAnimatedIcons', _hideshowWeather, false);
     document.addEventListener('visibilitychange', _handleVisibilityChange, false);

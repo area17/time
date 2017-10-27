@@ -82,10 +82,10 @@
   </head>
   <body>
     <div class="o-clocks">
-      <svg class="logo" aria-hidden="true"><use xlink:href="#logo" /></svg>
-      <a href="/downloads/A17TimeZones.saver.zip" class="screensaver-link">🖥️</a>
-      <button class="instruction">🕘 → 🕑</button>
-      <button class="settings-trigger">⚙</button>
+      <a href="http://www.area17.com/" class="logo"><svg aria-hidden="true"><use xlink:href="#logo" /></svg></a>
+      <!-- <a href="/downloads/A17TimeZones.saver.zip" class="screensaver-link">🖥️</a> -->
+      <button class="instruction">Convert</button>
+      <button class="settings-trigger">Settings</button>
       <p class="m-digital" data-behavior="digital"></p>
       <svg class="m-analogue" data-behavior="analogue" viewBox="0 0 425 425">
         <use xlink:href="#clock-face" class="m-analogue__face" />
@@ -95,7 +95,7 @@
         <circle cx="212.5" cy="212.5" r="1.5" stroke="none" />
       </svg>
       <ul class="o-timezones" data-behavior="timezones"></ul>
-      <small class="legal">Time by <a href="http://area17.com/">AREA 17</a> &copy; 2015&ndash;<?php date_default_timezone_set('UTC'); echo date("Y"); ?> &bull; <a href="https://darksky.net/poweredby/">Powered by Dark Sky</a></small>
+      <small class="legal">&copy; <a href="http://area17.com/">AREA 17</a> <?php date_default_timezone_set('UTC'); echo date("Y"); ?> &ndash; <a href="https://darksky.net/poweredby/">Weather powered by Dark Sky</a></small>
     </div>
     <div class="o-conversion" data-behavior="conversion">
       <p>Type a time to convert:</p>
@@ -104,23 +104,27 @@
       <a href="#" class="o-conversion__close">╳</a>
     </div>
     <div class="o-settings" data-behavior="settings">
+      <p>Type</p>
       <ul>
-        <li><label><input type="radio" name="ClockType" value="digital" checked> Digital</label></li>
-        <li><label><input type="radio" name="ClockType" value="analogue"> Analog</label></li>
+        <li><label><input type="radio" name="ClockType" value="analogue" checked> Analog</label></li>
+        <li><label><input type="radio" name="ClockType" value="digital"> Digital</label></li>
       </ul>
+      <p>Format</p>
       <ul>
-        <li><label><input type="radio" name="DigitalFormat" value="12"> 12 hour</label></li>
-        <li><label><input type="radio" name="DigitalFormat" value="24" checked> 24 hour</label></li>
+        <li><label><input type="radio" name="DigitalFormat" value="12" checked> 12 hour</label></li>
+        <li><label><input type="radio" name="DigitalFormat" value="24"> 24 hour</label></li>
       </ul>
+      <p>Information</p>
       <ul>
-        <li><label><input type="checkbox" value="ShowTemperature" checked> Temperature</label></li>
-        <li><label><input type="checkbox" value="ShowCurrentWeather"> Feels like/chance of rain</label></li>
-        <li><label><input type="checkbox" value="AnimatedIcons"> Animated icons</label></li>
+        <li><label><input type="checkbox" value="ShowCurrentWeather" checked> Weather</label></li>
+        <li setting-dependant-on-weather data-behavior="showHideAnimatedIconsToggler"><label><input type="checkbox" value="AnimatedIcons"> Animated icons</label></li>
       </ul>
+      <p>Degrees</p>
       <ul>
         <li><label><input type="radio" name="TemperatureUnit" value="c" checked> &deg;C</label></li>
         <li><label><input type="radio" name="TemperatureUnit" value="f"> &deg;F</label></li>
       </ul>
+      <p class="o-settings__save"><button class="close-settings-trigger">Save settings</button></p>
     </div>
     <?php include "includes/_icons.php" ?>
     <script src="/js/timezones.js"></script>

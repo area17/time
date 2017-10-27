@@ -1,16 +1,19 @@
 .instruction {
   display: none;
   position: absolute;
-  right: 50px;
-  top: 10px;
+  left: calc(80% + 100px);
+  bottom: 50px;
   margin: 0;
   padding: 0;
   border: 0 none;
   background: transparent;
   color: $color__text--off;
-  font-size: 12px;
-  line-height: 23px;
+  font: 15px/25px $sans-serif;
   cursor: pointer;
+
+  &:hover {
+    color: $color__text;
+  }
 
   @include breakpoint('medium+') {
     display: block;

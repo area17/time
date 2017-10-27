@@ -27,6 +27,8 @@ A17.settings.TemperatureUnit = 'c';
 
 // set up and trigger looking for the behaviors on DOM ready
 A17.onReady = function(){
+  // shift icons to top of DOM
+  document.body.insertBefore(document.getElementById('icons'),document.body.childNodes[0]);
 
   if (A17.screensaver) {
     A17.settings = A17.Helpers.extend(A17.settings, A17.Functions.massageScreebSaverOptions());

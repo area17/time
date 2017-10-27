@@ -2,15 +2,14 @@
   display: block;
   margin-top: 40px;
   color: $color__text--off;
-  font-size: 10px;
-  line-height: 15px;
   text-align: center;
 
   @include breakpoint('medium+') {
     position: absolute;
-    right: 20px;
-    bottom: 12px;
+    left: 50px;
+    bottom: 50px;
     margin-top: 0;
+    text-align: left;
   }
 }
 

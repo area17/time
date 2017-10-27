@@ -1,3 +1,5 @@
+$color__blue: #3a60fb;
+
 // Colors - Grayscale - try not to use
 $color__black: #000;
 $color__black--93: #121212;
@@ -29,11 +31,11 @@ $color__white: #fff;
 
 // Colors by usage - use these!
 $color__text: $color__white;
+$color__text--settings: $color__black--50;
 $color__text--off: $color__black--60;
 
-$color__text--settings: $color__black;
-$color__text--hover--settings: $color__black--40;
-$color__rules--settings: $color__black--40;
+$color__link: $color__blue;
+$color__label: $color__black;
 
 $color__text--times: $color__black;
 $color__text--times-off: $color__black--40;

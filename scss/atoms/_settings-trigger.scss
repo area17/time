@@ -1,18 +1,18 @@
 .settings-trigger {
   position: absolute;
-  z-index: 5;
-  right: 10px;
-  top: 10px;
-  width: 23px;
-  height: 23px;
+  left: 80%;
+  bottom: 50px;
   margin: 0;
   padding: 0;
   border: 0 none;
   background: transparent;
   color: $color__text--off;
-  font-size: 12px;
-  line-height: 23px;
+  font: 15px/25px $sans-serif;
   cursor: pointer;
+
+  &:hover {
+    color: $color__text;
+  }
 
   .s-settings-active &::before {
     @include breakpoint('small+') {
