@@ -8,7 +8,12 @@
 
   @include breakpoint('medium+') {
     max-height: 100vh;
-    padding: 10px 0 50px 50px;
+    padding: 30px 0 200px 50px;
+  }
+
+  @include breakpoint('xlarge+') {
+    padding-top: 10px;
+    padding-bottom: 130px;
   }
 }
 
@@ -28,6 +33,23 @@
 
   @include breakpoint('medium+') {
     order: 0;
+    margin-bottom: 40px;
+  }
+}
+
+.o-clocks .m-digital {
+  flex: 0 0 auto;
+  width: 100%;
+  margin: 70px 0 20px;
+
+  @include breakpoint('medium+') {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 55px);
+    width: auto;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -37,9 +59,12 @@
   margin: 20px;
 
   @include breakpoint('medium+') {
+    position: relative;
+    left: -25px;
     flex-grow: 1;
+    flex-shrink: 1;
     order: 1;
-    margin: auto 0;
+    margin: auto;
   }
 }
 

@@ -14,10 +14,11 @@
 
   @include breakpoint('medium+') {
     width: 33.33%;
-    margin-top: 40px;
+    margin-top: 20px;
   }
 
   @include breakpoint('xlarge+') {
     width: 20%;
+    margin-top: 40px;
   }
 }

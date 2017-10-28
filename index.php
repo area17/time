@@ -94,7 +94,8 @@
         <circle cx="212.5" cy="212.5" r="1.5" stroke="none" />
       </svg>
       <ul class="o-timezones" data-behavior="timezones"></ul>
-      <small class="legal">&copy; <a href="http://area17.com/" target="_blank">AREA 17</a> <?php date_default_timezone_set('UTC'); echo date("Y"); ?> &ndash; <a href="/downloads/A17TimeZones.saver.zip" class="screensaver-link">Download screensaver</a><span class="screensaver-link"> &ndash; </span><a href="https://darksky.net/poweredby/" target="_blank">Weather powered by Dark Sky</a></small>
+      <small class="legal">
+        <span class="legal__a17">&copy; <a href="http://area17.com/" target="_blank">AREA 17</a> <?php date_default_timezone_set('UTC'); echo date("Y"); ?></span><span class="legal__dash"> &ndash; </span><a href="/downloads/A17TimeZones.saver.zip" class="legal__screensaver">Download screensaver</a><span class="legal__dash"> &ndash; </span><a href="https://darksky.net/poweredby/" class="legal__darksky" target="_blank">Weather powered by Dark Sky</a></small>
     </div>
     <div class="o-conversion" data-behavior="conversion">
       <p>Type a time to convert:</p>

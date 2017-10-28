@@ -15,10 +15,24 @@
     height: 70px;
   }
 
+  @include breakpoint('medium+', 'portrait') {
+    .s-analogue & {
+      top: auto;
+      bottom: 100px;
+    }
+  }
+
   @include breakpoint('large+') {
     top: calc(50% - 40px);
     width: 127px;
     height: 80px;
+  }
+
+  @include breakpoint('large+', 'portrait') {
+    .s-analogue & {
+      top: auto;
+      bottom: 100px;
+    }
   }
 }
 

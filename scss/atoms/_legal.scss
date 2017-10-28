@@ -28,3 +28,45 @@
     color: $color__text;
   }
 }
+
+.legal span {
+  display: block;
+
+  @include breakpoint('medium+') {
+    display: inline;
+  }
+}
+
+
+.legal__screensaver {
+  display: none;
+
+  @include breakpoint('large+') {
+    display: inline;
+  }
+
+  .s-screensaver & {
+    display: none;
+  }
+}
+
+.legal .legal__dash {
+  display: none;
+
+  @include breakpoint('medium+') {
+    display: inline;
+  }
+}
+
+
+.legal .legal__screensaver + .legal__dash {
+  display: none;
+
+  @include breakpoint('large+') {
+    display: inline;
+  }
+
+  .s-screensaver & {
+    display: none;
+  }
+}

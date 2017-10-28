@@ -52,7 +52,7 @@ $breakpoints-with-directions: get-breakpoint-directions();
   NB: the we're mobile up, so the minus values should be avoided..
 */
 
-@mixin breakpoint($name) {
+@mixin breakpoint($name, $orientation: false) {
   $points: map-get($breakpoints-with-directions, $name);
   @if $points {
     $media: get-media($points);
@@ -63,12 +63,15 @@ $breakpoints-with-directions: get-breakpoint-directions();
       $str: $str + 'min-width: ' + ($start * 1px);
     }
     @if($start != null and $end != null) {
-      $str: $str + ') and ('
+      $str: $str + ') and (';
     }
     @if($end != null) {
       $str: $str + 'max-width: ' + ($end * 1px);
     }
     $str: $str + ')';
+    @if ($orientation) {
+      $str: $str + ' and (orientation: ' + $orientation + ')';
+    }
 
     @media #{$str} {
       @content;
