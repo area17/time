@@ -83,7 +83,7 @@
   <body>
     <div class="o-clocks">
       <a href="http://www.area17.com/" class="logo" target="_blank"><svg aria-hidden="true"><use xlink:href="#logo" /></svg></a>
-      <button class="instruction">Convert</button>
+      <button class="conversion-trigger">Convert</button>
       <button class="settings-trigger">Settings</button>
       <p class="m-digital" data-behavior="digital"></p>
       <svg class="m-analogue" data-behavior="analogue" viewBox="0 0 425 425">
@@ -100,7 +100,7 @@
     <div class="o-conversion" data-behavior="conversion">
       <p class="o-conversion__input">
         <label for="conversion" class="o-conversion__label">Type a time to convert:</label>
-        <input type="text" name="conversion" placeholder="eg: 15:00 Paris, 3pm New York, 9:30 Tucumán">
+        <input type="text" name="conversion" placeholder="2pm Paris">
       </p>
       <p class="o-conversion__output"></p>
       <a href="#" class="o-conversion__close">╳</a>

@@ -6,21 +6,26 @@
   right: 0;
   top: 0;
   bottom: 0;
-  padding: 50px;
+  flex-flow: column nowrap;
+  padding: 20px;
   background: $color__white;
   color: $color__text--times;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
+  @include breakpoint('medium+') {
+    padding: 50px;
+  }
+
   .s-active & {
-    display: block;
+    display: flex;
   }
 
   &.js-loading::after {
     content: '';
     position: absolute;
-    right: 20px;
-    top: 100px;
+    left: calc(50% - 8px);
+    top: calc(50% - 8px);
     width: 16px;
     height: 16px;
     border: 0 solid transparent;
@@ -34,25 +39,35 @@
 
 .o-conversion__input {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
 }
 
 .o-conversion__label {
   flex: 0 0 auto;
-  width: 33.33%;
+  width: 100%;
   color: $color__text--times-off;
-  line-height: 48px;
+
+  @include breakpoint('medium+') {
+    width: 33.33%;
+    line-height: 48px;
+  }
 }
 
 .o-conversion input {
   display: block;
   flex: 0 0 auto;
-  width: 66.66%;
+  width: 100%;
   height: 48px;
   border: 0 none;
   background: $color__white;
   color: $color__text--times;
-  font: 48px/48px $sans-serif;
+  font: 28px/28px $sans-serif;
+
+  @include breakpoint('medium+') {
+    width: 66.66%;
+    font-size: 48px;
+    line-height: 48px;
+  }
 
   &::-webkit-input-placeholder {
     color: $color__text--times-off;
@@ -75,19 +90,115 @@
   }
 }
 
-/*
-.o-conversion p {
-  margin: 50px 0 0;
-  color: $color__text--times;
-  font-size: 48px;
-  line-height: 48px;
+.o-conversion__output {
+  margin-top: auto;
+  padding-top: 40px;
 
-  &:first-child {
-    margin-top: 0;
-    color: $color__text--times-off;
+  @include breakpoint('small+') {
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  @include breakpoint('medium+') {
+    font-size: 60px;
+    line-height: 60px;
+  }
+
+  @include breakpoint('large+') {
+    font-size: 80px;
+    line-height: 80px;
   }
 }
-*/
+
+.o-conversion__location {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 10px;
+
+  @include breakpoint('large+') {
+    margin-top: 20px;
+  }
+}
+
+.o-conversion__highlight {
+  color: $color__text--times-highlight;
+}
+
+.o-conversion__location > * {
+  flex: 0 0 auto;
+}
+
+.o-conversion__emoji {
+  display: inline-block;
+  width: 25px;
+  vertical-align: top;
+  filter: saturate(0%);
+
+  @include breakpoint('small+') {
+    width: 30px;
+    font-size: 80%;
+  }
+
+  @include breakpoint('medium+') {
+    width: 40px;
+    font-size: 50%;
+  }
+
+  @include breakpoint('large+') {
+    width: 70px;
+  }
+}
+
+.o-conversion__name {
+  width: calc(((100% - 55px) / 3) * 2);
+
+  @include breakpoint('small+') {
+    width: calc(((100% - 70px) / 3) * 2);
+  }
+
+  @include breakpoint('medium+') {
+    width: calc(((100% - 140px) / 3) * 2);
+  }
+
+  @include breakpoint('large+') {
+    width: calc(((100% - 200px) / 3) * 2);
+  }
+}
+
+.o-conversion__time {
+  width: calc((100% - 55px) / 3);
+
+  @include breakpoint('small+') {
+    width: calc((100% - 70px) / 3);
+  }
+
+  @include breakpoint('medium+') {
+    width: calc((100% - 140px) / 3);
+  }
+
+  @include breakpoint('large+') {
+    width: calc((100% - 200px) / 3);
+  }
+}
+
+.o-conversion__am-pm {
+  width: 30px;
+  margin-left: auto;
+  text-align: right;
+  text-transform: uppercase;
+
+  @include breakpoint('small+') {
+    width: 40px;
+  }
+
+  @include breakpoint('medium+') {
+    width: 100px;
+  }
+
+  @include breakpoint('large+') {
+    width: 130px;
+  }
+}
 
 .o-conversion .o-conversion__close {
   position: absolute;

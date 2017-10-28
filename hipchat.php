@@ -20,9 +20,9 @@
     $post_msg = preg_replace('/\/time/i', '', $post_msg);
     //
     $time_properties = parseString($post_msg);
-    $message_str = generateResponseString($time_properties,"\n");
+    $message_str = generateResponseString($time_properties,"text");
   } else {
-    $message_str = generateResponseString(null,"\n");
+    $message_str = generateResponseString(null,"text");
   }
 
   $json = array('color' => 'gray', "message" => $message_str, "notify" => "false", "message_format" => "text", "from" => "http://time.area17.com/");

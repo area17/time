@@ -29,6 +29,7 @@
 
 .m-timezone__weather {
   display: block;
+  min-height: 25px;
   opacity: 1;
   transition: opacity .33s linear;
 

@@ -6,7 +6,6 @@ $now = date("Y-m-d H:i:s");
 $datetime = new DateTime($now, new DateTimeZone('UTC'));
 $locations = array();
 $format = 'h:i a';
-$hourEmoji = array("0" => "🕛", "1" => "🕐", "2" => "🕑", "3" => "🕒", "4" => "🕓", "5" => "🕔", "6" => "🕕", "7" => "🕖", "8" => "🕗", "9" => "🕘", "10" => "🕙", "11" => "🕚", "12" => "🕛");
 
 // our locations
 array_push($locations, array("name" => "Paris", "timezone" => "Europe/Paris", "emoji" => "🇫🇷", "lat" => 48.8728, "long" => 2.3701, "offset" => 0));
@@ -30,7 +29,8 @@ function parseString($str) {
   $str = preg_replace('/\./i', ':', $str);
   // guess if its am or pm
   $am = preg_match('/\Sam|\d\sam/i', $str) ? true : false;
-  $pm = preg_match('/\Spm|\d\spm/i', $str) ? true : false;
+  //$pm = preg_match('/\Spm|\d\spm/i', $str) ? true : false;
+  $pm = !$am;
   // really crudely get the hour by parsing the string for an integer
   $hour = preg_match('/^\s\d|^\d/i', $str) ? intval($str) : -1;
   // and now crudely get the minute by looking for a colon and a number
@@ -73,8 +73,8 @@ function parseString($str) {
   return array("am" => $am, "pm" => $pm, "timezone" => $timezone, "hour" => $hour, "minutes" => $minutes);
 }
 
-function generateResponseString($time_properties,$linebreak) {
-  global $locations, $datetime, $hourEmoji, $format;
+function generateResponseString($time_properties,$type) {
+  global $locations, $datetime, $format;
   $time_str = "";
   // if we got timezone convert, else just show times
   if(isset($time_properties) && isset($time_properties['timezone']) && $time_properties['timezone'] !== false) {
@@ -83,22 +83,33 @@ function generateResponseString($time_properties,$linebreak) {
     // do we have an hour?
     if ($time_properties['hour'] > -1) {
       $datetime->setTime($time_properties['hour'], $time_properties['minutes']);
-      foreach ($locations as $location) {
-        if ($time_properties['timezone'] === $location["timezone"]) {
-          $time_str = $time_str."\n".$location["emoji"]." ".$hourEmoji[$datetime->format('g')]." ".$datetime->format($format)." in ".$location["name"]." is:".$linebreak.$linebreak;
+      if ($type === "html") {
+        foreach ($locations as $location) {
+          $hightlight = ($time_properties['timezone'] === $location["timezone"]) ? " o-conversion__highlight" : "";
+          $time_str = $time_str."<span class=\"o-conversion__location".$hightlight."\"><span class=\"o-conversion__emoji\">".$location["emoji"]."</span><span class=\"o-conversion__name\">".$location["name"]."</span><span class=\"o-conversion__time\">".$datetime->format("h:i")."</span><span class=\"o-conversion__am-pm\">".$datetime->format("a")."</span></span>";
         }
-      }
-      foreach ($locations as $location) {
-        if ($time_properties['timezone'] !== $location["timezone"]) {
-          $datetime->setTimezone(new DateTimeZone($location["timezone"]));
-          $time_str = $time_str.$location["emoji"]." ".$hourEmoji[$datetime->format('g')]." ".$datetime->format($format)." - ".$location["name"].$linebreak;
+      } else {
+        foreach ($locations as $location) {
+          if ($time_properties['timezone'] === $location["timezone"]) {
+            $time_str = $time_str."\n".$location["emoji"]." ".$datetime->format($format)." in ".$location["name"]." is:"."\n"."\n";
+          }
+        }
+        foreach ($locations as $location) {
+          if ($time_properties['timezone'] !== $location["timezone"]) {
+            $datetime->setTimezone(new DateTimeZone($location["timezone"]));
+            $time_str = $time_str.$location["emoji"]." ".$datetime->format($format)." - ".$location["name"]."\n";
+          }
         }
       }
     } else {
       // no hour, but a city given
       foreach ($locations as $location) {
         if ($time_properties['timezone'] === $location["timezone"]) {
-          $time_str = $time_str.$location["emoji"]." ".$hourEmoji[$datetime->format('g')]." The time in ".$location["name"]." is ".$datetime->format($format).$linebreak;
+          if ($type === "html") {
+            $time_str = $time_str."Time in <span class=\"o-conversion__highlight\">".$location["name"]."</span> is <span class=\"o-conversion__highlight\">".$datetime->format($format)."</span><br>";
+          } else {
+            $time_str = $time_str.$location["emoji"]." The time in ".$location["name"]." is ".$datetime->format($format)."\n";
+          }
         }
       }
     }
@@ -106,7 +117,11 @@ function generateResponseString($time_properties,$linebreak) {
     // no timezone specified
     foreach ($locations as $location) {
       $datetime->setTimezone(new DateTimeZone($location["timezone"]));
-      $time_str = $time_str.$location["emoji"]." ".$hourEmoji[$datetime->format('g')]." ".$datetime->format($format)." - ".$location["name"].$linebreak;
+      if ($type === "html") {
+        $time_str = $time_str."<span class=\"o-conversion__location\"><span class=\"o-conversion__emoji\">".$location["emoji"]."</span><span class=\"o-conversion__name\">".$location["name"]."</span><span class=\"o-conversion__time\">".$datetime->format("h:i")."</span><span class=\"o-conversion__am-pm\">".$datetime->format("a")."</span></span>";
+      } else {
+        $time_str = $time_str.$location["emoji"]." ".$datetime->format($format)." - ".$location["name"]."\n";
+      }
     }
   }
 

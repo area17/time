@@ -11,9 +11,9 @@
 
   if(isset($_GET['str'])) {
     $time_properties = parseString(urldecode($_GET['str']));
-    $message_str = generateResponseString($time_properties,"<br>");
+    $message_str = generateResponseString($time_properties,"html");
   } else {
-    $message_str = generateResponseString(null,"<br>");
+    $message_str = generateResponseString(null,"html");
   }
 
   echo $message_str;
