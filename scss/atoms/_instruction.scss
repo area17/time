@@ -1,7 +1,7 @@
 .instruction {
-  display: none;
   position: absolute;
-  bottom: 50px;
+  right: 100px;
+  top: 14px;
   margin: 0;
   padding: 0;
   border: 0 none;
@@ -12,6 +12,8 @@
 
   @include breakpoint('medium+') {
     right: 50px;
+    top: auto;
+    bottom: 50px;
   }
 
   @include breakpoint('xlarge+') {
@@ -23,11 +25,7 @@
     color: $color__text;
   }
 
-  @include breakpoint('medium+') {
-    display: block;
-
-    .s-screensaver & {
-      display: none;
-    }
+  .s-screensaver & {
+    display: none;
   }
 }

@@ -23,24 +23,36 @@
     top: 100px;
     width: 16px;
     height: 16px;
-    border-radius: 50%;
     border: 0 solid transparent;
-    border-top-color: $color__spinner--times;
     border-top-width: 3px;
     border-right-width: 3px;
+    border-top-color: $color__spinner--times;
+    border-radius: 50%;
     animation: spin 1.5s linear infinite;
   }
 }
 
+.o-conversion__input {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.o-conversion__label {
+  flex: 0 0 auto;
+  width: 33.33%;
+  color: $color__text--times-off;
+  line-height: 48px;
+}
+
 .o-conversion input {
   display: block;
-  width: 100%;
-  margin: 20px 0 0;
-  padding-right: 100px;
+  flex: 0 0 auto;
+  width: 66.66%;
+  height: 48px;
   border: 0 none;
-  background: $color__black--2;
+  background: $color__white;
   color: $color__text--times;
-  font: 48px/1 $sans-serif;
+  font: 48px/48px $sans-serif;
 
   &::-webkit-input-placeholder {
     color: $color__text--times-off;
@@ -63,6 +75,7 @@
   }
 }
 
+/*
 .o-conversion p {
   margin: 50px 0 0;
   color: $color__text--times;
@@ -74,6 +87,7 @@
     color: $color__text--times-off;
   }
 }
+*/
 
 .o-conversion .o-conversion__close {
   position: absolute;

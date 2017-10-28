@@ -98,9 +98,11 @@
         <span class="legal__a17">&copy; <a href="http://area17.com/" target="_blank">AREA 17</a> <?php date_default_timezone_set('UTC'); echo date("Y"); ?></span><span class="legal__dash"> &ndash; </span><a href="/downloads/A17TimeZones.saver.zip" class="legal__screensaver">Download screensaver</a><span class="legal__dash"> &ndash; </span><a href="https://darksky.net/poweredby/" class="legal__darksky" target="_blank">Weather powered by Dark Sky</a></small>
     </div>
     <div class="o-conversion" data-behavior="conversion">
-      <p>Type a time to convert:</p>
-      <input type="text" placeholder="eg: 15:00 Paris, 3pm New York, 9:30 Tucumán">
-      <p></p>
+      <p class="o-conversion__input">
+        <label for="conversion" class="o-conversion__label">Type a time to convert:</label>
+        <input type="text" name="conversion" placeholder="eg: 15:00 Paris, 3pm New York, 9:30 Tucumán">
+      </p>
+      <p class="o-conversion__output"></p>
       <a href="#" class="o-conversion__close">╳</a>
     </div>
     <div class="o-settings" data-behavior="settings">
