@@ -191,7 +191,7 @@ A17.Behaviors.timezones = function(container) {
   }
 
   function _setIntervals() {
-    secondInterval = setInterval(_updateTimes, 1000);
+    secondInterval = setInterval(_updateTimes, 1000 * 20);
     weatherInterval = setInterval(_updateWeather, 60 * 30 * 1000);
   }
 

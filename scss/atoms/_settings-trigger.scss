@@ -1,7 +1,7 @@
 .settings-trigger {
   position: absolute;
-  left: 80%;
-  bottom: 50px;
+  top: 20px;
+  right: 20px;
   margin: 0;
   padding: 0;
   border: 0 none;
@@ -9,6 +9,17 @@
   color: $color__text--off;
   font: 15px/25px $sans-serif;
   cursor: pointer;
+
+  @include breakpoint('medium+') {
+    right: 150px;
+    top: auto;
+    bottom: 50px;
+  }
+
+  @include breakpoint('xlarge+') {
+    left: calc((((100% - 50px) / 5) * 4) + 50px);
+    right: auto;
+  }
 
   &:hover {
     color: $color__text;
@@ -18,6 +29,7 @@
     @include breakpoint('small+') {
       content: '';
       position: fixed;
+      z-index: 1;
       left: 0;
       right: 300px;
       top: 0;

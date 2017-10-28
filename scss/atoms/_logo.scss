@@ -1,6 +1,7 @@
 .logo {
   display: block;
   position: absolute;
+  z-index: 1;
   left: 20px;
   top: 20px;
   width: 63px;
@@ -8,13 +9,13 @@
   color: $color__white;
 
   @include breakpoint('medium+') {
+    left: 50px;
     top: calc(50% - 38px);
     width: 111px;
     height: 70px;
   }
 
   @include breakpoint('large+') {
-    left: 50px;
     top: calc(50% - 40px);
     width: 127px;
     height: 80px;

@@ -1,7 +1,6 @@
 .instruction {
   display: none;
   position: absolute;
-  left: calc(80% + 100px);
   bottom: 50px;
   margin: 0;
   padding: 0;
@@ -10,6 +9,15 @@
   color: $color__text--off;
   font: 15px/25px $sans-serif;
   cursor: pointer;
+
+  @include breakpoint('medium+') {
+    right: 50px;
+  }
+
+  @include breakpoint('xlarge+') {
+    left: calc((((100% - 50px) / 5) * 4) + 150px);
+    right: auto;
+  }
 
   &:hover {
     color: $color__text;

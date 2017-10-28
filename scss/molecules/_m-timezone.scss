@@ -29,11 +29,13 @@
 
 .m-timezone__weather {
   display: block;
-}
+  opacity: 1;
+  transition: opacity .33s linear;
 
-.s-hide-weather .m-timezone__weather,
-.m-timezone.s-loading .m-timezone__weather {
-  display: none;
+  .s-hide-weather &,
+  .m-timezone.s-loading & {
+    opacity: 0;
+  }
 }
 
 .m-timezone__emoji {
@@ -42,6 +44,32 @@
 
   .m-timezone__rain-chance & {
     margin-right: 2px;
+  }
+}
+
+@include breakpoint('xsmall') {
+  .m-timezone,
+  .m-timezone__weather {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .m-timezone__name,
+  .m-timezone__time,
+  .m-timezone__feels-like,
+  .m-timezone__rain-chance {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+
+  .m-timezone__time,
+  .m-timezone__rain-chance {
+    text-align: right;
+  }
+
+  .m-timezone__weather {
+    flex: 0 0 auto;
+    width: 100%;
   }
 }
 
