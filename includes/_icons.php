@@ -37,23 +37,23 @@
   <symbol id="partly-cloudy-night--animated" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" viewBox="0 0 22 22">
     <rect x="7.25" y="2.75" width="2" height=".5" fill="currentColor" style="transform-origin: 50% 50%;">
       <animate attributeName="opacity" values=".5; 1; .5" dur="1s" repeatCount="indefinite"/>
-      <animate attributeName="fill" values="currentColorccb; currentColor; #ced4ff; currentColor;" dur="10s" repeatCount="indefinite"/>
+      <!-- <animate attributeName="fill" values="currentColorccb; currentColor; #ced4ff; currentColor;" dur="10s" repeatCount="indefinite"/> -->
       <animateTransform attributeName="transform" type="scale" keyTimes="0;.98;.99;1" values="1;1;2;1" dur="20s" additive="sum" fill="freeze" repeatCount="indefinite"/>
     </rect>
     <rect x="8" y="2" width=".5" height="2" fill="currentColor" style="transform-origin: 50% 50%;">
       <animate attributeName="opacity" values=".5; 1; .5" dur="1s" repeatCount="indefinite"/>
-      <animate attributeName="fill" values="currentColorccb; currentColor; #ced4ff; currentColor;" dur="10s" repeatCount="indefinite"/>
+      <!-- <animate attributeName="fill" values="currentColorccb; currentColor; #ced4ff; currentColor;" dur="10s" repeatCount="indefinite"/> -->
       <animateTransform attributeName="transform" type="scale" keyTimes="0;.98;.99;1" values="1;1;2;1" dur="20s" additive="sum" fill="freeze" repeatCount="indefinite"/>
     </rect>
 
     <rect x="17.25" y="6.75" width="2" height=".5" fill="currentColor" style="transform-origin: 50% 50%;">
       <animate attributeName="opacity" values=".5; 1; .5" dur="1s" begin="-.5s" repeatCount="indefinite"/>
-      <animate attributeName="fill" values="currentColorccb; currentColor; #ced4ff; currentColor;" dur="10s" begin="-5s" repeatCount="indefinite"/>
+      <!-- <animate attributeName="fill" values="currentColorccb; currentColor; #ced4ff; currentColor;" dur="10s" begin="-5s" repeatCount="indefinite"/> -->
       <animateTransform attributeName="transform" type="scale" keyTimes="0;.98;.99;1" values="1;1;2;1" dur="20s" begin="-10s" additive="sum" fill="freeze" repeatCount="indefinite"/>
     </rect>
     <rect x="18" y="6" width=".5" height="2" fill="currentColor" style="transform-origin: 50% 50%;">
       <animate attributeName="opacity" values=".5; 1; .5" dur="1s" begin="-.5s" repeatCount="indefinite"/>
-      <animate attributeName="fill" values="currentColorccb; currentColor; #ced4ff; currentColor;" dur="10s" begin="-5s" repeatCount="indefinite"/>
+      <!-- <animate attributeName="fill" values="currentColorccb; currentColor; #ced4ff; currentColor;" dur="10s" begin="-5s" repeatCount="indefinite"/> -->
       <animateTransform attributeName="transform" type="scale" keyTimes="0;.98;.99;1" values="1;1;2;1" dur="20s" begin="-10s" additive="sum" fill="freeze" repeatCount="indefinite"/>
     </rect>
 
