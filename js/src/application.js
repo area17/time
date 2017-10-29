@@ -18,10 +18,9 @@ A17.activeBehaviors = {};
 A17.settings = {};
 
 // defaults
-A17.settings.ClockType = 'digital';
-A17.settings.DigitalFormat = '12';
-A17.settings.ShowTemperature = 'true';
-A17.settings.ShowCurrentWeather = 'false';
+A17.settings.ClockType = 'analogue';
+A17.settings.DigitalFormat = '24';
+A17.settings.ShowCurrentWeather = 'true';
 A17.settings.AnimatedIcons = 'false';
 A17.settings.TemperatureUnit = 'c';
 
@@ -35,7 +34,6 @@ A17.onReady = function(){
   } else {
     A17.settings.ClockType = localStorage.ClockType || A17.settings.ClockType;
     A17.settings.DigitalFormat = localStorage.DigitalFormat || A17.settings.DigitalFormat;
-    A17.settings.ShowTemperature = localStorage.ShowTemperature || A17.settings.ShowTemperature;
     A17.settings.ShowCurrentWeather = localStorage.ShowCurrentWeather || A17.settings.ShowCurrentWeather;
     A17.settings.AnimatedIcons = localStorage.AnimatedIcons || A17.settings.AnimatedIcons;
     A17.settings.TemperatureUnit = localStorage.TemperatureUnit || A17.settings.TemperatureUnit;
