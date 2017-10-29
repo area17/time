@@ -73,9 +73,13 @@ function parseString($str) {
   return array("am" => $am, "pm" => $pm, "timezone" => $timezone, "hour" => $hour, "minutes" => $minutes);
 }
 
-function generateResponseString($time_properties,$type) {
+function generateResponseString($time_properties, $type = "text") {
   global $locations, $datetime, $format;
   $time_str = "";
+  if(isset($time_properties) && isset($time_properties['timezone']) && $time_properties['timezone'] === false && $type === "html") {
+    // default to converting time in UTC on the web
+    $time_properties['timezone'] = "UTC";
+  }
   // if we got timezone convert, else just show times
   if(isset($time_properties) && isset($time_properties['timezone']) && $time_properties['timezone'] !== false) {
     // timezone specified
@@ -85,6 +89,7 @@ function generateResponseString($time_properties,$type) {
       $datetime->setTime($time_properties['hour'], $time_properties['minutes']);
       if ($type === "html") {
         foreach ($locations as $location) {
+          $datetime->setTimezone(new DateTimeZone($location["timezone"]));
           $hightlight = ($time_properties['timezone'] === $location["timezone"]) ? " o-conversion__highlight" : "";
           $time_str = $time_str."<span class=\"o-conversion__location".$hightlight."\"><span class=\"o-conversion__emoji\">".$location["emoji"]."</span><span class=\"o-conversion__name\">".$location["name"]."</span><span class=\"o-conversion__time\">".$datetime->format("h:i")."</span><span class=\"o-conversion__am-pm\">".$datetime->format("a")."</span></span>";
         }
