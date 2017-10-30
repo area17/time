@@ -51,7 +51,8 @@ A17.Behaviors.conversion = function(container) {
         url: '/convert.php',
         type: 'GET',
         data: {
-          str: _fixedEncodeURIComponent(value)
+          str: _fixedEncodeURIComponent(value),
+          tz: _fixedEncodeURIComponent(A17.guessedUserTimeZone),
         },
         onSuccess: function(data){
           if (data.length > 0 && thisSearchTime === lastSearchTime) {

@@ -10,7 +10,7 @@
   */
 
   if(isset($_GET['str'])) {
-    $time_properties = parseString(urldecode($_GET['str']));
+    $time_properties = parseString(urldecode($_GET['str']),urldecode($_GET['tz']));
     $message_str = generateResponseString($time_properties,"html");
   } else {
     $message_str = generateResponseString(null,"html");

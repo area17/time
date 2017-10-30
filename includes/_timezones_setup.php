@@ -24,7 +24,7 @@ foreach ($locations as $location => $locationinfo) {
   $locations[$location]["offset"] = $timeInLocation->getOffset();
 }
 
-function parseString($str) {
+function parseString($str = "", $guessedtz = false) {
   // replace any . with :
   $str = preg_replace('/\./i', ':', $str);
   // guess if its am or pm
@@ -70,15 +70,19 @@ function parseString($str) {
     $timezone = "America/Los_Angeles";
   }
 
-  return array("am" => $am, "pm" => $pm, "timezone" => $timezone, "hour" => $hour, "minutes" => $minutes);
+  return array("am" => $am, "pm" => $pm, "timezone" => $timezone, "hour" => $hour, "minutes" => $minutes, "guessed_timezone" => $guessedtz);
 }
 
 function generateResponseString($time_properties, $type = "text") {
   global $locations, $datetime, $format;
   $time_str = "";
   if(isset($time_properties) && isset($time_properties['timezone']) && $time_properties['timezone'] === false && $type === "html") {
-    // default to converting time in UTC on the web
-    $time_properties['timezone'] = "UTC";
+    // default to converting time to guessed timezone or UTC on the web
+    if (isset($time_properties['guessed_timezone']) && $time_properties['guessed_timezone'] !== false) {
+      $time_properties['timezone'] = $time_properties['guessed_timezone'];
+    } else {
+      $time_properties['timezone'] = "UTC";
+    }
   }
   // if we got timezone convert, else just show times
   if(isset($time_properties) && isset($time_properties['timezone']) && $time_properties['timezone'] !== false) {
