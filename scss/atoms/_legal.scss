@@ -38,6 +38,37 @@
 }
 
 
+.legal .legal__dash {
+  display: none;
+  transition: opacity .25s;
+
+  @include breakpoint('medium+') {
+    display: inline;
+  }
+}
+
+.legal__a17 {
+
+  .s-screensaver & {
+    display: none;
+  }
+}
+
+.legal .legal__a17  + .legal__dash {
+
+  .s-screensaver & {
+    display: none;
+  }
+
+  .s-hide-weather & {
+    opacity: 0;
+
+    @include breakpoint('large+') {
+      opacity: 1;
+    }
+  }
+}
+
 .legal__screensaver {
   display: none;
 
@@ -50,15 +81,6 @@
   }
 }
 
-.legal .legal__dash {
-  display: none;
-
-  @include breakpoint('medium+') {
-    display: inline;
-  }
-}
-
-
 .legal .legal__screensaver + .legal__dash {
   display: none;
 
@@ -68,5 +90,20 @@
 
   .s-screensaver & {
     display: none;
+  }
+
+  .s-hide-weather & {
+
+    @include breakpoint('large+') {
+      opacity: 0;
+    }
+  }
+}
+
+.legal__darksky {
+  transition: opacity .25s;
+
+  .s-hide-weather & {
+    opacity: 0;
   }
 }
