@@ -17,13 +17,14 @@ A17.currentMediaQuery = 'large';
 A17.activeBehaviors = {};
 A17.settings = {};
 A17.guessedUserTimeZone = (window.Intl) ? Intl.DateTimeFormat().resolvedOptions().timeZone : 'UTC';
+A17.guessedUserUSA = /Adak|Anchorage|Boise|Chicago|Denver|Detroit|Indiana|Juneau|Kentucky|Los_Angeles|Menominee|Metlakatla|New_York|Nome|North_Dakota|Phoenix|Sitka|Yakutat|Honolulu/i.test(A17.guessedUserTimeZone);
 
 // defaults
 A17.settings.ClockType = 'analogue';
-A17.settings.DigitalFormat = '24';
+A17.settings.DigitalFormat = A17.guessedUserUSA ? '12' : '24';
 A17.settings.ShowCurrentWeather = 'true';
 A17.settings.AnimatedIcons = 'false';
-A17.settings.TemperatureUnit = /Adak|Anchorage|Boise|Chicago|Denver|Detroit|Indiana|Juneau|Kentucky|Los_Angeles|Menominee|Metlakatla|New_York|Nome|North_Dakota|Phoenix|Sitka|Yakutat|Honolulu/i.test(A17.guessedUserTimeZone) ? 'f' : 'c';
+A17.settings.TemperatureUnit = A17.guessedUserUSA ? 'f' : 'c';
 
 // set up and trigger looking for the behaviors on DOM ready
 A17.onReady = function(){
