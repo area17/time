@@ -67,7 +67,7 @@ A17.Behaviors.timezones = function(container) {
       //
       tempUnit = tempUnit.toUpperCase();
       //
-      locationEl.querySelector('.m-timezone__weather').innerHTML = '<span class="m-timezone__feels-like' + temperatureClass + '" title="feels like"><span class="m-timezone__emoji' + emojiClass + '" title="' + weatherSummary + ' Feels like ' + tempFeelsLike + '°' + tempUnit + '">' + weatherEmoji + '</span>' + temp + '&deg;' + tempUnit + '</span>\n<span class="m-timezone__rain-chance' + rainChanceClass + '"><span class="m-timezone__emoji' + umbrellaClass + '" title="Precipitation probability in the next hour: ' + location.rainChance + '% ' + umbrellaEmoji + '">' + iconTemplate.replace('{{name}}', 'rain-drops') + '</span>' + location.rainChance + '%</span>';
+      locationEl.querySelector('.m-timezone__weather').innerHTML = '<span class="m-timezone__feels-like' + temperatureClass + '" title="' + weatherSummary + ' Feels like ' + tempFeelsLike + '°' + tempUnit + '."><span class="m-timezone__emoji' + emojiClass + '">' + weatherEmoji + '</span>' + temp + '&deg;' + tempUnit + '</span>\n<span class="m-timezone__rain-chance' + rainChanceClass + '" title="Probability of precipitation in the next hour: ' + location.rainChance + '% ' + umbrellaEmoji + '"><span class="m-timezone__emoji' + umbrellaClass + '">' + iconTemplate.replace('{{name}}', 'rain-drops') + '</span>' + location.rainChance + '%</span>';
       //
       locationEl.classList.remove('s-loading');
     }
