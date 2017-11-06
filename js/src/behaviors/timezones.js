@@ -9,7 +9,6 @@ A17.Behaviors.timezones = function(container) {
   var officeOpen = 9;
   var officeClosed = 19;
   var time, secondInterval, weatherInterval, weatherRecievedCounter;
-  var animatedIcons = ['clear-day','partly-cloudy-day','partly-cloudy-night','rain'];
 
   function _convertFtoC(f) {
     return (f - 32) * (5 / 9);
@@ -59,7 +58,7 @@ A17.Behaviors.timezones = function(container) {
       var moonPhase = A17.Functions.moonPhase();
       var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + '.';
       var weatherEmoji = (location.icon !== 'clear-night') ? iconTemplate.replace('{{name}}',location.icon) : iconTemplate.replace('{{name}}',moonPhase.icon);
-      if (A17.settings.AnimatedIcons === 'true' && location.icon !== 'clear-night' && (animatedIcons.indexOf(location.icon) !== -1)) {
+      if (A17.settings.AnimatedIcons === 'true' && location.icon !== 'clear-night') {
         weatherEmoji = iconTemplate.replace('{{name}}',location.icon + '--animated');
       }
       weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + ' Moon phase is ' + moonPhase.phase.toLowerCase() + ' ' + moonPhase.emoji + '.';
