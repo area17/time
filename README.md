@@ -67,6 +67,14 @@ Additional parameters set different options:
 * Added screen saver mode with parameter controlled options,
 * Somehow dropped the minified CSS down another 2kb
 
+### v3.0.1
+
+* updated footer links
+
+### v3.0.2
+
+* using SVG use to repeat icons rather than have an animated safe list. First step to icon optimisation.
+
 ## 2017 Refresh 1 (v2)
 
 * Redesigned to reflect new AREA17 website,
