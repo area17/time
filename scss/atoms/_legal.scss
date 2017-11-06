@@ -11,6 +11,10 @@
     margin-top: 0;
     text-align: left;
   }
+
+  .s-screensaver & {
+    display: none;
+  }
 }
 
 .legal br {
@@ -37,7 +41,6 @@
   }
 }
 
-
 .legal .legal__dash {
   display: none;
   transition: opacity .25s;
@@ -47,56 +50,10 @@
   }
 }
 
-.legal__a17 {
-
-  .s-screensaver & {
-    display: none;
-  }
-}
-
 .legal .legal__a17  + .legal__dash {
-
-  .s-screensaver & {
-    display: none;
-  }
 
   .s-hide-weather & {
     opacity: 0;
-
-    @include breakpoint('large+') {
-      opacity: 1;
-    }
-  }
-}
-
-.legal__screensaver {
-  display: none;
-
-  @include breakpoint('large+') {
-    display: inline;
-  }
-
-  .s-screensaver & {
-    display: none;
-  }
-}
-
-.legal .legal__screensaver + .legal__dash {
-  display: none;
-
-  @include breakpoint('large+') {
-    display: inline;
-  }
-
-  .s-screensaver & {
-    display: none;
-  }
-
-  .s-hide-weather & {
-
-    @include breakpoint('large+') {
-      opacity: 0;
-    }
   }
 }
 

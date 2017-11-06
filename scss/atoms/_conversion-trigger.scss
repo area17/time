@@ -1,6 +1,6 @@
-.settings-trigger {
+.conversion-trigger {
   position: absolute;
-  right: 100px;
+  right: 20px;
   top: 14px;
   margin: 0;
   padding: 0;
@@ -11,31 +11,22 @@
   cursor: pointer;
 
   @include breakpoint('medium+') {
-    right: 50px;
+    right: 150px;
     top: auto;
     bottom: 50px;
   }
 
+  @include breakpoint('large+') {
+    right: 285px;
+  }
+
   @include breakpoint('xlarge+') {
-    left: calc((((100% - 50px) / 5) * 4) + 50px);
+    left: calc((((100% - 50px) / 5) * 3) + 50px);
     right: auto;
   }
 
   &:hover {
     color: $color__text;
-  }
-
-  .s-settings-active &::before {
-    @include breakpoint('small+') {
-      content: '';
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      right: 300px;
-      top: 0;
-      bottom: 0;
-      background-color: rgba(0,0,0,.5);
-    }
   }
 
   .s-screensaver & {

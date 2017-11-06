@@ -1,6 +1,7 @@
-.conversion-trigger {
+.screensaver-trigger {
+  display: none;
   position: absolute;
-  right: 100px;
+  right: 20px;
   top: 14px;
   margin: 0;
   padding: 0;
@@ -10,14 +11,15 @@
   font: 15px/25px $sans-serif;
   cursor: pointer;
 
-  @include breakpoint('medium+') {
-    right: 50px;
+  @include breakpoint('large+') {
+    display: block;
+    right: 150px;
     top: auto;
     bottom: 50px;
   }
 
   @include breakpoint('xlarge+') {
-    left: calc((((100% - 50px) / 5) * 4) + 150px);
+    left: calc((((100% - 50px) / 5) * 3.45) + 50px);
     right: auto;
   }
 

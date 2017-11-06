@@ -85,6 +85,7 @@
       <a href="http://www.area17.com/" class="logo" target="_blank"><svg aria-hidden="true"><use xlink:href="#logo" /></svg></a>
       <button class="conversion-trigger">Convert</button>
       <button class="settings-trigger">Settings</button>
+      <a href="/downloads/A17TimeZones.saver.zip" class="screensaver-trigger">Screensaver</a>
       <p class="m-digital" data-behavior="digital"></p>
       <svg class="m-analogue" data-behavior="analogue" viewBox="0 0 425 425">
         <use xlink:href="#clock-face" class="m-analogue__face" />
@@ -95,7 +96,7 @@
       </svg>
       <ul class="o-timezones" data-behavior="timezones"></ul>
       <small class="legal">
-        <span class="legal__a17">&copy; <a href="http://area17.com/" target="_blank">AREA 17</a> <?php date_default_timezone_set('UTC'); echo date("Y"); ?></span><span class="legal__dash"> &ndash; </span><a href="/downloads/A17TimeZones.saver.zip" class="legal__screensaver">Download screensaver</a><span class="legal__dash"> &ndash; </span><a href="https://darksky.net/poweredby/" class="legal__darksky" target="_blank">Weather powered by Dark Sky</a></small>
+        <span class="legal__a17"><a href="http://area17.com/" target="_blank">AREA 17 studio time</a></span><span class="legal__dash"> &ndash; </span><a href="https://darksky.net/poweredby/" class="legal__darksky" target="_blank">Weather by Dark Sky</a></small>
     </div>
     <div class="o-conversion" data-behavior="conversion">
       <p class="o-conversion__input">
