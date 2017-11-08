@@ -8,6 +8,13 @@
 ?>
 <html dir="ltr" lang="en-US">
   <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180083-11"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-180083-11');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $meta_title; ?></title>
