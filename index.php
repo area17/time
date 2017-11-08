@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
-  $meta_title = "time.area17.com - AREA 17";
-  $meta_social_title = "AREA 17";
-  $meta_description = "Time, weather and timezone conversion between international A17 locations.";
+  $meta_title = "AREA 17 studio time";
+  $meta_social_title = "AREA 17 studio time";
+  $meta_description = "Time, weather and timezone conversion between AREA 17 studios and locations.";
   $meta_url = "https://time.area17.com/";
   $meta_image = "https://time.area17.com/img/og.png";
 ?>
