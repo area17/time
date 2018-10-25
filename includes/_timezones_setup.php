@@ -46,7 +46,7 @@ function parseString($str = "", $guessedtz = false) {
   }
 
   // begin guessing the timezone
-  if (preg_match('/(paris|par|france|fr|cet|cest|cdg)$/i', $str)) {
+  if (preg_match('/(paris|par|france|fr|cet|cest|cdg|luis)$/i', $str)) {
     $timezone = "Europe/Paris";
   }
 
@@ -54,7 +54,7 @@ function parseString($str = "", $guessedtz = false) {
     $timezone = "Europe/London";
   }
 
-  if (preg_match('/(tucumán|tucuman|tuc|argentina|ar|art|luis|pablo|bernardo)$/i', $str)) {
+  if (preg_match('/(tucumán|tucuman|tuc|argentina|ar|art|pablo|bernardo)$/i', $str)) {
     $timezone = "America/Argentina/Tucuman";
   }
 
