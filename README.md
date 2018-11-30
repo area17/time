@@ -22,12 +22,12 @@ Timezone conversion, in page and in Hipchat can accept:
 
 * `5:12pm NYC` which will convert 5:12pm to the other time zones
 * `Paris` which will show you the current time in Paris
-* `Luis` which will show you the current time in Tucumán
+* `Tim` which will show you the current time in Tennessee
 * `6pm Pablo` which will convert 6pm Tucumán to the other time zones
 
 The A17 locale info is [reasonably loose](https://github.com/area17/time/blob/master/includes/_timezones_setup.php#L48) - you can use city, country, state, local airport code and in some instances staff member names. 
 
-NB: If Luis is in the Paris office, time.area17.com doesn't know that and so will always show his time as being in Tucumán.
+NB: If Pablo is in the New York office, time.area17.com doesn't know that and so will always show his time as being in Tucumán.
 
 ### In HipChat
 
@@ -36,7 +36,7 @@ For A17 staff who use Hipchat, there is a `/time` command available in project r
 * `/time` which prints out the current time in all timezones
 * `/time Paris` which prints out the current time in Paris
 * `/time 3:30pm NYC` which will convert 3:30pm NYC to the other time zones
-* `/time Tim` which prints out the current time for Tim in Memphis
+* `/time Tim` which prints out the current time for Tim in Tennessee
 * `/time 6pm Mike` which will convert 6pm UK to the other time zones
 
 ## Screen saver mode

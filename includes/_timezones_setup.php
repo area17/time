@@ -50,11 +50,11 @@ function parseString($str = "", $guessedtz = false) {
     $timezone = "Europe/Paris";
   }
 
-  if (preg_match('/(london|manchester|britain|england|uk|gb|bst|gmt|mike|man|lhr)$/i', $str)) {
+  if (preg_match('/(london|manchester|britain|england|uk|gb|bst|gmt|mike|man|lhr|strobe|joe|chris|mac)$/i', $str)) {
     $timezone = "Europe/London";
   }
 
-  if (preg_match('/(tucumán|tucuman|tuc|argentina|ar|art|pablo|bernardo)$/i', $str)) {
+  if (preg_match('/(tucumán|tucuman|tuc|argentina|ar|art|pablo)$/i', $str)) {
     $timezone = "America/Argentina/Tucuman";
   }
 
