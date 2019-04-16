@@ -1,7 +1,9 @@
 .o-clocks {
   display: flex;
   position: relative;
-  flex-flow: column nowrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
   min-height: 100vh;
   padding: 40px 20px 20px;
   animation: fade-in .25s linear;
@@ -54,8 +56,8 @@
 }
 
 .o-clocks .m-analogue {
-  flex: 0 0 auto;
-  align-self: center;
+  //flex: 0 0 auto;
+  //align-self: center;
   margin: 20px;
 
   @include breakpoint('medium+') {
