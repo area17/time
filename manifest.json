@@ -1,0 +1,37 @@
+{
+  "name": "AREA 17 studio time",
+  "short_name": "A17 Time",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000",
+  "orientation": "portrait",
+  "background_color": "#000",
+  "description": "Time, weather and timezone conversion between AREA 17 studios and locations.",
+  "icons": [
+    {
+      "src": "img/favicons/favicon-57.png",
+      "sizes": "57x57",
+      "type": "image/png"
+    },
+    {
+      "src": "img/favicons/favicon-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "img/favicons/favicon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "img/favicons/favicon-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "img/favicons/favicon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

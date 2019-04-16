@@ -78,7 +78,6 @@
     <link href="//www.area17.com/favicon-144.png" rel="apple-touch-icon" sizes="144x144">
     <link href="//www.area17.com/favicon-152.png" rel="apple-touch-icon" sizes="152x152">
     <link href="//www.area17.com/favicon-180.png" rel="apple-touch-icon-precomposed" sizes="180x180">
-
     <meta name="apple-mobile-web-app-title" content="AREA 17" />
     <meta name="format-detection" content="telephone=no" />
 
@@ -86,6 +85,15 @@
 
     <meta name="msapplication-TileColor" content="#000000">
     <meta name="msapplication-TileImage" content="//www.area17.com/favicon-144.png">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="/img/apple_splash/apple_splash_2048.png" sizes="2048x2732" rel="apple-touch-startup-image"/>
+    <link href="/img/apple_splash/apple_splash_1668.png" sizes="1668x2224" rel="apple-touch-startup-image"/>
+    <link href="/img/apple_splash/apple_splash_1536.png" sizes="1536x2048" rel="apple-touch-startup-image"/>
+    <link href="/img/apple_splash/apple_splash_1125.png" sizes="1125x2436" rel="apple-touch-startup-image"/>
+    <link href="/img/apple_splash/apple_splash_1242.png" sizes="1242x2208" rel="apple-touch-startup-image"/>
+    <link href="/img/apple_splash/apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image"/>
+    <link href="/img/apple_splash/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image"/>
+    <link rel="manifest" href="/manifest.json">
   </head>
   <body>
     <div class="o-clocks">
@@ -140,6 +148,18 @@
     <script src="/js/timezones.js"></script>
     <?php include "includes/_timezones_setup.php" ?>
     <script>A17.locations = <?php echo json_encode(array_reverse($locations)); ?>;</script>
+    <script type="text/javascript">
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('sw.js').then(function (reg) {
+            // registration worked
+          }).catch(function (error) {
+            // registration failed
+            console.log('Registration failed with ' + error);
+          });
+        });
+      }
+    </script>
   </body>
 </html>
 
