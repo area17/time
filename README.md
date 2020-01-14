@@ -80,6 +80,10 @@ Additional parameters set different options:
 * added Los Angeles as Myles is out in LA
 * renamed Memphis to Jackson as Tim is in Jackson TN and not Memphis TN
 
+### v3.0.6
+
+* `npm audit fix`
+
 ## 2017 Refresh 1 (v2)
 
 * Redesigned to reflect new AREA17 website,

@@ -1,6 +1,6 @@
 {
   "name": "Timezones",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Timezones helper for A17",
   "devDependencies": {
     "grunt": "^1.0.4",
@@ -10,7 +10,7 @@
     "grunt-contrib-nodeunit": "^2.0.0",
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-gitinfo": "^0.1.8",
+    "grunt-gitinfo": "^0.1.9",
     "grunt-gulp": "^1.0.2",
     "grunt-sass": "^1.2.1",
     "grunt-timer": "^0.5.8",
