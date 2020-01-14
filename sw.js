@@ -13,7 +13,7 @@ if (workbox) {
   workbox.precaching.precacheAndRoute([
   {
     "url": "css/timezones.css",
-    "revision": "d597a1ca01e8260d42185bb28440ed68"
+    "revision": "d761dfe8569641f4fb6da8e931540a4d"
   },
   {
     "url": "fonts/SuisseIntl-Regular-WebXL.woff2",
@@ -89,7 +89,7 @@ if (workbox) {
   },
   {
     "url": "js/timezones.js",
-    "revision": "122a59862762cbaee02d03e44b05c6f7"
+    "revision": "0d75856877d3bcb0a04be5d7e67796c5"
   },
   {
     "url": "/",

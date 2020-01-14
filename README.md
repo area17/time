@@ -29,9 +29,9 @@ The A17 locale info is [reasonably loose](https://github.com/area17/time/blob/ma
 
 NB: If Pablo is in the New York office, time.area17.com doesn't know that and so will always show his time as being in Tucumán.
 
-### In HipChat
+### In Slack
 
-For A17 staff who use Hipchat, there is a `/time` command available in project rooms:
+For A17 staff who use Slack, there is a `/time` command available in project rooms:
 
 * `/time` which prints out the current time in all timezones
 * `/time Paris` which prints out the current time in Paris
@@ -74,6 +74,11 @@ Additional parameters set different options:
 ### v3.0.2
 
 * using SVG use to repeat icons rather than have an animated safe list. First step to icon optimisation.
+
+### v3.0.5
+
+* added Los Angeles as Myles is out in LA
+* renamed Memphis to Jackson as Tim is in Jackson TN and not Memphis TN
 
 ## 2017 Refresh 1 (v2)
 
