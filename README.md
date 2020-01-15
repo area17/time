@@ -84,6 +84,10 @@ Additional parameters set different options:
 
 * `npm audit fix`
 
+### v3.0.7
+
+* Added Lagos, Cairo, Nairobi and Shanghai (to make an even 10)
+
 ## 2017 Refresh 1 (v2)
 
 * Redesigned to reflect new AREA17 website,
