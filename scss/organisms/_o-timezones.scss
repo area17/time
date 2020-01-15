@@ -17,8 +17,12 @@
     margin-top: 20px;
   }
 
+  @include breakpoint('large+') {
+    width: 20%;
+  }
+
   @include breakpoint('xlarge+') {
-    width: 16.66%;
+    width: 20%;
     margin-top: 40px;
   }
 }
