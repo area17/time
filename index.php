@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <?php
+  $package = file_get_contents('package.json');
+  $package = json_decode($package, true);
   $meta_title = "AREA 17 studio time";
   $meta_social_title = "AREA 17 studio time";
   $meta_description = "Time, weather and timezone conversion between AREA 17 studios and locations.";
@@ -8,13 +10,6 @@
 ?>
 <html dir="ltr" lang="en-US">
   <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180083-11"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-180083-11');
-    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $meta_title; ?></title>
@@ -27,7 +22,7 @@
         A17.screensaver = false;
       }
     </script>
-    <link href="/css/timezones.css" rel="stylesheet" />
+    <link href="/css/timezones.css?v=<?php echo $package["version"]; ?>" rel="stylesheet" />
     <style id="animations"></style>
 
     <?php if(isset($meta_social_title)) { ?>
@@ -145,10 +140,18 @@
       <p class="o-settings__save"><button class="close-settings-trigger">Save settings</button></p>
     </div>
     <?php include "includes/_icons.php" ?>
-    <script src="/js/timezones.js"></script>
+    <script src="/js/timezones.js?v=<?php echo $package["version"]; ?>"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180083-11"></script>
     <?php include "includes/_timezones_setup.php" ?>
-    <script>A17.locations = <?php echo json_encode(array_reverse($locations)); ?>;</script>
-    <script type="text/javascript">
+    <script>
+      A17.locations = <?php echo json_encode(array_reverse($locations)); ?>;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-180083-11');
+
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
           navigator.serviceWorker.register('sw.js').then(function (reg) {

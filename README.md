@@ -88,6 +88,11 @@ Additional parameters set different options:
 
 * Added Lagos, Cairo, Nairobi and Shanghai (to make an even 10)
 
+### v3.0.8
+
+* Digital clock layout fix
+* adding package.json version number to CSS and JS file src to combat cache for screen savers
+
 ## 2017 Refresh 1 (v2)
 
 * Redesigned to reflect new AREA17 website,
