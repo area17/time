@@ -44,13 +44,16 @@ A17.Behaviors.analogue = function(container) {
       container.querySelector('.m-analogue__hour').setAttribute('style', _transformString(h));
       container.querySelector('.m-analogue__minute').setAttribute('style', _transformString(m));
       container.querySelector('.m-analogue__second').setAttribute('style', _transformString(s));
-      timezonesStyleBlock.textContent = str;
+      // update
+      window.requestAnimationFrame(function() {
+        timezonesStyleBlock.textContent = str;
+      });
     });
   }
 
   function _setIntervals() {
     // updates once a minute to maintain accuracy
-    minuteInterval = setInterval(_setClock, (60 * 1000));
+    minuteInterval = setInterval(_setClock, (1 * 1000));
   }
 
   function _handleVisibilityChange(event) {
