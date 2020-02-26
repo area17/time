@@ -4,48 +4,48 @@ A17.Behaviors.analogue = function(container) {
   var timezonesStyleBlock = document.getElementById('animations');
 
   function _transformString(num) {
-    return '-webkit-transform:rotate(' + num + 'deg);transform:rotate(' + num + 'deg);';
+    return 'transform:rotate(' + num + 'deg);';
   }
 
   function _animationString(hand,num) {
-    return '@-webkit-keyframes time_' + hand + ' { from { -webkit-transform: rotate(' + num + 'deg); } to { -webkit-transform: rotate(' + (num + 360) + 'deg); } }\n@keyframes time_' + hand + ' { from { transform: rotate(' + num + 'deg); } to { transform: rotate(' + (num + 360) + 'deg); } }\n';
+    return '@keyframes time_' + hand + ' { from { transform: rotate(' + num + 'deg); } to { transform: rotate(' + (num + 360) + 'deg); } }\n';
   }
 
-  function _setClock(reset) {
+  function _setClock() {
     var str = '';
     var h = 0;
     var m = 0;
     var s = 0;
     var time;
-    //
-    if (!reset) {
+
+    // safari seems to need this thrash, otherwise it won't animate the hands
+    timezonesStyleBlock.textContent = '.m-analogue__hour, .m-analogue__minute, .m-analogue__second { animation: none; }';
+
+    window.requestAnimationFrame(function() {
+      //
       time = new Date();
       h = time.getHours();
       m = time.getMinutes();
       s = time.getSeconds();
-      //
-      s = s * 6; // 60 seconds in 360 degrees
-      //
-      m = m * 6; // 60 minutes in 360 degrees
-      m = m + (s / 60); // adjust for how many seconds have passed
+      ms = time.getMilliseconds();
       //
       h = (h > 12) ? h - 12 : h; // 24h/12h fix
-      h = (h * 30); // 12 hours in 360 degrees plus
-      h = h + (m / 60); // adjust for how many minutes have passed
+      h = 0.5 * (60 * h + m); // https://en.wikipedia.org/wiki/Clock_angle_problem
       //
-      // lets start at less than 360deg
-      m = (m >= 360) ? m - 360 : m;
-      h = (h >= 360) ? h - 360 : h;
+      m = (m * 6) + (s / 60 * 6); // 60 minutes in 360 degrees, adjusted for how many seconds have passed
+      //
+      s = (s + (ms / 1000)) * 6; // 60 seconds in 360 degrees accounting for milliseconds
+      //
       //
       str = _animationString('hours', h);
       str += _animationString('minutes', m);
       str += _animationString('seconds', s);
-    }
-    // set
-    container.querySelector('.m-analogue__hour').setAttribute('style', _transformString(h));
-    container.querySelector('.m-analogue__minute').setAttribute('style', _transformString(m));
-    container.querySelector('.m-analogue__second').setAttribute('style', _transformString(s));
-    timezonesStyleBlock.textContent = str;
+      // set
+      container.querySelector('.m-analogue__hour').setAttribute('style', _transformString(h));
+      container.querySelector('.m-analogue__minute').setAttribute('style', _transformString(m));
+      container.querySelector('.m-analogue__second').setAttribute('style', _transformString(s));
+      timezonesStyleBlock.textContent = str;
+    });
   }
 
   function _setIntervals() {
@@ -56,7 +56,7 @@ A17.Behaviors.analogue = function(container) {
   function _handleVisibilityChange(event) {
     if (document.hidden) {
       clearInterval(minuteInterval);
-      _setClock(false, false, false);
+      _setClock();
     } else {
       _setClock();
       _setIntervals();
@@ -71,7 +71,10 @@ A17.Behaviors.analogue = function(container) {
     } else {
       document.documentElement.classList.remove('s-analogue');
       clearInterval(minuteInterval);
-      _setClock(true);
+      container.querySelector('.m-analogue__hour').removeAttribute('style');
+      container.querySelector('.m-analogue__minute').removeAttribute('style');
+      container.querySelector('.m-analogue__second').removeAttribute('style');
+      timezonesStyleBlock.textContent = '';
     }
   }
 

@@ -13,20 +13,16 @@
 .m-analogue__minute,
 .m-analogue__second {
   transform-origin: 50% 50%;
-  transition: all .25s linear;
 }
 
 .m-analogue__hour {
-  -webkit-animation: time_hours 43200s infinite linear;
   animation: time_hours 43200s infinite linear;
 }
 
 .m-analogue__minute {
-  -webkit-animation: time_minutes 3600s infinite linear;
   animation: time_minutes 3600s infinite linear;
 }
 
 .m-analogue__second {
-  -webkit-animation: time_seconds 60s infinite linear;
   animation: time_seconds 60s infinite linear;
 }

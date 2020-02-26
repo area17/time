@@ -93,6 +93,10 @@ Additional parameters set different options:
 * Digital clock layout fix
 * adding package.json version number to CSS and JS file src to combat cache for screen savers
 
+### v3.0.9
+
+* Refactored analogue clock JS to have more accurate display and removed `-webkit` prefixed props
+
 ## 2017 Refresh 1 (v2)
 
 * Redesigned to reflect new AREA17 website,
