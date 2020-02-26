@@ -8,9 +8,9 @@ $locations = array();
 $format = 'h:i a';
 
 // our locations
-array_push($locations, array("name" => "Shanghai", "timezone" => "Asia/Shanghai", "emoji" => "🇨🇳", "lat" => 31.2304, "long" => 121.4737, "offset" => 0));
+//array_push($locations, array("name" => "Shanghai", "timezone" => "Asia/Shanghai", "emoji" => "🇨🇳", "lat" => 31.2304, "long" => 121.4737, "offset" => 0));
 array_push($locations, array("name" => "Nairobi", "timezone" => "Africa/Nairobi", "emoji" => "🇰🇪", "lat" => -1.2921, "long" => 36.8219, "offset" => 0));
-array_push($locations, array("name" => "Cairo", "timezone" => "Africa/Cairo", "emoji" => "🇪🇬", "lat" => 30.0444, "long" => 31.2357, "offset" => 0));
+//array_push($locations, array("name" => "Cairo", "timezone" => "Africa/Cairo", "emoji" => "🇪🇬", "lat" => 30.0444, "long" => 31.2357, "offset" => 0));
 array_push($locations, array("name" => "Lagos", "timezone" => "Africa/Lagos", "emoji" => "🇳🇬", "lat" => 6.5244, "long" => 3.3792, "offset" => 0));
 array_push($locations, array("name" => "Paris", "timezone" => "Europe/Paris", "emoji" => "🇫🇷", "lat" => 48.8728, "long" => 2.3701, "offset" => 0));
 array_push($locations, array("name" => "Manchester", "timezone" => "Europe/London", "emoji" => "🇬🇧", "lat" => 53.701, "long" => -2.282, "offset" => 0));

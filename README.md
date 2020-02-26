@@ -96,6 +96,7 @@ Additional parameters set different options:
 ### v3.0.9
 
 * Refactored analogue clock JS to have more accurate display and removed `-webkit` prefixed props
+* Dropping Cairo and Shaghai timezones
 
 ## 2017 Refresh 1 (v2)
 
