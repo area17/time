@@ -53,6 +53,16 @@ Additional parameters set different options:
 * `&weather=true` - shows the weather info
 * `&temperatureunits=fahrenheit` - switches temperature units to Fahrenheit
 
+
+## 2017 Refresh 1 (v2)
+
+* Redesigned to reflect new AREA17 website,
+* Added HipChat integration with hook '/time' which is powered by a PHP file,
+* Timezone differences and conversions are done via shared PHP now,
+* Written out moment.js and moment-timezones.js and replaced with using PHP to provide timezone info. Takes 130kb off the JS weight,
+* Written out ForecastIO.js which caused a hang on load. Replaced with a different PHP proxy to ajax weather info. Much faster, no hang and reduces JS by 20kb,
+* Added display of feels like temperature and % chance of rain, with emoji.
+
 ## 2017 Refresh 2 (v3)
 
 * Redesigned to reflect [David's](https://area17.com/about/david-lamothe) art direction,
@@ -98,14 +108,10 @@ Additional parameters set different options:
 * Refactored analogue clock JS to have more accurate display and removed `-webkit` prefixed props
 * Dropping Cairo and Shaghai timezones
 
-## 2017 Refresh 1 (v2)
+### v3.0.10
 
-* Redesigned to reflect new AREA17 website,
-* Added HipChat integration with hook '/time' which is powered by a PHP file,
-* Timezone differences and conversions are done via shared PHP now,
-* Written out moment.js and moment-timezones.js and replaced with using PHP to provide timezone info. Takes 130kb off the JS weight,
-* Written out ForecastIO.js which caused a hang on load. Replaced with a different PHP proxy to ajax weather info. Much faster, no hang and reduces JS by 20kb,
-* Added display of feels like temperature and % chance of rain, with emoji.
+* Added Australia Eastern Standard time for Jen
+* Also added Doha to balance the list out
 
 ## Developing
 

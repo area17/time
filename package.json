@@ -1,6 +1,6 @@
 {
   "name": "Timezones",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "Timezones helper for A17",
   "devDependencies": {
     "grunt": "^1.0.4",
