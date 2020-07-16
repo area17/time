@@ -53,7 +53,7 @@ function parseString($str = "", $guessedtz = false) {
   }
 
   // begin guessing the timezone
-  if (preg_match('/(australia|aus|sydney|melbourne|brisbane|aest|syd|nsw|jen)$/i', $str)) {
+  if (preg_match('/(australia|aus|sydney|melbourne|brisbane|aest|syd|nsw|jen|koala|kangaroo|dingo)$/i', $str)) {
     $timezone = "Australia/Sydney";
   }
 
