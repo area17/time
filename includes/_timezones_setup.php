@@ -11,11 +11,12 @@ $format = 'h:i a';
 //array_push($locations, array("name" => "Shanghai", "timezone" => "Asia/Shanghai", "emoji" => "🇨🇳", "lat" => 31.2304, "long" => 121.4737, "offset" => 0));
 
 array_push($locations, array("name" => "Sydney", "timezone" => "Australia/Sydney", "emoji" => "🇦🇺", "lat" => -33.8688, "long" => 151.2093, "offset" => 0));
-array_push($locations, array("name" => "Doha", "timezone" => "Asia/Qatar", "emoji" => "🇶🇦", "lat" => 25.2854, "long" => 51.5310, "offset" => 0));
+//array_push($locations, array("name" => "Doha", "timezone" => "Asia/Qatar", "emoji" => "🇶🇦", "lat" => 25.2854, "long" => 51.5310, "offset" => 0));
 array_push($locations, array("name" => "Nairobi", "timezone" => "Africa/Nairobi", "emoji" => "🇰🇪", "lat" => -1.2921, "long" => 36.8219, "offset" => 0));
 //array_push($locations, array("name" => "Cairo", "timezone" => "Africa/Cairo", "emoji" => "🇪🇬", "lat" => 30.0444, "long" => 31.2357, "offset" => 0));
 array_push($locations, array("name" => "Lagos", "timezone" => "Africa/Lagos", "emoji" => "🇳🇬", "lat" => 6.5244, "long" => 3.3792, "offset" => 0));
 array_push($locations, array("name" => "Paris", "timezone" => "Europe/Paris", "emoji" => "🇫🇷", "lat" => 48.8728, "long" => 2.3701, "offset" => 0));
+array_push($locations, array("name" => "Amsterdam", "timezone" => "Europe/Amsterdam", "emoji" => "🇳🇱", "lat" => 52.3673, "long" => 4.8998, "offset" => 0));
 array_push($locations, array("name" => "Manchester", "timezone" => "Europe/London", "emoji" => "🇬🇧", "lat" => 53.701, "long" => -2.282, "offset" => 0));
 array_push($locations, array("name" => "Tucumán", "timezone" => "America/Argentina/Tucuman", "emoji" => "🇦🇷", "lat" => -26.8326, "long" => -65.2128, "offset" => 0));
 array_push($locations, array("name" => "New York", "timezone" => "America/New_York", "emoji" => "🇺🇸", "lat" => 40.7186, "long" => -73.948, "offset" => 0));
@@ -56,7 +57,7 @@ function parseString($str = "", $guessedtz = false) {
   if (preg_match('/(australia|aus|sydney|melbourne|brisbane|aest|syd|nsw|jen|koala|kangaroo|dingo)$/i', $str)) {
     $timezone = "Australia/Sydney";
   }
-
+  /*
   if (preg_match('/(china|ch|chn|shanghai|beijing|cst|pvg|pek)$/i', $str)) {
     $timezone = "Asia/Shanghai";
   }
@@ -64,28 +65,32 @@ function parseString($str = "", $guessedtz = false) {
   if (preg_match('/(qatar|doha|dia|dfi)$/i', $str)) {
     $timezone = "Asia/Qatar";
   }
-
+  */
   if (preg_match('/(nairobi|kenya|ken|eat|nbo)$/i', $str)) {
     $timezone = "Africa/Nairobi";
   }
-
+  /*
   if (preg_match('/(cairo|eqypt|egy|eest|cai)$/i', $str)) {
     $timezone = "Africa/Cairo";
   }
-
+  */
   if (preg_match('/(lagos|nigeria|nga|wast|los)$/i', $str)) {
     $timezone = "Africa/Lagos";
   }
 
-  if (preg_match('/(paris|par|france|fr|cet|cest|cdg|luis)$/i', $str)) {
+  if (preg_match('/(amsterdam|ams|holland|netherlands|liv|lieveke|ein|rtm)$/i', $str)) {
+    $timezone = "Europe/Amsterdam";
+  }
+
+  if (preg_match('/(paris|par|france|fr|cet|cest|cdg)$/i', $str)) {
     $timezone = "Europe/Paris";
   }
 
-  if (preg_match('/(london|manchester|britain|england|uk|gb|bst|gmt|mike|man|lhr|strobe|joe|chris|mac)$/i', $str)) {
+  if (preg_match('/(london|manchester|britain|england|uk|gb|bst|gmt|mike|man|lhr|joe)$/i', $str)) {
     $timezone = "Europe/London";
   }
 
-  if (preg_match('/(tucumán|tucuman|tuc|argentina|ar|art|pablo)$/i', $str) && !preg_match('/(qatar)$/i', $str)) {
+  if (preg_match('/(tucumán|tucuman|tuc|argentina|ar|art|pablo|luis)$/i', $str) && !preg_match('/(qatar)$/i', $str)) {
     // "ar" was matching the "ar" in "qatar" and returning this instead of "Asia/Qatar"
     // need a better "matching" system
     $timezone = "America/Argentina/Tucuman";
@@ -99,7 +104,7 @@ function parseString($str = "", $guessedtz = false) {
     $timezone = "America/Chicago";
   }
 
-  if (preg_match('/(la|los angeles|san francisco|sf|lax|sfo|pst|pdt|ca|myles)$/i', $str)) {
+  if (preg_match('/(la|los angeles|san francisco|sf|lax|sfo|pst|pdt|ca|myles)$/i', $str) && !preg_match('/(koala)$/i', $str)) {
     $timezone = "America/Los_Angeles";
   }
 
