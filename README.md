@@ -113,6 +113,13 @@ Additional parameters set different options:
 * Added Australia Eastern Standard time for Jen
 * Also added Doha to balance the list out
 
+### v3.0.11
+
+* Added Amsterdam as Liv is currently living there
+* Added Cairo for our new hire, Yasien
+* Moved Luis back to Paris
+* Removed Doha and Australia - Jen is now in London
+
 ## Developing
 
 ### Grunt Tasks:
