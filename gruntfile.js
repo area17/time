@@ -77,7 +77,7 @@ module.exports = function(grunt) {
             'js/timezones.js',
           ],
           templatedURLs: {
-            '/' : '/index.php'
+            //'/' : '/index.php'
           },
           swSrc: './js/src/service-worker-src.js',
           swDest: './sw.js',

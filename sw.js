@@ -90,10 +90,6 @@ if (workbox) {
   {
     "url": "js/timezones.js",
     "revision": "6f7ae0a53f81c31b84125076dbdcd3ed"
-  },
-  {
-    "url": "/",
-    "revision": "e251273eb74a8ee3f661a7af00915af1"
   }
 ]);
 
