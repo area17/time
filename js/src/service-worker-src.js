@@ -10,7 +10,7 @@ if (workbox) {
   workbox.clientsClaim = true;
   workbox.skipWaiting = true;
 
-  workbox.precaching.precacheAndRoute([]);
+  workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
 
   workbox.googleAnalytics.initialize();
   // runtime cache
