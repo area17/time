@@ -5,6 +5,7 @@ const DartScss = require('sass');
 const glob = require('glob');
 
 module.exports = {
+  mode: 'development',
   entry: {
     'js/timezones': glob.sync('./js/src/**/*.js', {
       ignore: ['./js/src/service-worker-src.js', './js/src/workbox.js']
@@ -20,6 +21,13 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.(woff(2)?|ttf|eot)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: './fonts/[name][ext]',
+        },
+      },
       {
         test: /\.s[ac]ss$/i,
         use: [
