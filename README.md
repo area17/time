@@ -120,16 +120,21 @@ Additional parameters set different options:
 * Moved Luis back to Paris
 * Removed Doha and Australia - Jen is now in London
 
+### v3.1.0
+
+* Moved to a Webpack build process from Grunt
+* `sw.js` created from dedicated `workbox` task
+
 ## Developing
 
 ### Grunt Tasks:
 
-    $ grunt
-    $ grunt watch
+    $ npm install
+    $ npm run build
 
-For dev purposes: concats but doesn't minify CSS/JS and places the compiled files in /css/ and /js/. These files are not committed to the GIT repo.
+For dev purposes: concats but doesn't minify CSS/JS and places the compiled files in `/css/` and `/js/`. These files are not committed to the GIT repo.
 
-    $ grunt dist
+    $ grunt prod
 
 Concats and minifies CSS/JS and places the compiled files in /css/ and /js/. These files are not committed to the GIT repo.
 
@@ -138,7 +143,7 @@ Concats and minifies CSS/JS and places the compiled files in /css/ and /js/. The
 
 You'll probably want to run:
 
-    $ grunt && grunt watch
+    $ npm run watch
 
 
 ### Breakpoints
