@@ -134,7 +134,7 @@ Additional parameters set different options:
 
 For dev purposes: concats but doesn't minify CSS/JS and places the compiled files in `/css/` and `/js/`. These files are not committed to the GIT repo.
 
-    $ grunt prod
+    $ npm run prod
 
 Concats and minifies CSS/JS and places the compiled files in /css/ and /js/. These files are not committed to the GIT repo.
 
