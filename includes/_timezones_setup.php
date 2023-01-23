@@ -9,17 +9,19 @@ $format = 'h:i a';
 
 // our locations
 //array_push($locations, array("name" => "Sydney", "timezone" => "Australia/Sydney", "emoji" => "🇦🇺", "lat" => -33.8688, "long" => 151.2093, "offset" => 0));
-array_push($locations, array("name" => "Taipei", "timezone" => "Asia/Taipei", "emoji" => "🇹🇼", "lat" => 25.0330, "long" => 121.5654, "offset" => 0));
+//array_push($locations, array("name" => "Taipei", "timezone" => "Asia/Taipei", "emoji" => "🇹🇼", "lat" => 25.0330, "long" => 121.5654, "offset" => 0));
 //array_push($locations, array("name" => "Shanghai", "timezone" => "Asia/Shanghai", "emoji" => "🇨🇳", "lat" => 31.2304, "long" => 121.4737, "offset" => 0));
 //array_push($locations, array("name" => "Doha", "timezone" => "Asia/Qatar", "emoji" => "🇶🇦", "lat" => 25.2854, "long" => 51.5310, "offset" => 0));
 array_push($locations, array("name" => "Nairobi", "timezone" => "Africa/Nairobi", "emoji" => "🇰🇪", "lat" => -1.2921, "long" => 36.8219, "offset" => 0));
-array_push($locations, array("name" => "Cairo", "timezone" => "Africa/Cairo", "emoji" => "🇪🇬", "lat" => 30.0444, "long" => 31.2357, "offset" => 0));
+//array_push($locations, array("name" => "Cairo", "timezone" => "Africa/Cairo", "emoji" => "🇪🇬", "lat" => 30.0444, "long" => 31.2357, "offset" => 0));
 array_push($locations, array("name" => "Lagos", "timezone" => "Africa/Lagos", "emoji" => "🇳🇬", "lat" => 6.5244, "long" => 3.3792, "offset" => 0));
 array_push($locations, array("name" => "Paris", "timezone" => "Europe/Paris", "emoji" => "🇫🇷", "lat" => 48.8728, "long" => 2.3701, "offset" => 0));
 //array_push($locations, array("name" => "Amsterdam", "timezone" => "Europe/Amsterdam", "emoji" => "🇳🇱", "lat" => 52.3673, "long" => 4.8998, "offset" => 0));
+array_push($locations, array("name" => "London", "timezone" => "Europe/London", "emoji" => "🇬🇧", "lat" => 51.5072, "long" => -0.1276, "offset" => 0));
 array_push($locations, array("name" => "Manchester", "timezone" => "Europe/London", "emoji" => "🇬🇧", "lat" => 53.701, "long" => -2.282, "offset" => 0));
 array_push($locations, array("name" => "Tucumán", "timezone" => "America/Argentina/Tucuman", "emoji" => "🇦🇷", "lat" => -26.8326, "long" => -65.2128, "offset" => 0));
 array_push($locations, array("name" => "New York", "timezone" => "America/New_York", "emoji" => "🇺🇸", "lat" => 40.7186, "long" => -73.948, "offset" => 0));
+array_push($locations, array("name" => "Montreal", "timezone" => "America/Toronto", "emoji" => "🇨🇦", "lat" => 45.5019, "long" => -73.5674, "offset" => 0));
 array_push($locations, array("name" => "Jackson", "timezone" => "America/Chicago", "emoji" => "🇺🇸", "lat" => 35.6331, "long" => -88.8208, "offset" => 0));
 array_push($locations, array("name" => "Los Angeles", "timezone" => "America/Los_Angeles", "emoji" => "🇺🇸", "lat" => 37.8024, "long" => -122.4058, "offset" => 0));
 // testing timezones not on whole hour offsets from UTC
@@ -74,11 +76,11 @@ function parseString($str = "", $guessedtz = false) {
   if (preg_match('/(nairobi|kenya|ken|eat|nbo)$/i', $str)) {
     $timezone = "Africa/Nairobi";
   }
-
+  /*
   if (preg_match('/(cairo|eqypt|egy|eest|cai|yasien|pyramids)$/i', $str)) {
     $timezone = "Africa/Cairo";
   }
-
+  */
   if (preg_match('/(lagos|nigeria|nga|wast|los|mazi)$/i', $str)) {
     $timezone = "Africa/Lagos";
   }
@@ -91,14 +93,23 @@ function parseString($str = "", $guessedtz = false) {
     $timezone = "Europe/Paris";
   }
 
-  if (preg_match('/(london|manchester|britain|england|uk|gb|bst|gmt|mike|man|lhr|joe)$/i', $str)) {
+  if (preg_match('/(london|britain|england|uk|gb|bst|gmt|lhr|thomas)$/i', $str)) {
     $timezone = "Europe/London";
+  }
+
+  if (preg_match('/(manchester|mike|man|joe)$/i', $str)) {
+    $timezone = "Europe/London";
+    // Manchester🤷🏻‍♂️
   }
 
   if (preg_match('/(tucumán|tucuman|tuc|argentina|ar|art|pablo)$/i', $str) && !preg_match('/(qatar)$/i', $str)) {
     // "ar" was matching the "ar" in "qatar" and returning this instead of "Asia/Qatar"
     // need a better "matching" system
     $timezone = "America/Argentina/Tucuman";
+  }
+
+  if (preg_match('/(toronto|montreal|mon|patrick|yul|yyz)$/i', $str)) {
+    $timezone = "America/Toronto";
   }
 
   if (preg_match('/(ny|nyc|new york|new york city|edt|est|jfk)$/i', $str)) {
