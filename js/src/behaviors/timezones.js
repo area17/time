@@ -112,7 +112,7 @@ A17.Behaviors.timezones = function(container) {
         location.temperature = Math.round(data.currentConditions.temp);
         location.icon = data.currentConditions.icon;
         location.feelsLike = Math.round(data.currentConditions.feelslike);
-        location.rainChance = Math.round(data.currentConditions.precipprob * 100);
+        location.rainChance = Math.round(data.currentConditions.precipprob);
         location.summary = data.currentConditions.conditions;
         //
         _updateTemperatures(location, index);
