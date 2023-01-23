@@ -14,6 +14,10 @@ A17.Behaviors.timezones = function(container) {
     return (f - 32) * (5 / 9);
   }
 
+  function _convertCtoF(c) {
+    return c * 9 / 5 + 32;
+  }
+
   function _updateTemperatures(location,index) {
     var locationEl = document.getElementById('location-'+index);
     if (locationEl) {
@@ -38,23 +42,22 @@ A17.Behaviors.timezones = function(container) {
           umbrellaClass = ' m-timezone__emoji--windy'; // if windy and high rain chance
         }
       }
-      // add class for high/low temps, frustratingly DarkSky returns temps in °F
-      // WTF is a °F
+      // add class for high/low temps
       var temperatureClass = '';
-      if (location.feelsLike <= 33) {
-        // 33°F is 0°C
+      if (location.feelsLike <= 0) {
+        // 0°C is 33°F
         temperatureClass = ' m-timezone__feels-like--cold';
-      } else if (location.feelsLike > 86) {
-        // I'm British, 86°F is hot for me
+      } else if (location.feelsLike > 30) {
+        // I'm British, 30°C/86°F is hot for me
         temperatureClass = ' m-timezone__feels-like--hot';
-      } else if (location.feelsLike > 100) {
+      } else if (location.feelsLike > 37.78) {
         // Americans go bananas about 100+°F temperatures
         temperatureClass = ' m-timezone__feels-like--really-hot';
       }
       //
       var tempUnit = A17.settings.TemperatureUnit || 'c';
-      var temp = Math.round( (tempUnit === 'c') ? _convertFtoC(location.temperature) : location.temperature );
-      var tempFeelsLike = Math.round( (tempUnit === 'c') ? _convertFtoC(location.feelsLike) : location.feelsLike );
+      var temp = Math.round( (tempUnit === 'c') ? location.temperature : _convertCtoF(location.temperature) );
+      var tempFeelsLike = Math.round( (tempUnit === 'c') ? location.feelsLike : _convertCtoF(location.feelsLike) );
       var moonPhase = A17.Functions.moonPhase();
       var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + '.';
       var weatherEmoji = (location.icon !== 'clear-night') ? iconTemplate.replace('{{name}}',location.icon) : iconTemplate.replace('{{name}}',moonPhase.icon);
@@ -106,11 +109,11 @@ A17.Behaviors.timezones = function(container) {
       onSuccess: function(data){
         data = JSON.parse(data);
         //
-        location.temperature = Math.round(data.currently.temperature);
-        location.icon = data.currently.icon;
-        location.feelsLike = Math.round(data.currently.apparentTemperature);
-        location.rainChance = Math.round(data.currently.precipProbability * 100);
-        location.summary = data.currently.summary;
+        location.temperature = Math.round(data.currentConditions.temp);
+        location.icon = data.currentConditions.icon;
+        location.feelsLike = Math.round(data.currentConditions.feelslike);
+        location.rainChance = Math.round(data.currentConditions.precipprob * 100);
+        location.summary = data.currentConditions.conditions;
         //
         _updateTemperatures(location, index);
         //

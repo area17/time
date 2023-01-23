@@ -8,4 +8,4 @@ img/*.svg
 img/_images.scss
 img/orig/
 todo.md
-includes/_forecastapi.php
+includes/_visualCrossingApiKey.php
