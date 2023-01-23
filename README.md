@@ -125,9 +125,19 @@ Additional parameters set different options:
 * Moved to a Webpack build process from Grunt
 * `sw.js` created from dedicated `workbox` task
 
+### v3.1.1
+
+* include re-exported icons with paths split out
+* adds animated snow, fog and wind
+* updates animated sun, cloudy day, cloudy night
+
+### v3.2.0
+
+* migrate away from Dark Sky weather API to Visual Crossing weather API
+
 ## Developing
 
-### Grunt Tasks:
+### Node Tasks:
 
     $ npm install
     $ npm run build
