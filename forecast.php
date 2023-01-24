@@ -8,7 +8,7 @@ function getForecast($latitude, $longitude) {
 
   $options = [
     'unitGroup' => 'metric',
-    'elements' => 'tempmax,tempmin,temp,feelslike,precipprob,sunrise,sunset,moonphase,conditions,icon',
+    'elements' => 'tempmax,tempmin,temp,feelslike,precipprob,preciptype,sunrise,sunset,moonphase,conditions,icon,uvindex',
     'include' => 'fcst,current',
     'key' => getenv('KEY'),
     'contentType' => 'json',

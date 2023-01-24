@@ -18,58 +18,82 @@ A17.Behaviors.timezones = function(container) {
     return c * 9 / 5 + 32;
   }
 
+  function _uvindexRating(i) {
+    if (i < 3) {
+      return 'low';
+    }
+    if (i < 6) {
+      return 'moderate';
+    }
+    if (i < 8) {
+      return 'high';
+    }
+    return 'very high'
+  }
+
   function _updateTemperatures(location,index) {
-    var locationEl = document.getElementById('location-'+index);
+    var locationEl = document.getElementById(location.id);
     if (locationEl) {
       var rainChanceClass = '';
-      var rainChanceClass = (location.rainChance > 49) ? ' m-timezone__rain-chance--raining' : '';
+      var rainChanceClass = (location.conditions.rainChance > 49) ? ' m-timezone__rain-chance--raining' : '';
       // show umbrella emoji to illustrate rain chance
       var umbrellaEmoji = '🌂'; // default, low chance of rain
       var umbrellaClass = '';
-      if (location.rainChance > 20) {
+      if (location.conditions.rainChance > 20) {
         umbrellaEmoji = '☂️'; // some chance of rain
       }
-      if (location.rainChance > 80) {
+      if (location.conditions.rainChance > 80) {
         umbrellaEmoji = '☔'; // high chance of rain
       }
-      if (/snow/i.test(location.icon)) {
+      if (/snow/i.test(location.conditions.icon)) {
         umbrellaEmoji = '⛄️'; // override for snowing
       } else {
-        if (/rain|sleet/i.test(location.icon)) {
+        if (/rain|sleet/i.test(location.conditions.icon)) {
           umbrellaEmoji = '☔'; // override for raining or sleeting
         }
-        if ((/wind/i.test(location.icon) || /wind/i.test(location.summary)) && location.rainChance > 80) {
+        if ((/wind/i.test(location.conditions.icon) || /wind/i.test(location.conditions.summary)) && location.conditions.rainChance > 80) {
           umbrellaClass = ' m-timezone__emoji--windy'; // if windy and high rain chance
         }
       }
       // add class for high/low temps
       var temperatureClass = '';
-      if (location.feelsLike <= 0) {
+      if (location.conditions.feelsLike <= 0) {
         // 0°C is 33°F
         temperatureClass = ' m-timezone__feels-like--cold';
-      } else if (location.feelsLike > 30) {
+      } else if (location.conditions.feelsLike > 30) {
         // I'm British, 30°C/86°F is hot for me
         temperatureClass = ' m-timezone__feels-like--hot';
-      } else if (location.feelsLike > 37.78) {
+      } else if (location.conditions.feelsLike > 37.78) {
         // Americans go bananas about 100+°F temperatures
         temperatureClass = ' m-timezone__feels-like--really-hot';
       }
       //
       var tempUnit = A17.settings.TemperatureUnit || 'c';
-      var temp = Math.round( (tempUnit === 'c') ? location.temperature : _convertCtoF(location.temperature) );
-      var tempFeelsLike = Math.round( (tempUnit === 'c') ? location.feelsLike : _convertCtoF(location.feelsLike) );
+      var temp = Math.round( (tempUnit === 'c') ? location.conditions.temperature : _convertCtoF(location.conditions.temperature) );
+      var tempFeelsLike = Math.round( (tempUnit === 'c') ? location.conditions.feelsLike : _convertCtoF(location.conditions.feelsLike) );
+      var tempMin = Math.round( (tempUnit === 'c') ? location.conditions.tempmin : _convertCtoF(location.conditions.tempmin) );
+      var tempMax = Math.round( (tempUnit === 'c') ? location.conditions.tempmax : _convertCtoF(location.conditions.tempmax) );
       var moonPhase = A17.Functions.moonPhase();
-      var weatherSummary = location.summary[0].toUpperCase() + location.summary.substring(1).toLowerCase() + '.';
-      var weatherEmoji = (location.icon !== 'clear-night') ? iconTemplate.replace('{{name}}',location.icon) : iconTemplate.replace('{{name}}',moonPhase.icon);
-      if (A17.settings.AnimatedIcons === 'true' && location.icon !== 'clear-night') {
-        weatherEmoji = iconTemplate.replace('{{name}}',location.icon + '--animated');
+      var weatherSummary = location.conditions.summary[0].toUpperCase() + location.conditions.summary.substring(1).toLowerCase() + '.';
+      var weatherEmoji = (location.conditions.icon !== 'clear-night') ? iconTemplate.replace('{{name}}',location.conditions.icon) : iconTemplate.replace('{{name}}',moonPhase.icon);
+      if (A17.settings.AnimatedIcons === 'true' && location.conditions.icon !== 'clear-night') {
+        weatherEmoji = iconTemplate.replace('{{name}}',location.conditions.icon + '--animated');
       }
-      weatherSummary = (location.icon !== 'clear-night') ? weatherSummary : weatherSummary + ' Moon phase is ' + moonPhase.phase.toLowerCase() + ' ' + moonPhase.emoji + '.';
-      var emojiClass = (location.icon === 'clear-day') ? ' m-timezone__emoji--sunny' : '';
+      weatherSummary = (location.conditions.icon !== 'clear-night') ? weatherSummary : weatherSummary + ' Moon phase is ' + moonPhase.phase.toLowerCase() + ' ' + moonPhase.emoji + '.';
+      var emojiClass = (location.conditions.icon === 'clear-day') ? ' m-timezone__emoji--sunny' : '';
+      var sunglasses = location.conditions.uvindex > 6 ? '🕶️' : '';
       //
       tempUnit = tempUnit.toUpperCase();
       //
-      locationEl.querySelector('.m-timezone__weather').innerHTML = '<span class="m-timezone__feels-like' + temperatureClass + '" title="' + weatherSummary + ' Feels like ' + tempFeelsLike + '°' + tempUnit + '."><span class="m-timezone__emoji' + emojiClass + '">' + weatherEmoji + '</span>' + temp + '&deg;' + tempUnit + '</span>\n<span class="m-timezone__rain-chance' + rainChanceClass + '" title="Probability of precipitation in the next hour: ' + location.rainChance + '% ' + umbrellaEmoji + '"><span class="m-timezone__emoji' + umbrellaClass + '">' + iconTemplate.replace('{{name}}', 'rain-drops') + '</span>' + location.rainChance + '%</span>';
+      var $weatherSpan = locationEl.querySelector('.m-timezone__weather');
+      var weatherSpanHTML = '';
+      weatherSpanHTML += '<span class="m-timezone__feels-like' + temperatureClass + '"><span class="m-timezone__emoji' + emojiClass + '">' + weatherEmoji + '</span>' + temp + '&deg;' + tempUnit + '</span>\n';
+      weatherSpanHTML += '<span class="m-timezone__rain-chance' + rainChanceClass + '""><span class="m-timezone__emoji' + umbrellaClass + '">' + iconTemplate.replace('{{name}}', 'rain-drops') + '</span>' + location.conditions.rainChance + '%</span>';
+      //
+      var title = weatherSummary + ' \nMinimum ' + tempMin + '°' + tempUnit + ', maximum ' + tempMax + '°' + tempUnit + ',  feels like ' + tempFeelsLike + '°' + tempUnit + '. \nProbability of ' + location.conditions.preciptype + ' in the next hour: ' + location.conditions.rainChance + '% ' + umbrellaEmoji + '.\nSunrise at ' + location.conditions.sunrise + ', sunset at ' + location.conditions.sunset + '. \nUV index ' + location.conditions.uvindex + ' (' + _uvindexRating(location.conditions.uvindex) + ') ' + sunglasses;
+      //
+      $weatherSpan.parentNode.title = title;
+      $weatherSpan.innerHTML = weatherSpanHTML;
       //
       locationEl.classList.remove('s-loading');
     }
@@ -109,11 +133,19 @@ A17.Behaviors.timezones = function(container) {
       onSuccess: function(data){
         data = JSON.parse(data);
         //
-        location.temperature = Math.round(data.currentConditions.temp);
-        location.icon = data.currentConditions.icon;
-        location.feelsLike = Math.round(data.currentConditions.feelslike);
-        location.rainChance = Math.round(data.currentConditions.precipprob);
-        location.summary = data.currentConditions.conditions;
+        location.conditions = location.conditions || {};
+        location.conditions.temperature = Math.round(data.currentConditions.temp);
+        location.conditions.icon = data.currentConditions.icon;
+        location.conditions.feelsLike = Math.round(data.currentConditions.feelslike);
+        location.conditions.rainChance = Math.round(data.currentConditions.precipprob);
+        location.conditions.summary = data.currentConditions.conditions;
+        location.conditions.tempmax = data.days[0].tempmax;
+        location.conditions.tempmin = data.days[0].tempmin;
+        location.conditions.sunrise = data.currentConditions.sunrise;
+        location.conditions.sunset = data.currentConditions.sunset;
+        location.conditions.uvindex = data.currentConditions.uvindex;
+        location.conditions.preciptype = data.currentConditions.preciptype || 'rain';
+        location.conditions.moonphase = data.currentConditions.moonphase;
         //
         _updateTemperatures(location, index);
         //
