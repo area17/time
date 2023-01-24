@@ -168,7 +168,7 @@ A17.Behaviors.timezones = function(container) {
     if (mTemp !== systemM || override) {
       mTemp = systemM;
       A17.locations.forEach(function(location,index){
-        var locationEl = document.getElementById('location-'+index);
+        var locationEl = document.getElementById(location.id);
         var format = A17.settings.DigitalFormat || '24';
         var thisTime = new Date((time + location.offset) * 1000);
         var thisH = thisTime.getHours();
@@ -249,12 +249,9 @@ A17.Behaviors.timezones = function(container) {
   function _init() {
     //
     A17.locations.forEach(function(location,index){
-      location.id = 'location-'+index;
-      location.time = '';
-      location.temperature = '';
       //
       var thisLocationTemplate = locationTemplate;
-      thisLocationTemplate = thisLocationTemplate.replace('{{time}}',location.time);
+      thisLocationTemplate = thisLocationTemplate.replace('{{time}}','');
       thisLocationTemplate = thisLocationTemplate.replace('{{name}}',location.name);
       thisLocationTemplate = thisLocationTemplate.replace('{{iconID}}','icon-'+index);
       thisLocationTemplate = thisLocationTemplate.replace('{{locationID}}',location.id);
