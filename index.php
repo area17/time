@@ -106,7 +106,7 @@
       </svg>
       <ul class="o-timezones" data-behavior="timezones"></ul>
       <small class="legal">
-        <span class="legal__a17"><a href="http://area17.com/" target="_blank">AREA 17 studio time</a></span><span class="legal__dash"> &ndash; </span><a href="https://darksky.net/poweredby/" class="legal__darksky" target="_blank">Weather by Dark Sky</a></small>
+        <span class="legal__a17"><a href="http://area17.com/" target="_blank">AREA 17 studio time</a></span><span class="legal__dash"> &ndash; </span><a href="https://www.visualcrossing.com/" class="legal__api" target="_blank">Powered by Visual Crossing Weather</a></small>
     </div>
     <div class="o-conversion" data-behavior="conversion">
       <p class="o-conversion__input">

@@ -125,9 +125,28 @@ Additional parameters set different options:
 * Moved to a Webpack build process from Grunt
 * `sw.js` created from dedicated `workbox` task
 
+### v3.1.1
+
+* include re-exported icons with paths split out
+* adds animated snow, fog and wind
+* updates animated sun, cloudy day, cloudy night
+
+### v3.2.0
+
+* migrate away from Dark Sky weather API to Visual Crossing weather API
+* removed Cairo and Taipai
+* added London and Montreal
+* on time convert, guess a location ID not a timezone, so we can have multiple locations in a single timezone
+* reveal more weather data when hovering location weather
+* style scrollbars
+
 ## Developing
 
-### Grunt Tasks:
+### API key
+
+For the weather conditions time.area17.com uses [Visual Crossing](https://www.visualcrossing.com/) which needs an API key. The API key lives in `/includes/_visualCrossingApiKey.php` and can be found in the A17 Redux vault.
+
+### Node Tasks:
 
     $ npm install
     $ npm run build
