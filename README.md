@@ -137,6 +137,10 @@ Additional parameters set different options:
 
 ## Developing
 
+### API key
+
+For the weather conditions time.area17.com uses [Visual Crossing](https://www.visualcrossing.com/) which needs an API key. The API key lives in `/includes/_visualCrossingApiKey.php` and can be found in the A17 Redux vault.
+
 ### Node Tasks:
 
     $ npm install
