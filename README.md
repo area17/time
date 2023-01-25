@@ -134,6 +134,11 @@ Additional parameters set different options:
 ### v3.2.0
 
 * migrate away from Dark Sky weather API to Visual Crossing weather API
+* removed Cairo and Taipai
+* added London and Montreal
+* on time convert, guess a location ID not a timezone, so we can have multiple locations in a single timezone
+* reveal more weather data when hovering location weather
+* style scrollbars
 
 ## Developing
 
