@@ -8,6 +8,32 @@ html {
   margin-left: -50vw;
   overflow-x: hidden;
   overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: $color__text--off $color__black;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-track {
+    background: $color__black;
+  }
+
+  &::-webkit-scrollbar-track:vertical,
+  &::-webkit-scrollbar-track:vertical {
+    border-left: 1px solid $color__black;
+    border-right: 1px solid $color__black;
+  }
+
+  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar-thumb {
+    background: $color__text--off;
+    border-radius: 20px;
+    border: 0 solid transparent;
+    background-clip: content-box;
+  }
 }
 
 body {
