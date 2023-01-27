@@ -12,6 +12,7 @@ $format = 'h:i a';
 //array_push($locations, array("name" => "Taipei", "timezone" => "Asia/Taipei", "emoji" => "🇹🇼", "lat" => 25.0330, "long" => 121.5654, "offset" => 0, "id" => "TW-TPE"));
 //array_push($locations, array("name" => "Shanghai", "timezone" => "Asia/Shanghai", "emoji" => "🇨🇳", "lat" => 31.2304, "long" => 121.4737, "offset" => 0, "id" => "CN-SH"));
 //array_push($locations, array("name" => "Doha", "timezone" => "Asia/Qatar", "emoji" => "🇶🇦", "lat" => 25.2854, "long" => 51.5310, "offset" => 0, "id" => "QA"));
+array_push($locations, array("name" => "Tbilisi", "timezone" => "Asia/Tbilisi", "emoji" => "🇬🇪", "lat" => 41.7151, "long" => 44.8271, "offset" => 0, "id" => "GE-TB"));
 array_push($locations, array("name" => "Nairobi", "timezone" => "Africa/Nairobi", "emoji" => "🇰🇪", "lat" => -1.2921, "long" => 36.8219, "offset" => 0, "id" => "KE-30"));
 //array_push($locations, array("name" => "Cairo", "timezone" => "Africa/Cairo", "emoji" => "🇪🇬", "lat" => 30.0444, "long" => 31.2357, "offset" => 0, "id" => "EG-C"));
 array_push($locations, array("name" => "Lagos", "timezone" => "Africa/Lagos", "emoji" => "🇳🇬", "lat" => 6.5244, "long" => 3.3792, "offset" => 0, "id" => "NG-LA"));
@@ -21,7 +22,7 @@ array_push($locations, array("name" => "London", "timezone" => "Europe/London", 
 array_push($locations, array("name" => "Manchester", "timezone" => "Europe/London", "emoji" => "🇬🇧", "lat" => 53.701, "long" => -2.282, "offset" => 0, "id" => "GB-MAN"));
 array_push($locations, array("name" => "Tucumán", "timezone" => "America/Argentina/Tucuman", "emoji" => "🇦🇷", "lat" => -26.8326, "long" => -65.2128, "offset" => 0, "id" => "AR-TUC"));
 array_push($locations, array("name" => "New York", "timezone" => "America/New_York", "emoji" => "🇺🇸", "lat" => 40.7186, "long" => -73.948, "offset" => 0, "id" => "US-NY"));
-array_push($locations, array("name" => "Montreal", "timezone" => "America/Toronto", "emoji" => "🇨🇦", "lat" => 45.5019, "long" => -73.5674, "offset" => 0, "id" => "CA-MON"));
+//array_push($locations, array("name" => "Montreal", "timezone" => "America/Toronto", "emoji" => "🇨🇦", "lat" => 45.5019, "long" => -73.5674, "offset" => 0, "id" => "CA-MON"));
 array_push($locations, array("name" => "Jackson", "timezone" => "America/Chicago", "emoji" => "🇺🇸", "lat" => 35.6331, "long" => -88.8208, "offset" => 0, "id" => "US-TN"));
 array_push($locations, array("name" => "Los Angeles", "timezone" => "America/Los_Angeles", "emoji" => "🇺🇸", "lat" => 37.8024, "long" => -122.4058, "offset" => 0, "id" => "US-CA"));
 // testing timezones not on whole hour offsets from UTC
@@ -77,6 +78,10 @@ function parseString($str = "", $guessedtz = false) {
     $id = "TW-TPE";
   }
   */
+  if (preg_match('/(tbilisi|georgia|get|tsb)$/i', $str)) {
+    $timezone = "Asia/Tbilisi";
+    $id = "GE-TB";
+  }
 
   if (preg_match('/(nairobi|kenya|ken|eat|nbo)$/i', $str)) {
     $timezone = "Africa/Nairobi";
@@ -120,10 +125,12 @@ function parseString($str = "", $guessedtz = false) {
     $id = "AR-TUC";
   }
 
+  /*
   if (preg_match('/(toronto|montreal|mon|patrick|yul|yyz)$/i', $str)) {
     $timezone = "America/Toronto";
     $id = "CA-MON";
   }
+  */
 
   if (preg_match('/(ny|nyc|new york|new york city|edt|est|jfk)$/i', $str)) {
     $timezone = "America/New_York";
