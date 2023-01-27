@@ -11,10 +11,6 @@
     margin-top: 0;
     text-align: left;
   }
-
-  .s-screensaver & {
-    display: none;
-  }
 }
 
 .legal br {
@@ -41,12 +37,23 @@
   }
 }
 
+.legal .legal__a17 {
+
+  .s-screensaver & {
+    display: none;
+  }
+}
+
 .legal .legal__dash {
   display: none;
   transition: opacity .25s;
 
   @include breakpoint('medium+') {
     display: inline;
+  }
+
+  .s-screensaver & {
+    display: none;
   }
 }
 
