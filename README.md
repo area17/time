@@ -140,6 +140,11 @@ Additional parameters set different options:
 * reveal more weather data when hovering location weather
 * style scrollbars
 
+### v3.2.1
+
+* removed Montreal, added Tbilisi
+* showing weather API credit in screen saver mode (its been removed from the latest version of the screen saver)
+
 ## Developing
 
 ### API key
