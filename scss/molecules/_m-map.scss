@@ -1,0 +1,19 @@
+.m-map {
+  display: none;
+  position: relative;
+  z-index: 1;
+  height: 0;
+  padding-bottom: 55.11212467%;
+
+  .s-map & {
+    display: block;
+  }
+}
+
+.m-map svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  color: #1a1a1a;
+}

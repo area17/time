@@ -56,7 +56,7 @@ A17.Behaviors.digital = function(container) {
 
 
   function _init() {
-    if (A17.settings.ClockType === 'digital') {
+    if (A17.settings.ClockType === 'digital' || A17.settings.ClockType === 'map') {
       document.documentElement.classList.add('s-digital');
       _updateDigitalTime();
       _setIntervals();

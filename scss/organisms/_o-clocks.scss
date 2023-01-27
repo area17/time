@@ -16,6 +16,11 @@
   @include breakpoint('xlarge+') {
     padding-top: 10px;
     padding-bottom: 130px;
+
+    .s-map & {
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
 
@@ -29,13 +34,93 @@
   }
 }
 
-
-.o-clocks .o-timezones {
+.o_clocks__zones {
   flex: 0 0 auto;
 
   @include breakpoint('medium+') {
     order: 0;
     margin-bottom: 40px;
+
+    .s-map & {
+      position: relative;
+      width: 100%;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.o-clocks .o-timezones {
+
+  .s-map & {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.s-map .o-clocks .m-timezone {
+  position: absolute;
+  z-index: 2;
+  width: auto;
+  height: 0;
+  margin-top: 0;
+  overflow: visible;
+
+  &#US-CA {
+    right: 85%;
+    top: 42%;
+    text-align: right;
+  }
+
+  &#US-TN {
+    left: 21%;
+    top: 42%;
+  }
+
+  &#CA-MON {
+    right: 75%;
+    top: 28%;
+    text-align: right;
+  }
+
+  &#US-NY {
+    left: 28%;
+    top: 35%;
+  }
+
+  &#AR-TUC {
+    left: 31%;
+    top: 70%;
+  }
+
+  &#GB-MAN {
+    left: 47%;
+    top: 21%;
+  }
+
+  &#GB-LND {
+    right: 54%;
+    top: 28%;
+    text-align: right;
+  }
+
+  &#FR-IDF {
+    left: 49%;
+    top: 31%;
+  }
+
+  &#NG-LA {
+    right: 53%;
+    top: 56%;
+    text-align: right;
+  }
+
+  &#KE-30 {
+    left: 59%;
+    top: 59%;
   }
 }
 
@@ -53,6 +138,19 @@
     margin-top: 0;
     margin-bottom: 0;
   }
+
+  @include breakpoint('xlarge+') {
+
+    .s-map & {
+      z-index: 2;
+      top: auto;
+      bottom: 130px;
+      margin: 0;
+    }
+  }
+}
+
+.o-clocks .m-map {
 }
 
 .o-clocks .m-analogue {

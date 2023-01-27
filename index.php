@@ -104,7 +104,10 @@
         <use xlink:href="#seconds" class="m-analogue__second" />
         <circle cx="212.5" cy="212.5" r="1.5" stroke="none" />
       </svg>
-      <ul class="o-timezones" data-behavior="timezones"></ul>
+      <div class="o_clocks__zones">
+        <div class="m-map" data-behavior="map"><?php include 'includes/_map.php'; ?></div>
+        <ul class="o-timezones" data-behavior="timezones"></ul>
+      </div>
       <small class="legal">
         <span class="legal__a17"><a href="http://area17.com/" target="_blank">AREA 17 studio time</a></span><span class="legal__dash"> &ndash; </span><a href="https://www.visualcrossing.com/" class="legal__api" target="_blank">Powered by Visual Crossing Weather</a></small>
     </div>
@@ -121,6 +124,7 @@
       <ul>
         <li><label><input type="radio" name="ClockType" value="analogue" checked> Analog</label></li>
         <li><label><input type="radio" name="ClockType" value="digital"> Digital</label></li>
+        <li><label><input type="radio" name="ClockType" value="map"> Map</label></li>
       </ul>
       <p>Format</p>
       <ul>
