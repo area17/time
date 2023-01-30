@@ -1,28 +1,19 @@
 .o-timezones {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.o-timezones > .m-timezone {
-  flex: 0 0 auto;
-  width: 100%;
-  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 30px;
+  justify-content: space-between;
 
   @include breakpoint('small+') {
-    width: 50%;
+    grid-template-columns: repeat(2, max-content);
+    row-gap: 40px;
   }
 
   @include breakpoint('medium+') {
-    width: 50%;
-    margin-top: 20px;
+    grid-template-columns: repeat(4, max-content);
   }
 
   @include breakpoint('large+') {
-    width: 20%;
-  }
-
-  @include breakpoint('xlarge+') {
-    width: 20%;
-    margin-top: 40px;
+    grid-template-columns: repeat(5, max-content);
   }
 }

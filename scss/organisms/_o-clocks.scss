@@ -10,11 +10,11 @@
 
   @include breakpoint('medium+') {
     max-height: 100vh;
-    padding: 30px 0 200px 50px;
+    padding: 50px 50px 200px;
   }
 
   @include breakpoint('xlarge+') {
-    padding-top: 10px;
+    padding-top: 50px;
     padding-bottom: 130px;
 
     .s-map & {

@@ -1,6 +1,6 @@
 A17.Behaviors.timezones = function(container) {
 
-  var locationTemplate = '<li id="{{locationID}}" class="m-timezone s-loading">\n<div class="m-timezone__inner">\n<strong class="m-timezone__name">{{name}}</strong>\n<em class="m-timezone__time">{{time}}</em>\n<span class="m-timezone__weather">\n</span>\n</div>\n</li>\n';
+  var locationTemplate = '<li id="{{locationID}}" class="m-timezone s-loading">\n<div class="m-timezone__inner">\n<span class="m-timezone__title">\n<strong class="m-timezone__name">{{name}}</strong>\n<em class="m-timezone__time">{{time}}</em>\n</span>\n<span class="m-timezone__weather">\n</span>\n</div>\n</li>\n';
   var iconTemplate = '<svg class="icon" aria-hidden="true"><use xlink:href="#{{name}}" /></svg>';
   var liHtml = '';
   var mTemp = 99; // initial value out of range
@@ -55,15 +55,16 @@ A17.Behaviors.timezones = function(container) {
           umbrellaClass = ' m-timezone__emoji--windy'; // if windy and high rain chance
         }
       }
-      // add class for high/low temps
+      // add class for high/low temps, 0°C is 33°F
       var temperatureClass = '';
-      if (location.conditions.feelsLike <= 0) {
-        // 0°C is 33°F
+      if (location.conditions.temperature < 4) {
         temperatureClass = ' m-timezone__feels-like--cold';
-      } else if (location.conditions.feelsLike > 30) {
+      } else if (location.conditions.temperature < -3) {
+        temperatureClass = ' m-timezone__feels-like--really-cold';
+      } else if (location.conditions.temperature > 30) {
         // I'm British, 30°C/86°F is hot for me
         temperatureClass = ' m-timezone__feels-like--hot';
-      } else if (location.conditions.feelsLike > 37.78) {
+      } else if (location.conditions.temperature > 37.78) {
         // Americans go bananas about 100+°F temperatures
         temperatureClass = ' m-timezone__feels-like--really-hot';
       }
