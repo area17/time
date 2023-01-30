@@ -8,18 +8,12 @@
   white-space: nowrap;
 
   @include breakpoint('medium+') {
-    padding-left: 25%;
     font-size: 100px;
     line-height: 110px;
   }
 
   @include breakpoint('large+') {
-    padding-left: calc(((100% - 50px) / 3) + 50px);
     font-size: 110px;
-  }
-
-  @include breakpoint('xlarge+') {
-    padding-left: calc((((100% - 50px) / 5) * 2) + 50px);
   }
 
   &.m-digital--24 {
@@ -47,14 +41,4 @@
   right: 0;
   top: 0;
   text-align: right;
-
-  @include breakpoint('medium+') {
-    right: 50px;
-  }
-
-  @include breakpoint('xlarge+') {
-    right: 0;
-    width: calc((100% - 50px) / 5);
-    text-align: left;
-  }
 }

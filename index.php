@@ -92,24 +92,36 @@
   </head>
   <body>
     <div class="o-clocks">
-      <a href="http://www.area17.com/" class="logo" target="_blank"><svg aria-hidden="true"><use xlink:href="#logo" /></svg></a>
-      <button class="conversion-trigger">Convert</button>
-      <button class="settings-trigger">Settings</button>
-      <a href="/downloads/A17TimeZones.saver.zip" class="screensaver-trigger">Screensaver</a>
-      <p class="m-digital" data-behavior="digital"></p>
-      <svg class="m-analogue" data-behavior="analogue" viewBox="0 0 425 425">
-        <use xlink:href="#clock-face" class="m-analogue__face" />
-        <use xlink:href="#hours" class="m-analogue__hour" />
-        <use xlink:href="#minutes" class="m-analogue__minute" />
-        <use xlink:href="#seconds" class="m-analogue__second" />
-        <circle cx="212.5" cy="212.5" r="1.5" stroke="none" />
-      </svg>
-      <div class="o_clocks__zones">
-        <div class="m-map" data-behavior="map"><?php include 'includes/_map.php'; ?></div>
-        <ul class="o-timezones" data-behavior="timezones"></ul>
-      </div>
-      <small class="legal">
-        <span class="legal__a17"><a href="http://area17.com/" target="_blank">AREA 17 studio time</a></span><span class="legal__dash"> &ndash; </span><a href="https://www.visualcrossing.com/" class="legal__api" target="_blank">Powered by Visual Crossing Weather</a></small>
+      <ul class="o-timezones" data-behavior="timezones">
+        <li class="o-timezones__logo"><a href="http://www.area17.com/" target="_blank"><svg aria-hidden="true"><use xlink:href="#logo" /></svg></a></li>
+        <li class="o-timezones__clock">
+          <div class="m-digital" data-behavior="digital"></div>
+          <svg class="m-analogue" data-behavior="analogue" viewBox="0 0 425 425">
+            <use xlink:href="#clock-face" class="m-analogue__face" />
+            <use xlink:href="#hours" class="m-analogue__hour" />
+            <use xlink:href="#minutes" class="m-analogue__minute" />
+            <use xlink:href="#seconds" class="m-analogue__second" />
+            <circle cx="212.5" cy="212.5" r="1.5" stroke="none" />
+          </svg>
+        </li>
+        <li class="o-timezones__map">
+          <div class="m-map" data-behavior="map"><?php include 'includes/_map.php'; ?>
+        </li>
+        <li class="o-timezones__settings">
+          <ul>
+            <li><a href="/downloads/A17TimeZones.saver.zip" class="screensaver-trigger">Screensaver</a></li>
+            <li><button class="conversion-trigger">Convert</button></li>
+            <li><button class="settings-trigger">Settings</button></li>
+          </ul>
+        </li>
+        <li class="o-timezones__legal">
+          <small class="legal">
+            <span class="legal__a17"><a href="http://area17.com/" target="_blank">AREA 17 studio time</a></span>
+            <span class="legal__dash"> &ndash; </span>
+            <a href="https://www.visualcrossing.com/" class="legal__api" target="_blank">Powered by Visual Crossing Weather</a>
+          </small>
+        </li>
+      </ul>
     </div>
     <div class="o-conversion" data-behavior="conversion">
       <p class="o-conversion__input">

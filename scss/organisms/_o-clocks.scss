@@ -1,26 +1,14 @@
 .o-clocks {
   display: flex;
   position: relative;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
+  flex-flow: row nowrap;
   min-height: 100vh;
-  padding: 40px 20px 20px;
+  padding: 40px;
   animation: fade-in .25s linear;
 
   @include breakpoint('medium+') {
     max-height: 100vh;
-    padding: 50px 50px 200px;
-  }
-
-  @include breakpoint('xlarge+') {
-    padding-top: 50px;
-    padding-bottom: 130px;
-
-    .s-map & {
-      align-items: center;
-      justify-content: center;
-    }
+    padding: 50px;
   }
 }
 
@@ -34,31 +22,9 @@
   }
 }
 
-.o_clocks__zones {
-  flex: 0 0 auto;
-
-  @include breakpoint('medium+') {
-    order: 0;
-    margin-bottom: 40px;
-
-    .s-map & {
-      position: relative;
-      width: 100%;
-      margin-bottom: 0;
-    }
-  }
-}
-
 .o-clocks .o-timezones {
-
-  .s-map & {
-    position: absolute;
-    z-index: 2;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  }
+  min-height: 100%;
+  width: 100%;
 }
 
 .s-map .o-clocks .m-timezone {
@@ -169,38 +135,7 @@
   }
 }
 
-.o-clocks .m-digital {
-  flex: 0 0 auto;
-  width: 100%;
-  margin: 70px 0 20px;
-
-  @include breakpoint('medium+') {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(50% - 55px);
-    width: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  @include breakpoint('xlarge+') {
-
-    .s-map & {
-      z-index: 2;
-      top: auto;
-      bottom: 130px;
-      margin: 0;
-    }
-  }
-}
-
-.o-clocks .m-map {
-}
-
 .o-clocks .m-analogue {
-  //flex: 0 0 auto;
-  //align-self: center;
   margin: 20px;
 
   @include breakpoint('medium+') {
@@ -211,10 +146,4 @@
     order: 1;
     margin: auto;
   }
-}
-
-.o-clocks .legal {
-  flex: 0 0 auto;
-  margin-top: auto;
-  padding-top: 20px;
 }

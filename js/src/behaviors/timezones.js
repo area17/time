@@ -8,7 +8,9 @@ A17.Behaviors.timezones = function(container) {
   var lastWeatherCheck = 0;
   var officeOpen = 9;
   var officeClosed = 19;
-  var time, secondInterval, weatherInterval, weatherRecievedCounter;
+  var time, secondInterval, weatherInterval, weatherRecievedCounter, prevClockType;
+  var $mapContainer = container.querySelector('.o-timezones__map');
+  var $mapContainerUl;
 
   function _convertFtoC(f) {
     return (f - 32) * (5 / 9);
@@ -234,9 +236,7 @@ A17.Behaviors.timezones = function(container) {
     if (document.hidden) {
       clearInterval(secondInterval);
       clearInterval(weatherInterval);
-      container.innerHTML = '';
     } else {
-      container.innerHTML = liHtml;
       _updateTimes(true);
       _updateWeather();
       _setIntervals();
@@ -247,8 +247,7 @@ A17.Behaviors.timezones = function(container) {
     _hideshowWeather();
   }
 
-  function _init() {
-    //
+  function _generateClocks() {
     A17.locations.forEach(function(location,index){
       //
       var thisLocationTemplate = locationTemplate;
@@ -259,10 +258,55 @@ A17.Behaviors.timezones = function(container) {
       //
       liHtml += thisLocationTemplate;
     });
+  }
 
-    container.innerHTML = liHtml;
+  function _addClocks() {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = liHtml;
+
+    if (A17.settings.ClockType === 'map') {
+      $mapContainerUl = document.createElement('ul');
+      $mapContainerUl.appendChild(tpl.content);
+      $mapContainer.appendChild($mapContainerUl);
+    } else {
+      container.appendChild(tpl.content);
+    }
 
     _updateTimes(true);
+
+    prevClockType = A17.settings.ClockType;
+  }
+
+  function _updateClockType() {
+    if (!prevClockType) {
+      return;
+    }
+
+    if (
+      (prevClockType === 'map' && A17.settings.ClockType !== 'map')
+      ||
+      (prevClockType !== 'map' && A17.settings.ClockType === 'map')
+    ) {
+
+      if (A17.settings.ClockType === 'map') {
+        container.querySelectorAll('.m-timezone').forEach(function($tz) {
+          $tz.parentNode.removeChild($tz);
+        });
+      } else {
+        $mapContainerUl.parentNode.removeChild($mapContainerUl);
+        $mapContainerUl = null;
+      }
+
+      _addClocks();
+
+      _updateTimes(true);
+    }
+  }
+
+  function _init() {
+    _generateClocks();
+
+    _addClocks();
 
     _setIntervals();
   }
@@ -276,5 +320,6 @@ A17.Behaviors.timezones = function(container) {
     document.addEventListener('updateAnimatedIcons', _hideshowWeather, false);
     document.addEventListener('visibilitychange', _handleVisibilityChange, false);
     window.addEventListener('load', _windowLoad, false);
+    document.addEventListener('updateClockType', _updateClockType, false);
   };
 };

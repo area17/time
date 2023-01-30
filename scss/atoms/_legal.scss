@@ -1,14 +1,10 @@
 .legal {
   display: block;
-  margin-top: 40px;
   color: $color__text--off;
   text-align: center;
 
   @include breakpoint('medium+') {
-    position: absolute;
-    left: 50px;
-    bottom: 50px;
-    margin-top: 0;
+    display: inline;
     text-align: left;
   }
 }

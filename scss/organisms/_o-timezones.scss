@@ -3,17 +3,106 @@
   grid-template-columns: 1fr;
   row-gap: 30px;
   justify-content: space-between;
+  white-space: nowrap;
 
   @include breakpoint('small+') {
     grid-template-columns: repeat(2, max-content);
-    row-gap: 40px;
   }
 
   @include breakpoint('medium+') {
     grid-template-columns: repeat(4, max-content);
+    row-gap: 40px;
   }
 
   @include breakpoint('large+') {
-    grid-template-columns: repeat(5, max-content);
+    grid-template-columns: repeat(5, min-content);
+    grid-template-rows: min-content min-content 1fr min-content;
+
+    .s-map & {
+      grid-template-rows: min-content 1fr min-content;
+    }
+  }
+}
+
+.o-timezones__map {
+  position: relative;
+  order: 0;
+  grid-column: 1 / span 5;
+  display: none;
+
+  .s-map & {
+    display: block;
+  }
+}
+
+.o-timezones__logo {
+  position: relative;
+  top: -50px;
+  order: 100;
+  grid-column: 1 / span 1;
+  align-self: center;
+
+  svg {
+    display: block;
+    width: 63px;
+    height: 40px;
+    color: $color__white;
+
+    @include breakpoint('medium+') {
+      width: 111px;
+      height: 70px;
+    }
+
+    @include breakpoint('large+') {
+      width: 127px;
+      height: 80px;
+    }
+  }
+}
+
+.o-timezones__clock {
+  position: relative;
+  top: -50px;
+  order: 101;
+  grid-column: 3 / span 3;
+  align-self: center;
+
+  .s-analogue & {
+    grid-column: 2 / span 3;
+  }
+}
+
+.o-timezones__legal {
+  order: 200;
+  grid-column: 1 / span 3;
+}
+
+.o-timezones__settings {
+  order: 201;
+  grid-column: 4 / span 2;
+
+  ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+
+  li {
+    flex: 0 0 auto;
+  }
+
+  a,
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    background: transparent;
+    color: $color__text--off;
+    font: 15px/25px $sans-serif;
+    cursor: pointer;
+
+    &:hover {
+      color: $color__text;
+    }
   }
 }

@@ -1,9 +1,6 @@
 .m-timezone {
   color: $color__text--off;
 
-  //&.s-current {
-  //}
-
   &.s-open {
     color: $color__text;
   }
@@ -62,6 +59,7 @@
   }
 }
 
+/*
 .m-timezone__feels-like--hot {
   color: #ef7c24;
 }
@@ -77,3 +75,4 @@
 .m-timezone__feels-like--really-cold {
   color: #74bbfb; // blue ice
 }
+*/
