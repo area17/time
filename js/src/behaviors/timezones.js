@@ -9,7 +9,7 @@ A17.Behaviors.timezones = function(container) {
   var officeOpen = 9;
   var officeClosed = 19;
   var time, secondInterval, weatherInterval, weatherRecievedCounter, prevClockType;
-  var $mapContainer = container.querySelector('.o-timezones__map');
+  var $mapContainer = container.querySelector('.m-map__box');
   var $mapContainerUl;
 
   function _convertFtoC(f) {
@@ -300,6 +300,8 @@ A17.Behaviors.timezones = function(container) {
       _addClocks();
 
       _updateTimes(true);
+
+      _updateWeather();
     }
   }
 

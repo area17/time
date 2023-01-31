@@ -3,11 +3,15 @@
   position: relative;
   flex-flow: row nowrap;
   min-height: 100vh;
-  padding: 40px;
+  padding: 30px;
   animation: fade-in .25s linear;
 
   @include breakpoint('medium+') {
     max-height: 100vh;
+    padding: 40px;
+  }
+
+  @include breakpoint('large+') {
     padding: 50px;
   }
 }
@@ -27,123 +31,141 @@
   width: 100%;
 }
 
-.s-map .o-clocks .m-timezone {
-  position: absolute;
-  z-index: 2;
-  width: 2px;
-  height: 2px;
-  margin-top: 0;
-  padding-left: 15px;
-  overflow: visible;
-  white-space: nowrap;
-
-  &#US-CA {
-    left: 16.1%;
-    top: 42.5%;
-  }
-
-  &#US-TN {
-    left: 23.5%;
-    top: 41%;
-  }
-
-  &#US-NY {
-    left: 27.5%;
-    top: 37%;
-  }
-
-  &#AR-TUC {
-    left: 29.75%;
-    top: 76%;
-  }
-
-  &#GB-MAN {
-    left: 46.8%;
-    top: 28.6%;
-  }
-
-  &#GB-LND {
-    left: 47.25%;
-    top: 29.75%;
-  }
-
-  &#FR-IDF {
-    left: 48%;
-    top: 32%;
-  }
-
-  &#NG-LA {
-    left: 48%;
-    top: 57.9%;
-  }
-
-  &#KE-30 {
-    left: 57.75%;
-    top: 61.5%;
-  }
-
-  &#GE-TB {
-    left: 59.65%;
-    top: 36.5%;
-  }
-
-  &::after {
-    content: '';
+@include breakpoint('medium+') {
+  .s-map .o-clocks .m-timezone {
     position: absolute;
-    left: -2px;
-    top: -2px;
-    width: 4px;
-    height: 4px;
-    background: $color__text--off;
-    border-radius: 50%;
-    transition: transform 0.1s ease-in-out;
+    z-index: 2;
+    width: 2px;
+    height: 2px;
+    margin-top: 0;
+    padding-left: 15px;
+    overflow: visible;
+    white-space: nowrap;
+
+    &#US-CA {
+      left: 16.1%;
+      top: 42.5%;
+    }
+
+    &#US-TN {
+      left: 23.5%;
+      top: 41%;
+    }
+
+    &#US-NY {
+      left: 27.5%;
+      top: 37%;
+    }
+
+    &#AR-TUC {
+      left: 29.75%;
+      top: 76%;
+    }
+
+    &#GB-MAN {
+      left: 46.8%;
+      top: 28.6%;
+    }
+
+    &#GB-LND {
+      left: 47.25%;
+      top: 29.75%;
+    }
+
+    &#FR-IDF {
+      left: 48%;
+      top: 32%;
+    }
+
+    &#NG-LA {
+      left: 48%;
+      top: 57.9%;
+    }
+
+    &#KE-30 {
+      left: 57.75%;
+      top: 61.5%;
+    }
+
+    &#GE-TB {
+      left: 59.65%;
+      top: 36.5%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: -2px;
+      top: -2px;
+      width: 4px;
+      height: 4px;
+      background: $color__text--off;
+      border-radius: 50%;
+      transition: transform 0.1s ease-in-out;
+    }
+
+    &:hover::after {
+      transform: scale(2);
+    }
+
+    &.s-open::after {
+      background: $color__text;
+    }
+
+    .m-timezone__inner {
+      position: absolute;
+      left: 10px;
+      top: -7px;
+    }
+
+    &#GB-LND .m-timezone__inner,
+    &#NG-LA .m-timezone__inner {
+      left: auto;
+      right: 25px;
+      text-align: right;
+    }
+
+    &#US-CA .m-timezone__inner {
+      left: auto;
+      right: -25px;
+      top: 3px;
+      text-align: right;
+    }
+
+    &#US-NY .m-timezone__inner {
+      left: auto;
+      right: 25px;
+      top: auto;
+      bottom: -7px;
+      text-align: right;
+    }
+
+    &#GB-MAN .m-timezone__inner {
+      top: auto;
+      bottom: -7px;
+    }
+
+    .m-timezone__weather {
+      display: none;
+    }
   }
 
-  &:hover::after {
-    transform: scale(2);
-  }
+  @include breakpoint('large+') {
+    .s-map .o-clocks .m-timezone {
+      &#US-CA {
+        left: 16.1%;
+        top: 42.5%;
+      }
 
-  &.s-open::after {
-    background: $color__text;
-  }
+      &#US-CA .m-timezone__inner {
+        right: 25px;
+        top: -7px;
+      }
 
-  .m-timezone__inner {
-    position: absolute;
-    left: 10px;
-    top: -7px;
-  }
-
-  &#US-CA .m-timezone__inner,
-  &#GB-LND .m-timezone__inner,
-  &#NG-LA .m-timezone__inner {
-    left: auto;
-    right: 25px;
-    text-align: right;
-  }
-
-  &#US-NY .m-timezone__inner {
-    left: auto;
-    right: 25px;
-    top: auto;
-    bottom: -7px;
-    text-align: right;
-  }
-
-  &#GB-MAN .m-timezone__inner {
-    top: auto;
-    bottom: -7px;
-  }
-}
-
-.o-clocks .m-analogue {
-  margin: 20px;
-
-  @include breakpoint('medium+') {
-    position: relative;
-    left: -25px;
-    flex-grow: 1;
-    flex-shrink: 1;
-    order: 1;
-    margin: auto;
+      .m-timezone__weather {
+        display: flex;
+        margin-top: -6px;
+      }
+    }
   }
 }

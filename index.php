@@ -105,7 +105,11 @@
           </svg>
         </li>
         <li class="o-timezones__map">
-          <div class="m-map" data-behavior="map"><?php include 'includes/_map.php'; ?>
+          <div class="m-map" data-behavior="map">
+            <div class="m-map__box">
+              <?php include 'includes/_map.php'; ?>
+            </div>
+          </div>
         </li>
         <li class="o-timezones__settings">
           <ul>
