@@ -28,11 +28,13 @@ $color__black--4: #f6f6f6;
 $color__black--3: #f7f7f7;
 $color__black--2: #fbfbfb;
 $color__white: #fff;
+$color__yellow: #ff0;
 
 // Colors by usage - use these!
 $color__text: $color__white;
 $color__text--settings: $color__black--50;
 $color__text--off: $color__black--60;
+$color__highlight: $color__yellow;
 
 $color__link: $color__blue;
 $color__label: $color__black;

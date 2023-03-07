@@ -1,28 +1,259 @@
 .o-timezones {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.o-timezones > .m-timezone {
-  flex: 0 0 auto;
-  width: 100%;
-  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  align-content: start;
+  justify-content: space-between;
+  white-space: nowrap;
 
   @include breakpoint('small+') {
-    width: 50%;
+    column-gap: 10vw;
   }
 
   @include breakpoint('medium+') {
-    width: 50%;
-    margin-top: 20px;
+    grid-template-columns: repeat(4, max-content);
+    grid-template-rows: min-content min-content min-content 1fr min-content 2fr min-content;
+    gap: 40px;
+
+    &::before {
+      content: '';
+      order: 2;
+      grid-column: 1 / span 4;
+    }
+
+    &::after {
+      content: '';
+      order: 101;
+      grid-column: 1 / span 4;
+    }
+
+    .s-map & {
+      grid-template-rows: 1fr max-content 1.5fr min-content;
+      row-gap: 0;
+
+      &::before {
+        content: '';
+        order: -1;
+        grid-column: 1 / span 4;
+      }
+
+      &::after {
+        content: '';
+        order: 2;
+        grid-column: 1 / span 4;
+      }
+    }
   }
 
   @include breakpoint('large+') {
-    width: 20%;
+    grid-template-columns: repeat(5, min-content);
+    grid-template-rows: min-content min-content 1fr min-content 1.5fr min-content;
+
+    &::before,
+    &::after {
+      grid-column: 1 / span 5;
+    }
+
+    .s-map & {
+      grid-template-rows: 1fr max-content 2fr min-content;
+    }
+  }
+}
+
+.o-timezones .m-timezone {
+  order: 4;
+  grid-column: 1 / span 2;
+
+  @include breakpoint('medium+') {
+    order: 1;
+    grid-column: unset;
+  }
+}
+
+.o-timezones__map {
+  position: relative;
+  order: 0;
+  grid-column: 1 / span 2;
+  max-height: calc(100vh - 130px);
+  display: none;
+
+  @include breakpoint('medium+') {
+    grid-column: 1 / span 4;
+  }
+
+  @include breakpoint('large+') {
+    grid-column: 1 / span 5;
+  }
+
+  .m-map {
+    height: 100%;
+  }
+
+  .s-map & {
+    display: block;
+  }
+}
+
+.o-timezones__logo {
+  order: 0;
+  grid-column: 1 / span 1;
+
+  @include breakpoint('medium+') {
+    order: 100;
+  }
+
+  svg {
+    display: block;
+    width: 63px;
+    height: 40px;
+    color: $color__white;
+
+    @include breakpoint('medium+') {
+      width: 111px;
+      height: 70px;
+    }
+
+    @include breakpoint('large+') {
+      width: 127px;
+      height: 80px;
+    }
+  }
+
+  .s-map & {
+    position: absolute;
+    z-index: 2;
+    top: auto;
+    left: 40px;
+    bottom: 150px;
+
+    @include breakpoint('large+') {
+      left: 50px;
+    }
+  }
+}
+
+.o-timezones__clock {
+  order: 2;
+  grid-column: 1 / span 2;
+
+  @include breakpoint('medium+') {
+    order: 100;
+    grid-column: 2 / span 3;
+  }
+
+  @include breakpoint('large+') {
+    grid-column: 2 / span 4;
   }
 
   @include breakpoint('xlarge+') {
-    width: 20%;
-    margin-top: 40px;
+    grid-column: 3 / span 3;
+  }
+
+  .s-analogue & {
+    @include breakpoint('medium+') {
+      grid-column: 2 / span 2;
+    }
+
+    @include breakpoint('large+') {
+      grid-column: 2 / span 3;
+    }
+
+    .m-analogue {
+      margin: auto;
+    }
+  }
+
+  .s-map & {
+    @include breakpoint('medium+') {
+      position: absolute;
+      z-index: 2;
+      top: auto;
+      left: 200px;
+      right: 40px;
+      bottom: 130px;
+    }
+
+    @include breakpoint('large+') {
+      left: auto;
+      right: 50px;
+      width: 66.66%;
+    }
+
+    @include breakpoint('xlarge+') {
+      width: 50%;
+    }
+  }
+}
+
+.o-timezones__legal {
+  order: 200;
+  grid-column: 1 / span 2;
+
+  @include breakpoint('large+') {
+    grid-column: 1 / span 2;
+  }
+}
+
+.o-timezones__settings {
+  order: 1;
+  grid-column: 2 / span 1;
+
+  @include breakpoint('medium+') {
+    order: 201;
+    grid-column: 3 / span 2;
+  }
+
+  @include breakpoint('large+') {
+    grid-column: 4 / span 2;
+  }
+
+  ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+
+    @include breakpoint('large+') {
+      justify-content: space-between;
+    }
+
+    @include breakpoint('xxlarge') {
+      justify-content: flex-end;
+    }
+  }
+
+  li {
+    flex: 0 0 auto;
+    margin-left: 24px;
+
+    @include breakpoint('large+') {
+      margin-left: 0;
+    }
+
+    @include breakpoint('xxlarge') {
+      margin-left: 50px;
+    }
+
+    &:first-child {
+      display: none;
+
+      @include breakpoint('large+') {
+        display: block;
+      }
+    }
+  }
+
+  a,
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    background: transparent;
+    color: $color__text--off;
+    font: 15px/25px $sans-serif;
+    cursor: pointer;
+
+    &:hover {
+      color: $color__text;
+    }
   }
 }

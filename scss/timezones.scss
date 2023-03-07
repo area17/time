@@ -35,9 +35,6 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ atoms */
 
 @import 'atoms/logo';
-@import 'atoms/settings-trigger';
-@import 'atoms/conversion-trigger';
-@import 'atoms/screensaver-trigger';
 @import 'atoms/close-settings-trigger';
 @import 'atoms/legal';
 
@@ -46,6 +43,7 @@
 @import 'molecules/m-digital';
 @import 'molecules/m-analogue';
 @import 'molecules/m-timezone';
+@import 'molecules/m-map';
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ organisms */
 

@@ -1,12 +1,26 @@
 .m-timezone {
   color: $color__text--off;
 
-  //&.s-current {
-  //}
-
   &.s-open {
     color: $color__text;
   }
+
+  @include breakpoint('large+') {
+    &#GB-MAN {
+      display: none;
+    }
+
+    .s-map &#GB-MAN {
+      display: block;
+    }
+  }
+}
+
+.m-timezone__title,
+.m-timezone__weather {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }
 
 .m-timezone__time,
@@ -19,9 +33,15 @@
   cursor: default;
 }
 
+.m-timezone__name,
+.m-timezone__feels-like {
+  padding-right: 8px;
+}
+
 .m-timezone__rain-chance,
 .m-timezone__time {
-  padding-left: 16px;
+  padding-left: 8px;
+  text-align: right;
 }
 
 .m-timezone__time {
@@ -29,14 +49,14 @@
 }
 
 .m-timezone__weather {
-  display: block;
   min-height: 25px;
   opacity: 1;
-  transition: opacity .33s linear;
+  transition: all .33s linear;
 
   .s-hide-weather &,
   .m-timezone.s-loading & {
     opacity: 0;
+    min-height: 0;
   }
 }
 
@@ -49,35 +69,9 @@
   }
 }
 
-@include breakpoint('xsmall') {
-  .m-timezone,
-  .m-timezone__weather {
-    display: flex;
-    flex-flow: row wrap;
-  }
-
-  .m-timezone__name,
-  .m-timezone__time,
-  .m-timezone__feels-like,
-  .m-timezone__rain-chance {
-    flex: 0 0 auto;
-    width: 50%;
-  }
-
-  .m-timezone__time,
-  .m-timezone__rain-chance {
-    text-align: right;
-  }
-
-  .m-timezone__weather {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-}
-
 /*
 .m-timezone__feels-like--hot {
-  color: #ffbfbf;
+  color: #ef7c24;
 }
 
 .m-timezone__feels-like--really-hot {
@@ -85,19 +79,10 @@
 }
 
 .m-timezone__feels-like--cold {
-  color: #bfbfff;
+  color: #b0e2ff;
 }
 
-.m-timezone__emoji--windy {
-  transform: rotate(-40deg);
-}
-
-.m-timezone__feels-like--hot .m-timezone__emoji--sunny {
-  filter: hue-rotate(-10deg) saturate(5);
-}
-
-.m-timezone__feels-like--really-hot .m-timezone__emoji--sunny {
-  transform: scale(1.2);
-  filter: hue-rotate(-10deg) saturate(5);
+.m-timezone__feels-like--really-cold {
+  color: #74bbfb; // blue ice
 }
 */

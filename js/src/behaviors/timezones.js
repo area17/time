@@ -1,6 +1,6 @@
 A17.Behaviors.timezones = function(container) {
 
-  var locationTemplate = '<li id="{{locationID}}" class="m-timezone s-loading">\n<strong class="m-timezone__name">{{name}}</strong>\n<em class="m-timezone__time">{{time}}</em>\n<span class="m-timezone__weather">\n</span>\n</li>\n';
+  var locationTemplate = '<li id="{{locationID}}" class="m-timezone s-loading">\n<div class="m-timezone__inner">\n<span class="m-timezone__title">\n<strong class="m-timezone__name">{{name}}</strong>\n<em class="m-timezone__time">{{time}}</em>\n</span>\n<span class="m-timezone__weather">\n</span>\n</div>\n</li>\n';
   var iconTemplate = '<svg class="icon" aria-hidden="true"><use xlink:href="#{{name}}" /></svg>';
   var liHtml = '';
   var mTemp = 99; // initial value out of range
@@ -8,7 +8,9 @@ A17.Behaviors.timezones = function(container) {
   var lastWeatherCheck = 0;
   var officeOpen = 9;
   var officeClosed = 19;
-  var time, secondInterval, weatherInterval, weatherRecievedCounter;
+  var time, secondInterval, weatherInterval, weatherRecievedCounter, prevClockType;
+  var $mapContainer = container.querySelector('.m-map__box');
+  var $mapContainerUl;
 
   function _convertFtoC(f) {
     return (f - 32) * (5 / 9);
@@ -55,15 +57,16 @@ A17.Behaviors.timezones = function(container) {
           umbrellaClass = ' m-timezone__emoji--windy'; // if windy and high rain chance
         }
       }
-      // add class for high/low temps
+      // add class for high/low temps, 0°C is 33°F
       var temperatureClass = '';
-      if (location.conditions.feelsLike <= 0) {
-        // 0°C is 33°F
+      if (location.conditions.temperature < 4) {
         temperatureClass = ' m-timezone__feels-like--cold';
-      } else if (location.conditions.feelsLike > 30) {
+      } else if (location.conditions.temperature < -3) {
+        temperatureClass = ' m-timezone__feels-like--really-cold';
+      } else if (location.conditions.temperature > 30) {
         // I'm British, 30°C/86°F is hot for me
         temperatureClass = ' m-timezone__feels-like--hot';
-      } else if (location.conditions.feelsLike > 37.78) {
+      } else if (location.conditions.temperature > 37.78) {
         // Americans go bananas about 100+°F temperatures
         temperatureClass = ' m-timezone__feels-like--really-hot';
       }
@@ -233,9 +236,7 @@ A17.Behaviors.timezones = function(container) {
     if (document.hidden) {
       clearInterval(secondInterval);
       clearInterval(weatherInterval);
-      container.innerHTML = '';
     } else {
-      container.innerHTML = liHtml;
       _updateTimes(true);
       _updateWeather();
       _setIntervals();
@@ -246,8 +247,7 @@ A17.Behaviors.timezones = function(container) {
     _hideshowWeather();
   }
 
-  function _init() {
-    //
+  function _generateClocks() {
     A17.locations.forEach(function(location,index){
       //
       var thisLocationTemplate = locationTemplate;
@@ -258,10 +258,57 @@ A17.Behaviors.timezones = function(container) {
       //
       liHtml += thisLocationTemplate;
     });
+  }
 
-    container.innerHTML = liHtml;
+  function _addClocks() {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = liHtml;
+
+    if (A17.settings.ClockType === 'map') {
+      $mapContainerUl = document.createElement('ul');
+      $mapContainerUl.appendChild(tpl.content);
+      $mapContainer.appendChild($mapContainerUl);
+    } else {
+      container.appendChild(tpl.content);
+    }
 
     _updateTimes(true);
+
+    prevClockType = A17.settings.ClockType;
+  }
+
+  function _updateClockType() {
+    if (!prevClockType) {
+      return;
+    }
+
+    if (
+      (prevClockType === 'map' && A17.settings.ClockType !== 'map')
+      ||
+      (prevClockType !== 'map' && A17.settings.ClockType === 'map')
+    ) {
+
+      if (A17.settings.ClockType === 'map') {
+        container.querySelectorAll('.m-timezone').forEach(function($tz) {
+          $tz.parentNode.removeChild($tz);
+        });
+      } else {
+        $mapContainerUl.parentNode.removeChild($mapContainerUl);
+        $mapContainerUl = null;
+      }
+
+      _addClocks();
+
+      _updateTimes(true);
+
+      _updateWeather();
+    }
+  }
+
+  function _init() {
+    _generateClocks();
+
+    _addClocks();
 
     _setIntervals();
   }
@@ -275,5 +322,6 @@ A17.Behaviors.timezones = function(container) {
     document.addEventListener('updateAnimatedIcons', _hideshowWeather, false);
     document.addEventListener('visibilitychange', _handleVisibilityChange, false);
     window.addEventListener('load', _windowLoad, false);
+    document.addEventListener('updateClockType', _updateClockType, false);
   };
 };

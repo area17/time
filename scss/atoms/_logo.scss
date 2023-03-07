@@ -26,6 +26,12 @@
     top: calc(50% - 40px);
     width: 127px;
     height: 80px;
+
+    .s-map & {
+      z-index: 2;
+      top: auto;
+      bottom: 130px;
+    }
   }
 
   @include breakpoint('large+', 'portrait') {

@@ -1,0 +1,46 @@
+.m-map {
+  display: none;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+
+  .s-map & {
+    display: block;
+  }
+}
+
+.m-map__box {
+
+  @include breakpoint('medium+') {
+    position: relative;
+    height: 0;
+    padding-bottom: 55.11212467%;
+    margin: auto;
+  }
+}
+
+@include breakpoint('medium+') {
+  @supports (aspect-ratio: 16 / 9) {
+    .m-map__box {
+      aspect-ratio: 1052.4 / 580;
+      width: auto;
+      height: auto;
+      max-height: calc(100vh - 130px);
+      padding-bottom: 0;
+    }
+  }
+}
+
+.m-map__box > svg {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  color: #1a1a1a;
+  pointer-events: none;
+
+  @include breakpoint('medium+') {
+    display: block;
+  }
+}
