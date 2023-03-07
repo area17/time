@@ -82,6 +82,11 @@
       top: 57.9%;
     }
 
+    &#UA-30 {
+      left: 56%;
+      top: 30.75%;
+    }
+
     &#KE-30 {
       left: 57.75%;
       top: 61.5%;
@@ -114,14 +119,23 @@
 
     .m-timezone__inner {
       position: absolute;
-      left: 10px;
+      left: 7px;
       top: -7px;
     }
 
     &#GB-LND .m-timezone__inner,
-    &#NG-LA .m-timezone__inner {
+    &#GB-MAN .m-timezone__inner,
+    &#US-NY .m-timezone__inner {
+      top: auto;
+      bottom: -3px;
+    }
+
+    &#GB-MAN .m-timezone__inner,
+    &#FR-IDF .m-timezone__inner,
+    &#NG-LA .m-timezone__inner,
+    &#US-NY .m-timezone__inner {
       left: auto;
-      right: 25px;
+      right: 22px;
       text-align: right;
     }
 
@@ -130,19 +144,6 @@
       right: -25px;
       top: 3px;
       text-align: right;
-    }
-
-    &#US-NY .m-timezone__inner {
-      left: auto;
-      right: 25px;
-      top: auto;
-      bottom: -7px;
-      text-align: right;
-    }
-
-    &#GB-MAN .m-timezone__inner {
-      top: auto;
-      bottom: -7px;
     }
 
     .m-timezone__weather {
@@ -161,7 +162,11 @@
         right: 25px;
         top: -7px;
       }
+    }
+  }
 
+  @include breakpoint('xlarge+') {
+    .s-map .o-clocks .m-timezone {
       .m-timezone__weather {
         display: flex;
         margin-top: -6px;

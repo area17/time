@@ -4,6 +4,16 @@
   &.s-open {
     color: $color__text;
   }
+
+  @include breakpoint('large+') {
+    &#GB-MAN {
+      display: none;
+    }
+
+    .s-map &#GB-MAN {
+      display: block;
+    }
+  }
 }
 
 .m-timezone__title,

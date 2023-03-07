@@ -145,6 +145,11 @@ Additional parameters set different options:
 * removed Montreal, added Tbilisi
 * showing weather API credit in screen saver mode (its been removed from the latest version of the screen saver)
 
+### v3.3.0
+
+* added Kyiv
+* added map view
+
 ## Developing
 
 ### API key
