@@ -1,6 +1,17 @@
 <?php
 
-include "includes/_visualCrossingApiKey.php";
+$envFilepath = "../.env";
+
+if (is_file($envFilepath)) {
+    $file = new \SplFileObject($envFilepath);
+
+    while (false === $file->eof()) {
+        $keyValue = trim($file->fgets());
+        if ($keyValue && $keyValue !== '') {
+          putenv($keyValue);
+        }
+    }
+}
 
 function getForecast($latitude, $longitude) {
 
@@ -10,7 +21,7 @@ function getForecast($latitude, $longitude) {
     'unitGroup' => 'metric',
     'elements' => 'tempmax,tempmin,temp,feelslike,precipprob,preciptype,sunrise,sunset,moonphase,conditions,icon,uvindex',
     'include' => 'fcst,current',
-    'key' => getenv('KEY'),
+    'key' => getenv('VISUAL_CROSSING_API_KEY'),
     'contentType' => 'json',
   ];
 
