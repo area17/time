@@ -20,6 +20,6 @@
     "build": "webpack && npm run workbox-build",
     "prod": "webpack --mode=production && npm run workbox-build",
     "watch": "webpack --watch",
-    "workbox-build": "node ./js/src/workbox.js"
+    "workbox-build": "node ./js/workbox.js"
   }
 }

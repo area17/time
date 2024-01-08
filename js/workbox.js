@@ -5,13 +5,13 @@ const { injectManifest } = require('workbox-build');
 injectManifest({
   globDirectory: './',
   globPatterns: [
-    'css/*.css',
-    'fonts/*.woff2',
-    'icons/*.svg',
-    'js/timezones.js',
+    'public/css/*.css',
+    'public/fonts/*.woff2',
+    'public/icons/*.svg',
+    'public/js/timezones.js',
   ],
-  swSrc: './js/src/service-worker-src.js',
-  swDest: './sw.js',
+  swSrc: './js/service-worker-src.js',
+  swDest: './public/sw.js',
 }).then(({count, size, warnings}) => {
   // Optionally, log any warnings and details.
   warnings.forEach(warning => console.warn(warning));

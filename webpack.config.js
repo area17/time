@@ -7,13 +7,13 @@ const glob = require('glob');
 module.exports = {
   mode: 'development',
   entry: {
-    'js/timezones': glob.sync('./js/src/**/*.js', {
-      ignore: ['./js/src/service-worker-src.js', './js/src/workbox.js']
+    '/js/timezones': glob.sync('./js/**/*.js', {
+      ignore: ['./js/service-worker-src.js', './js/workbox.js']
     }),
-    'css/timezones': './scss/timezones.scss',
+    '/css/timezones': './scss/timezones.scss',
   },
   output: {
-    path: path.resolve('./'),
+    path: path.resolve('./public'),
   },
   plugins: [
     new RemoveEmptyScriptsPlugin(),

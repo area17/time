@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-  $package = file_get_contents('package.json');
+  $package = file_get_contents('../package.json');
   $package = json_decode($package, true);
   $meta_title = "AREA 17 studio time";
   $meta_social_title = "AREA 17 studio time";
@@ -113,7 +113,7 @@
         </li>
         <li class="o-timezones__settings">
           <ul>
-            <li><a href="/downloads/A17TimeZones.saver.zip" class="screensaver-trigger">Screensaver</a></li>
+            <!-- <li><a href="/downloads/A17TimeZones.saver.zip" class="screensaver-trigger">Screensaver</a></li> -->
             <li><button class="conversion-trigger">Convert</button></li>
             <li><button class="settings-trigger">Settings</button></li>
           </ul>

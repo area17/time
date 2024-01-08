@@ -5,14 +5,12 @@
     color: $color__text;
   }
 
-  @include breakpoint('large+') {
-    &#GB-MAN {
-      display: none;
-    }
+  &#GB-MAN {
+    display: none;
+  }
 
-    .s-map &#GB-MAN {
-      display: block;
-    }
+  .s-map &#GB-MAN {
+    display: block;
   }
 }
 

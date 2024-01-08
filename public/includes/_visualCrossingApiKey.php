@@ -1,0 +1,1 @@
+<?php putenv("KEY=SZKKR8QLZVBUFD9UHJ9S7QKQA"); ?>
