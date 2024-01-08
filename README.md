@@ -150,6 +150,14 @@ Additional parameters set different options:
 * added Kyiv
 * added map view
 
+### v3.4.0
+
+Prep for server move:
+* move public assets to `public` folder
+* remove Kyiv and Lagos
+* hide screensaver link (doesn't work in Sonoma)
+* ran `npm audit fix`
+
 ## Developing
 
 ### API key
